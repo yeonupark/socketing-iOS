@@ -1,13 +1,13 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  Socketing
 //
-//  Created by Yeonu Park on 2024/12/23.
+//  Created by Yeonu Park on 2025/01/02.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,4 +16,5 @@ class ViewController: UIViewController {
 
 
 }
+
 
