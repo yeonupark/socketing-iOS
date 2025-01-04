@@ -21,6 +21,13 @@
 		48461C4A2D26788700675CED /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 48461C492D26788700675CED /* RxRelay */; };
 		48461C4C2D26788700675CED /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 48461C4B2D26788700675CED /* RxSwift */; };
 		48461C502D27B69600675CED /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C4F2D27B69600675CED /* MainViewModel.swift */; };
+		48461C552D27C30700675CED /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C542D27C30700675CED /* Common.swift */; };
+		48461C5A2D27CB3400675CED /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 48461C592D27CB3400675CED /* SnapKit */; };
+		48461C5C2D27CB3400675CED /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 48461C5B2D27CB3400675CED /* SnapKit-Dynamic */; };
+		48461C612D27EDBA00675CED /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C602D27EDBA00675CED /* BaseView.swift */; };
+		48461C632D27EF0000675CED /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C622D27EF0000675CED /* LoginView.swift */; };
+		48461C652D27F0AC00675CED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C642D27F0AC00675CED /* LoginViewController.swift */; };
+		48461C672D27F44200675CED /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C662D27F44200675CED /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +63,11 @@
 		48461C422D19AEC200675CED /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		48461C442D263F6500675CED /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		48461C4F2D27B69600675CED /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		48461C542D27C30700675CED /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		48461C602D27EDBA00675CED /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		48461C622D27EF0000675CED /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		48461C642D27F0AC00675CED /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		48461C662D27F44200675CED /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +75,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48461C5C2D27CB3400675CED /* SnapKit-Dynamic in Frameworks */,
 				48461C4C2D26788700675CED /* RxSwift in Frameworks */,
+				48461C5A2D27CB3400675CED /* SnapKit in Frameworks */,
 				48461C4A2D26788700675CED /* RxRelay in Frameworks */,
 				48461C482D26788700675CED /* RxCocoa in Frameworks */,
 			);
@@ -109,11 +123,11 @@
 		48461C0C2D19A1BA00675CED /* Socketing */ = {
 			isa = PBXGroup;
 			children = (
+				48461C5F2D27EDA700675CED /* Base */,
 				48461C412D19AD4200675CED /* Network */,
 				48461C402D19AA2B00675CED /* Views */,
 				48461C3F2D19A9CB00675CED /* Controllers */,
 				48461C3E2D19A99D00675CED /* ViewModels */,
-				48461C3D2D19A98D00675CED /* APIModels */,
 				48461C0D2D19A1BA00675CED /* AppDelegate.swift */,
 				48461C0F2D19A1BA00675CED /* SceneDelegate.swift */,
 				48461C132D19A1BA00675CED /* Main.storyboard */,
@@ -141,17 +155,11 @@
 			path = SocketingUITests;
 			sourceTree = "<group>";
 		};
-		48461C3D2D19A98D00675CED /* APIModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = APIModels;
-			sourceTree = "<group>";
-		};
 		48461C3E2D19A99D00675CED /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				48461C4F2D27B69600675CED /* MainViewModel.swift */,
+				48461C662D27F44200675CED /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -160,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				48461C442D263F6500675CED /* MainViewController.swift */,
+				48461C642D27F0AC00675CED /* LoginViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -167,6 +176,7 @@
 		48461C402D19AA2B00675CED /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				48461C622D27EF0000675CED /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,9 +184,26 @@
 		48461C412D19AD4200675CED /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				48461C532D27C2FF00675CED /* APIModels */,
 				48461C422D19AEC200675CED /* APIKeys.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		48461C532D27C2FF00675CED /* APIModels */ = {
+			isa = PBXGroup;
+			children = (
+				48461C542D27C30700675CED /* Common.swift */,
+			);
+			path = APIModels;
+			sourceTree = "<group>";
+		};
+		48461C5F2D27EDA700675CED /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				48461C602D27EDBA00675CED /* BaseView.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +226,8 @@
 				48461C472D26788700675CED /* RxCocoa */,
 				48461C492D26788700675CED /* RxRelay */,
 				48461C4B2D26788700675CED /* RxSwift */,
+				48461C592D27CB3400675CED /* SnapKit */,
+				48461C5B2D27CB3400675CED /* SnapKit-Dynamic */,
 			);
 			productName = Socketing;
 			productReference = 48461C0A2D19A1BA00675CED /* Socketing.app */;
@@ -274,6 +303,7 @@
 			mainGroup = 48461C012D19A1BA00675CED;
 			packageReferences = (
 				48461C462D26788700675CED /* XCRemoteSwiftPackageReference "RxSwift" */,
+				48461C582D27CB3400675CED /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 48461C0B2D19A1BA00675CED /* Products */;
 			projectDirPath = "";
@@ -318,11 +348,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48461C652D27F0AC00675CED /* LoginViewController.swift in Sources */,
 				48461C502D27B69600675CED /* MainViewModel.swift in Sources */,
 				48461C0E2D19A1BA00675CED /* AppDelegate.swift in Sources */,
 				48461C432D19AEC200675CED /* APIKeys.swift in Sources */,
 				48461C102D19A1BA00675CED /* SceneDelegate.swift in Sources */,
+				48461C552D27C30700675CED /* Common.swift in Sources */,
 				48461C452D263F6500675CED /* MainViewController.swift in Sources */,
+				48461C632D27EF0000675CED /* LoginView.swift in Sources */,
+				48461C672D27F44200675CED /* LoginViewModel.swift in Sources */,
+				48461C612D27EDBA00675CED /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +714,14 @@
 				minimumVersion = 6.8.0;
 			};
 		};
+		48461C582D27CB3400675CED /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -696,6 +739,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 48461C462D26788700675CED /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		48461C592D27CB3400675CED /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48461C582D27CB3400675CED /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		48461C5B2D27CB3400675CED /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48461C582D27CB3400675CED /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
