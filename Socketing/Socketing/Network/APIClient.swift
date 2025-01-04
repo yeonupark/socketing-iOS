@@ -1,0 +1,120 @@
+//
+//  APIClient.swift
+//  Socketing
+//
+//  Created by Yeonu Park on 2025/01/04.
+//
+
+import Foundation
+
+extension URL {
+    func withQueries(_ queries: [String: String]) -> URL? {
+        var components = URLComponents(url: self, resolvingAgainstBaseURL: true)
+        components?.queryItems = queries.map { URLQueryItem(name: $0.key, value: $0.value) }
+        return components?.url
+    }
+}
+
+class APIClient {
+    
+    static let shared = APIClient()
+    
+    private init() {}
+    
+    func getRequest<T: Decodable>(
+        urlString: String,
+        queries: [String: String]? = nil,
+        responseType: T.Type,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        
+        guard var url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+        
+        if let queries = queries {
+            url = url.withQueries(queries) ?? url
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                let statusError = NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)
+                completion(.failure(statusError))
+                return
+            }
+            
+            guard let data = data else {
+                let dataError = NSError(domain: "No data received", code: 0, userInfo: nil)
+                completion(.failure(dataError))
+                return
+            }
+            
+            do {
+                let decodedResponse = try JSONDecoder().decode(responseType, from: data)
+                completion(.success(decodedResponse))
+            } catch let decodeError {
+                completion(.failure(decodeError))
+            }
+        }
+        task.resume()
+    }
+    
+    func postRequest<T: Decodable, U: Encodable>(
+        urlString: String,
+        requestBody: U,
+        responseType: T.Type,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            let jsonData = try JSONEncoder().encode(requestBody)
+            request.httpBody = jsonData
+        } catch let encodingError {
+            completion(.failure(encodingError))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                let statusError = NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)
+                completion(.failure(statusError))
+                return
+            }
+            
+            guard let data = data else {
+                let dataError = NSError(domain: "No data received", code: 0, userInfo: nil)
+                completion(.failure(dataError))
+                return
+            }
+            
+            do {
+                let decodedResponse = try JSONDecoder().decode(responseType, from: data)
+                completion(.success(decodedResponse))
+            } catch let decodeError {
+                completion(.failure(decodeError))
+            }
+        }
+        task.resume()
+    }
+    
+}
