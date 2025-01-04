@@ -34,5 +34,24 @@ class LoginViewModel {
             .asDriver(onErrorJustReturn: UIColor.lightGray)
     }
     
-    
+    func requestLogin(completionHandler: @escaping (LoginData?) -> Void) {
+        let loginBody = LoginRequest(email: email.value+"@jungle.com", password: pw.value)
+        
+        APIClient.shared.postRequest(
+            urlString: APIEndpoint.authentication.url + "login",
+            requestBody: loginBody,
+            responseType: LoginResponse.self
+        ) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    UserDefaults.standard.set(response.data?.accessToken, forKey: "authToken")
+                    completionHandler(response.data)
+                case .failure(let error):
+                    print("로그인 실패: \(error.localizedDescription)")
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
 }
