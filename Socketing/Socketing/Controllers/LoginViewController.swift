@@ -21,8 +21,15 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
+        DispatchQueue.main.async {
+            self.mainView.idField.becomeFirstResponder()
+        }
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
+        bind()
+
     }
     
     func bind() {
@@ -45,11 +52,38 @@ class LoginViewController: UIViewController {
             .drive(mainView.loginButton.rx.backgroundColor)
             .disposed(by: disposeBag)
         
-        // Login Button Tap -> ViewModel
+        // Login Button Tap
         mainView.loginButton.rx.tap
-            .bind { _ in
-                print(self.viewModel.email.value)
-            }
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.hideKeyboard()
+                self.viewModel.requestLogin { data in
+                    if let data {
+                        self.handleLoginSuccess(data: data)
+                    } else {
+                        self.handleLoginFailure()
+                    }
+                }
+            })
             .disposed(by: disposeBag)
     }
+    
+    private func handleLoginSuccess(data: LoginData) {
+        let vc = MainViewController()
+        self.navigationController?.setViewControllers([vc], animated: true)
+        print(data)
+    }
+
+    private func handleLoginFailure() {
+        let alert = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인하세요.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
+        
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
+    }
+
 }

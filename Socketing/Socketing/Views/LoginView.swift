@@ -12,17 +12,17 @@ class LoginView: BaseView {
     
     let idField = {
         let view = UITextField()
+        view.applyDefaultStyle()
         view.placeholder = "enter your email"
-        view.borderStyle = .roundedRect
         
         return view
     }()
     
     let pwField = {
         let view = UITextField()
+        view.applyDefaultStyle()
         view.isSecureTextEntry = true
         view.placeholder = "enter your password"
-        view.borderStyle = .roundedRect
         
         return view
     }()

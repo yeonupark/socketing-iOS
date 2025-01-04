@@ -95,9 +95,39 @@ class APIClient {
                 return
             }
             
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                let statusError = NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)
-                completion(.failure(statusError))
+            guard let httpResponse = response as? HTTPURLResponse else {
+                let responseError = NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)
+                completion(.failure(responseError))
+                return
+            }
+            
+            if !(200...299).contains(httpResponse.statusCode) {
+                
+                if let data = data {
+                    do {
+                        let apiError = try JSONDecoder().decode(ApiErrorResponse.self, from: data)
+                        let errorInfo = NSError(
+                            domain: "Server Error",
+                            code: apiError.code,
+                            userInfo: [NSLocalizedDescriptionKey: apiError.message]
+                        )
+                        completion(.failure(errorInfo))
+                    } catch {
+                        let genericError = NSError(
+                            domain: "Server Error",
+                            code: httpResponse.statusCode,
+                            userInfo: [NSLocalizedDescriptionKey: "Failed to parse error response"]
+                        )
+                        completion(.failure(genericError))
+                    }
+                } else {
+                    let noDataError = NSError(
+                        domain: "Server Error",
+                        code: httpResponse.statusCode,
+                        userInfo: [NSLocalizedDescriptionKey: "No error data received"]
+                    )
+                    completion(.failure(noDataError))
+                }
                 return
             }
             
