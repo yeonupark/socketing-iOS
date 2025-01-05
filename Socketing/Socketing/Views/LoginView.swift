@@ -13,7 +13,7 @@ class LoginView: BaseView {
     let idField = {
         let view = UITextField()
         view.applyDefaultStyle()
-        view.placeholder = "enter your email"
+        view.placeholder = "enter your name"
         
         return view
     }()

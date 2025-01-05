@@ -37,15 +37,55 @@ class APIClient {
             url = url.withQueries(queries) ?? url
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        if let token = UserDefaults.standard.string(forKey: "authToken") {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } 
+//        else {
+//
+//        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
             
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                let statusError = NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)
-                completion(.failure(statusError))
+            guard let httpResponse = response as? HTTPURLResponse else {
+                let responseError = NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)
+                completion(.failure(responseError))
+                return
+            }
+            
+            if !(200...299).contains(httpResponse.statusCode) {
+                
+                if let data = data {
+                    do {
+                        let apiError = try JSONDecoder().decode(ApiErrorResponse.self, from: data)
+                        let errorInfo = NSError(
+                            domain: "Server Error",
+                            code: apiError.code,
+                            userInfo: [NSLocalizedDescriptionKey: apiError.message]
+                        )
+                        completion(.failure(errorInfo))
+                    } catch {
+                        let genericError = NSError(
+                            domain: "Server Error",
+                            code: httpResponse.statusCode,
+                            userInfo: [NSLocalizedDescriptionKey: "Failed to parse error response"]
+                        )
+                        completion(.failure(genericError))
+                    }
+                } else {
+                    let noDataError = NSError(
+                        domain: "Server Error",
+                        code: httpResponse.statusCode,
+                        userInfo: [NSLocalizedDescriptionKey: "No error data received"]
+                    )
+                    completion(.failure(noDataError))
+                }
                 return
             }
             
