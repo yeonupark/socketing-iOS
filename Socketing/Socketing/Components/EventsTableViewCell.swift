@@ -12,7 +12,7 @@ class EventsTableViewCell: UITableViewCell {
     
     let thumbnail = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "person.circle")
+        view.image = UIImage(systemName: "hourglass.circle.fill")
         view.tintColor = .black
         
         view.layer.cornerRadius = 5
@@ -25,7 +25,8 @@ class EventsTableViewCell: UITableViewCell {
     let titleLabel = {
         let view = UILabel()
         view.text = "공연 제목"
-        view.font = .boldSystemFont(ofSize: 20)
+        view.font = .boldSystemFont(ofSize: 16)
+        view.textAlignment = .center
         
         return view
     }()
@@ -33,7 +34,9 @@ class EventsTableViewCell: UITableViewCell {
     let dateLabel = {
         let view = UILabel()
         view.text = "일시: "
-        view.font = .boldSystemFont(ofSize: 16)
+        view.font = .boldSystemFont(ofSize: 14)
+        view.textColor = .darkGray
+        view.textAlignment = .center
         
         return view
     }()
@@ -41,7 +44,9 @@ class EventsTableViewCell: UITableViewCell {
     let placeLabel = {
         let view = UILabel()
         view.text = "장소: "
-        view.font = .boldSystemFont(ofSize: 16)
+        view.font = .boldSystemFont(ofSize: 14)
+        view.textColor = .darkGray
+        view.textAlignment = .center
         
         return view
     }()
@@ -68,12 +73,12 @@ class EventsTableViewCell: UITableViewCell {
     func setConstraints() {
         thumbnail.snp.makeConstraints { make in
             make.horizontalEdges.top.equalToSuperview().inset(12)
-            make.height.equalTo(100)
+            make.height.equalTo(160)
         }
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(thumbnail.snp.bottom).offset(8)
             make.horizontalEdges.equalTo(thumbnail)
-            make.height.equalTo(24)
+            make.height.equalTo(20)
         }
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
@@ -81,10 +86,9 @@ class EventsTableViewCell: UITableViewCell {
             make.height.equalTo(20)
         }
         placeLabel.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.bottom).offset(8)
+            make.top.equalTo(dateLabel.snp.bottom).offset(2)
             make.horizontalEdges.equalTo(thumbnail)
             make.height.equalTo(20)
         }
     }
-
 }

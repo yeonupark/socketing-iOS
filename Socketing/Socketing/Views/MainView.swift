@@ -12,8 +12,9 @@ class MainView: BaseView {
     let titleLabel = {
         let view = UILabel()
         view.text = "예매 진행중인 공연"
-        view.font = .boldSystemFont(ofSize: 24)
+        view.font = .boldSystemFont(ofSize: 20)
         view.textAlignment = .center
+        
         return view
     }()
     
@@ -21,7 +22,7 @@ class MainView: BaseView {
         let view = UITableView()
         view.register(EventsTableViewCell.self, forCellReuseIdentifier: "EventsTableViewCell")
         view.backgroundColor = .clear
-        view.rowHeight = 208 /*+ UIScreen.main.bounds.width*/
+        view.rowHeight = 258 
         
         return view
     }()
@@ -37,7 +38,7 @@ class MainView: BaseView {
         
         titleLabel.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
-            make.height.equalTo(32)
+            make.height.equalTo(20)
         }
         tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)

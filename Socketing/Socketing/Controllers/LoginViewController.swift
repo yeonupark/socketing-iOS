@@ -72,7 +72,6 @@ class LoginViewController: UIViewController {
     private func handleLoginSuccess(data: LoginData) {
         let vc = MainViewController()
         self.navigationController?.setViewControllers([vc], animated: true)
-        print(data)
     }
 
     private func handleLoginFailure() {

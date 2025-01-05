@@ -17,7 +17,7 @@ class LoginViewModel {
     let loginButtonEnabled: Driver<Bool>
     let loginButtonColor: Driver<UIColor>
     
-    let disposeBag = DisposeBag()
+//    let disposeBag = DisposeBag()
     
     init() {
         
