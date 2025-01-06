@@ -39,6 +39,16 @@ class EventDetailViewController: UIViewController {
                 self.mainView.castLabel.text = "출연: \(event.cast)" 
             })
             .disposed(by: disposeBag)
+        
+        mainView.bookingButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                
+                let vc = WaitingViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
     }
 
 }

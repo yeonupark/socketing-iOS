@@ -66,12 +66,6 @@ class EventDetailView: BaseView {
         return view
     }()
     
-    let reservationButton = {
-        let view = UIButton()
-        
-        return view
-    }()
-    
     let friendRegistrationButton = {
         let view = UIButton()
         view.setTitle("함께할 친구 등록 (0명)", for: .normal)
@@ -83,7 +77,7 @@ class EventDetailView: BaseView {
         return view
     }()
 
-    private let togetherBookingButton: UIButton = {
+    let togetherBookingButton: UIButton = {
         let button = UIButton()
         button.setTitle("함께 예매하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
@@ -94,7 +88,7 @@ class EventDetailView: BaseView {
         return button
     }()
 
-    private let bookingButton: UIButton = {
+    let bookingButton: UIButton = {
         let button = UIButton()
         button.setTitle("예매하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
@@ -102,6 +96,7 @@ class EventDetailView: BaseView {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
+        
         return button
     }()
 
@@ -119,8 +114,10 @@ class EventDetailView: BaseView {
     override func configure() {
         super.configure()
         
-        addSubview(infoView)
-        for item in [thumbnail, titleLabel, dateLabel, placeLabel, castLabel, friendRegistrationButton, actionButtonsContainer] {
+        for item in [infoView, friendRegistrationButton, actionButtonsContainer] {
+            addSubview(item)
+        }
+        for item in [thumbnail, titleLabel, dateLabel, placeLabel, castLabel] {
             infoView.addSubview(item)
         }
         for item in [togetherBookingButton, bookingButton] {
