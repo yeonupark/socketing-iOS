@@ -85,7 +85,7 @@ class EventDetailView: BaseView {
 
     private let togetherBookingButton: UIButton = {
         let button = UIButton()
-        button.setTitle("함께 예매", for: .normal)
+        button.setTitle("함께 예매하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.backgroundColor = .black
         button.setTitleColor(.white, for: .normal)
@@ -96,7 +96,7 @@ class EventDetailView: BaseView {
 
     private let bookingButton: UIButton = {
         let button = UIButton()
-        button.setTitle("예매", for: .normal)
+        button.setTitle("예매하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.backgroundColor = .systemPink
         button.setTitleColor(.white, for: .normal)

@@ -21,12 +21,20 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNavigationBar()
+        bind()
+        viewModel.getEvents()
+    }
+    
+    private func configureNavigationBar() {
         navigationItem.title = "예매 진행중인 공연"
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = .black
+        navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .plain, target: .none, action: #selector(myPageButtonClicked)), animated: true)
+    }
+    
+    @objc func myPageButtonClicked() {
         
-        bind()
-        viewModel.getEvents()
     }
     
     private func bind() {
