@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import RxCocoa
+
+class EventDetailViewModel {
+    let event = BehaviorRelay<EventData>(value: EventData(id: "", title: "", eventDates: [], thumbnail: "", place: "", cast: "", ticketingStartTime: ""))
+}

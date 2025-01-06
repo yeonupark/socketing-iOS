@@ -63,7 +63,7 @@ class EventsTableViewCell: UITableViewCell {
     
     func configure() {
         
-        self.isUserInteractionEnabled = true
+        self.selectionStyle = .none
         
         for item in [ thumbnail, titleLabel, dateLabel, placeLabel] {
             contentView.addSubview(item)
