@@ -21,8 +21,20 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNavigationBar()
         bind()
         viewModel.getEvents()
+    }
+    
+    private func configureNavigationBar() {
+        navigationItem.title = "예매 진행중인 공연"
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .black
+        navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .plain, target: .none, action: #selector(myPageButtonClicked)), animated: true)
+    }
+    
+    @objc func myPageButtonClicked() {
+        
     }
     
     private func bind() {
@@ -32,48 +44,20 @@ class MainViewController: UIViewController {
                 cell.titleLabel.text = element.title
                 cell.placeLabel.text = element.place
                 
-                self.loadThumbnailImage(from: element.thumbnail, into: cell.thumbnail)
-                if let dateString = self.formatDateString(element.eventDates[0].date) {
+                CommonUtils.loadThumbnailImage(from: element.thumbnail, into: cell.thumbnail)
+                if let dateString = CommonUtils.formatDateString(element.eventDates[0].date) {
                     cell.dateLabel.text = dateString
                 }
             }
             .disposed(by: disposeBag)
-    }
-    
-    private func formatDateString(_ dateString: String) -> String? {
         
-        guard dateString.count >= 10 else {
-            return nil
-        }
-        
-        let dateSubstring = dateString.prefix(10)
-        
-        let formattedDate = dateSubstring.replacingOccurrences(of: "-", with: ".")
-        
-        return formattedDate
-    }
-    
-    private func loadThumbnailImage(from urlString: String, into imageView: UIImageView) {
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            return
-        }
-
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error loading image: \(error.localizedDescription)")
-                return
-            }
-
-            guard let data = data, let image = UIImage(data: data) else {
-                print("Failed to decode image")
-                return
-            }
-
-            DispatchQueue.main.async {
-                imageView.image = image
-            }
-        }.resume()
+        mainView.tableView.rx.modelSelected(EventData.self)
+            .subscribe(onNext: { event in
+                let vc = EventDetailViewController()
+                vc.viewModel.event.accept(event)
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 
 }

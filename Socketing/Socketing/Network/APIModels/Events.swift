@@ -24,4 +24,3 @@ struct EventDate: Decodable {
 }
 
 typealias EventsResponse = ApiResponse<[EventData]>
-//typealias SingleEventResponse = ApiResponse<EventData>
