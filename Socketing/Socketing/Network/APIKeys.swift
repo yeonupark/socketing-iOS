@@ -6,9 +6,9 @@
 //
 
 enum APIkeys {
-    static let baseURL = "https://socketing.hjyoon.me/api/"
-    static let socketURL = "https://socket.hjyoon.me/"
-    static let queueURL = "https://queue.hjyoon.me/"
+    static let baseURL = "http://localhost:5001/api/" //"https://socketing.hjyoon.me/api/"
+    static let socketURL = "http://localhost:3000/" //"https://socket.hjyoon.me/"
+    static let queueURL = "http://localhost:3001/" //"https://queue.hjyoon.me/"
 }
 
 enum APIEndpoint {

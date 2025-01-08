@@ -9,5 +9,8 @@ import Foundation
 import RxCocoa
 
 class EventDetailViewModel {
+    
+    static let shared = EventDetailViewModel()
+    
     let event = BehaviorRelay<EventData>(value: EventData(id: "", title: "", eventDates: [], thumbnail: "", place: "", cast: "", ticketingStartTime: ""))
 }
