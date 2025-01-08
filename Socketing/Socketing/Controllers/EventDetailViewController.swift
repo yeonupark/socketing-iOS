@@ -11,7 +11,7 @@ import RxSwift
 class EventDetailViewController: UIViewController {
 
     let mainView = EventDetailView()
-    let viewModel = EventDetailViewModel()
+    let viewModel = EventDetailViewModel.shared
     private let disposeBag = DisposeBag()
     
     override func loadView() {

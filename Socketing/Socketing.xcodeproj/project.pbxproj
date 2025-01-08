@@ -39,6 +39,10 @@
 		4852B6632D2C220600186115 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B6622D2C220600186115 /* CommonUtils.swift */; };
 		48AC46B22D2C5FA80054FC86 /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46B12D2C5FA80054FC86 /* WaitingViewController.swift */; };
 		48AC46B42D2C5FBB0054FC86 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46B32D2C5FBB0054FC86 /* WaitingView.swift */; };
+		48AC46B72D2E5FE00054FC86 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 48AC46B62D2E5FE00054FC86 /* SocketIO */; };
+		48AC46B92D2E5FF40054FC86 /* QueueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */; };
+		48AC46BB2D2E67650054FC86 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46BA2D2E67650054FC86 /* Queue.swift */; };
+		48AC46BD2D2F03720054FC86 /* SocketUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46BC2D2F03720054FC86 /* SocketUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +95,9 @@
 		4852B6622D2C220600186115 /* CommonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		48AC46B12D2C5FA80054FC86 /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		48AC46B32D2C5FBB0054FC86 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
+		48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueViewModel.swift; sourceTree = "<group>"; };
+		48AC46BA2D2E67650054FC86 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		48AC46BC2D2F03720054FC86 /* SocketUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +108,7 @@
 				48461C4C2D26788700675CED /* RxSwift in Frameworks */,
 				480B33902D29B300000FA50D /* SnapKit in Frameworks */,
 				48461C4A2D26788700675CED /* RxRelay in Frameworks */,
+				48AC46B72D2E5FE00054FC86 /* SocketIO in Frameworks */,
 				48461C482D26788700675CED /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +194,7 @@
 				48461C4F2D27B69600675CED /* MainViewModel.swift */,
 				48461C662D27F44200675CED /* LoginViewModel.swift */,
 				4852B65B2D2BEA5C00186115 /* EventDetailViewModel.swift */,
+				48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -228,6 +237,7 @@
 				48461C542D27C30700675CED /* Common.swift */,
 				48461C6E2D29749000675CED /* Authentication.swift */,
 				4852B6512D2A56DD00186115 /* Events.swift */,
+				48AC46BA2D2E67650054FC86 /* Queue.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -260,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				4852B6622D2C220600186115 /* CommonUtils.swift */,
+				48AC46BC2D2F03720054FC86 /* SocketUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -285,6 +296,7 @@
 				48461C492D26788700675CED /* RxRelay */,
 				48461C4B2D26788700675CED /* RxSwift */,
 				480B338F2D29B300000FA50D /* SnapKit */,
+				48AC46B62D2E5FE00054FC86 /* SocketIO */,
 			);
 			productName = Socketing;
 			productReference = 48461C0A2D19A1BA00675CED /* Socketing.app */;
@@ -361,6 +373,7 @@
 			packageReferences = (
 				48461C462D26788700675CED /* XCRemoteSwiftPackageReference "RxSwift" */,
 				480B338E2D29B300000FA50D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				48AC46B52D2E5FE00054FC86 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 48461C0B2D19A1BA00675CED /* Products */;
 			projectDirPath = "";
@@ -412,6 +425,7 @@
 				48461C652D27F0AC00675CED /* LoginViewController.swift in Sources */,
 				48461C502D27B69600675CED /* MainViewModel.swift in Sources */,
 				48461C0E2D19A1BA00675CED /* AppDelegate.swift in Sources */,
+				48AC46BD2D2F03720054FC86 /* SocketUtils.swift in Sources */,
 				48461C432D19AEC200675CED /* APIKeys.swift in Sources */,
 				48461C102D19A1BA00675CED /* SceneDelegate.swift in Sources */,
 				4852B6632D2C220600186115 /* CommonUtils.swift in Sources */,
@@ -424,7 +438,9 @@
 				4852B6522D2A56DD00186115 /* Events.swift in Sources */,
 				48461C672D27F44200675CED /* LoginViewModel.swift in Sources */,
 				48AC46B22D2C5FA80054FC86 /* WaitingViewController.swift in Sources */,
+				48AC46BB2D2E67650054FC86 /* Queue.swift in Sources */,
 				4852B6582D2BDF2000186115 /* EventDetailView.swift in Sources */,
+				48AC46B92D2E5FF40054FC86 /* QueueViewModel.swift in Sources */,
 				48461C612D27EDBA00675CED /* BaseView.swift in Sources */,
 				48461C6F2D29749000675CED /* Authentication.swift in Sources */,
 			);
@@ -772,6 +788,14 @@
 				minimumVersion = 6.8.0;
 			};
 		};
+		48AC46B52D2E5FE00054FC86 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -794,6 +818,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 48461C462D26788700675CED /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		48AC46B62D2E5FE00054FC86 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48AC46B52D2E5FE00054FC86 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

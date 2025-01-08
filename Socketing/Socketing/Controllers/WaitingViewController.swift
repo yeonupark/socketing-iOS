@@ -10,7 +10,7 @@ import UIKit
 class WaitingViewController: UIViewController {
     
     let mainView = WaitingView()
-//    let viewModel = EventDetailViewModel()
+    let queueViewModel = QueueViewModel()
     
     override func loadView() {
         self.view = mainView
@@ -18,7 +18,14 @@ class WaitingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        queueViewModel.connectSocket()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        queueViewModel.disconnectSocket()
     }
 
 }
