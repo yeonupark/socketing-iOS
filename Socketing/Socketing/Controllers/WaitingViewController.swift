@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class WaitingViewController: UIViewController {
+class WaitingViewController: BaseViewController {
     
     let mainView = WaitingView()
     let queueViewModel = QueueViewModel()

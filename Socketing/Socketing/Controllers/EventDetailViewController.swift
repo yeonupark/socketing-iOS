@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class EventDetailViewController: UIViewController {
+class EventDetailViewController: BaseViewController {
 
     let mainView = EventDetailView()
     let viewModel = EventDetailViewModel.shared
