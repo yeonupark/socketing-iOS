@@ -37,6 +37,8 @@
 		4852B65C2D2BEA5C00186115 /* EventDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B65B2D2BEA5C00186115 /* EventDetailViewModel.swift */; };
 		4852B6602D2C04FF00186115 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B65F2D2C04FF00186115 /* EventDetailViewController.swift */; };
 		4852B6632D2C220600186115 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B6622D2C220600186115 /* CommonUtils.swift */; };
+		48A065402D2FA65300DA5CAA /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0653F2D2FA65300DA5CAA /* ReservationView.swift */; };
+		48A065422D2FAECC00DA5CAA /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A065412D2FAECC00DA5CAA /* ReservationViewController.swift */; };
 		48AC46B22D2C5FA80054FC86 /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46B12D2C5FA80054FC86 /* WaitingViewController.swift */; };
 		48AC46B42D2C5FBB0054FC86 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46B32D2C5FBB0054FC86 /* WaitingView.swift */; };
 		48AC46B72D2E5FE00054FC86 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 48AC46B62D2E5FE00054FC86 /* SocketIO */; };
@@ -93,6 +95,8 @@
 		4852B65B2D2BEA5C00186115 /* EventDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModel.swift; sourceTree = "<group>"; };
 		4852B65F2D2C04FF00186115 /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		4852B6622D2C220600186115 /* CommonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
+		48A0653F2D2FA65300DA5CAA /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
+		48A065412D2FAECC00DA5CAA /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		48AC46B12D2C5FA80054FC86 /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		48AC46B32D2C5FBB0054FC86 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueViewModel.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 				48461C642D27F0AC00675CED /* LoginViewController.swift */,
 				4852B65F2D2C04FF00186115 /* EventDetailViewController.swift */,
 				48AC46B12D2C5FA80054FC86 /* WaitingViewController.swift */,
+				48A065412D2FAECC00DA5CAA /* ReservationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 				4852B64C2D2A4F9E00186115 /* MainView.swift */,
 				4852B6572D2BDF2000186115 /* EventDetailView.swift */,
 				48AC46B32D2C5FBB0054FC86 /* WaitingView.swift */,
+				48A0653F2D2FA65300DA5CAA /* ReservationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -420,6 +426,7 @@
 			files = (
 				48AC46B42D2C5FBB0054FC86 /* WaitingView.swift in Sources */,
 				4852B64B2D29B87000186115 /* UITextField+Extensions.swift in Sources */,
+				48A065422D2FAECC00DA5CAA /* ReservationViewController.swift in Sources */,
 				4852B6602D2C04FF00186115 /* EventDetailViewController.swift in Sources */,
 				4852B64D2D2A4F9E00186115 /* MainView.swift in Sources */,
 				48461C652D27F0AC00675CED /* LoginViewController.swift in Sources */,
@@ -427,6 +434,7 @@
 				48461C0E2D19A1BA00675CED /* AppDelegate.swift in Sources */,
 				48AC46BD2D2F03720054FC86 /* SocketUtils.swift in Sources */,
 				48461C432D19AEC200675CED /* APIKeys.swift in Sources */,
+				48A065402D2FA65300DA5CAA /* ReservationView.swift in Sources */,
 				48461C102D19A1BA00675CED /* SceneDelegate.swift in Sources */,
 				4852B6632D2C220600186115 /* CommonUtils.swift in Sources */,
 				4852B6502D2A50BE00186115 /* EventsTableViewCell.swift in Sources */,

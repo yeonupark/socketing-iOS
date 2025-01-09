@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxCocoa
 import RxSwift
 import SocketIO
 
@@ -13,13 +14,15 @@ class QueueViewModel {
     
     private var manager: SocketManager!
     private var socket: SocketIOClient!
+    
+    let isTurn = BehaviorRelay(value: false)
 
     init() {
         guard let url = URL(string: APIkeys.queueURL) else {
             return
         }
         manager = SocketManager(socketURL: url, config: [
-                .log(true),
+//                .log(true),
                 .compress,
                 .forceWebsockets(true),
             ])
@@ -67,14 +70,15 @@ class QueueViewModel {
             }
             
             UserDefaults.standard.set(response.token, forKey: "entranceToken")
-            print("Entrance token saved: \(response.token)")
+            self.isTurn.accept(true)
+            print("Entrance token saved and enter reservation page")
         }
         
         socket.on(ServerToClientEvent.updateQueue.rawValue) { data, _ in
             guard let firstData = data.first as? [String: Any],
                   let response = JSONParser.decode(UpdatedQueueResponse.self, from: firstData)
             else {
-                print("Failed to parse tokenIssued data")
+                print("Failed to parse updateQueue data")
                 return
             }
             
@@ -86,7 +90,7 @@ class QueueViewModel {
             guard let firstData = data.first as? [String: Any],
                   let response = JSONParser.decode(SeatsInfoResponse.self, from: firstData)
             else {
-                print("Failed to parse tokenIssued data")
+                print("Failed to parse seatsInfo data")
                 return
             }
             print("Reserved seats: \(response)")
