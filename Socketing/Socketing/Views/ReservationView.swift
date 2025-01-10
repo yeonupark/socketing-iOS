@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 class ReservationView: BaseView {
     let titleLabel = {
@@ -17,10 +18,17 @@ class ReservationView: BaseView {
         return view
     }()
     
+    let webView: WKWebView = {
+        let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        return webView
+    }()
+    
     override func configure() {
         super.configure()
         
         addSubview(titleLabel)
+        addSubview(webView)
     }
     
     override func setConstraints() {
@@ -28,6 +36,10 @@ class ReservationView: BaseView {
             make.centerX.equalToSuperview()
             make.top.equalTo(safeAreaLayoutGuide).inset(80)
             make.height.equalTo(30)
+        }
+        webView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom)
+            make.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
 

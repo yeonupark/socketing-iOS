@@ -15,6 +15,8 @@ class SocketViewModel {
     private var manager: SocketManager!
     private var socket: SocketIOClient!
     
+    let htmlContent = BehaviorRelay(value: "")
+    
     init() {
         guard let url = URL(string: APIkeys.socketURL) else {
             return
@@ -69,6 +71,7 @@ class SocketViewModel {
             
             print(response.message)
             print("room data: ", response.areas)
+            self.htmlContent.accept(self.wrapSVGsInHTML(areas: response.areas))
         }
         
 //        socket.on(SocketServerToClientEvent.serverTime.rawValue) { data, _ in
@@ -107,5 +110,39 @@ class SocketViewModel {
         socket.emit(eventName, data)
         print("Join room request sent")
     }
+    
+    private func wrapSVGsInHTML(areas: [AreaData]) -> String {
+        let svgElements = areas.map { $0.svg }.joined(separator: "\n")
 
+        return """
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100vw;
+                height: 100vh;
+                background-color: #f0f0f0;
+            }
+            svg {
+                width: 100%;
+                height: auto;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        </style>
+        </head>
+        <body>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350 1350" preserveAspectRatio="xMidYMid meet">
+                \(svgElements)
+            </svg>
+        </body>
+        </html>
+        """
+    }
 }
