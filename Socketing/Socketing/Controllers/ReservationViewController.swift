@@ -24,6 +24,9 @@ class ReservationViewController: BaseViewController {
         bind()
         
         socketViewModel.connectSocket()
+        
+        let eventData = EventDetailViewModel.shared.event.value
+        mainView.infoView.configureWithViewModel(eventData: eventData)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

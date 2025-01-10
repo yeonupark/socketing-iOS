@@ -9,14 +9,8 @@ import UIKit
 import WebKit
 
 class ReservationView: BaseView {
-    let titleLabel = {
-        let view = UILabel()
-        view.font = .boldSystemFont(ofSize: 24)
-        view.textAlignment = .center
-        view.text = "예매페이지"
-        
-        return view
-    }()
+    
+    let infoView = EventInfoView()
     
     let webView: WKWebView = {
         let webView = WKWebView()
@@ -27,18 +21,16 @@ class ReservationView: BaseView {
     override func configure() {
         super.configure()
         
-        addSubview(titleLabel)
+        addSubview(infoView)
         addSubview(webView)
     }
     
     override func setConstraints() {
-        titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(safeAreaLayoutGuide).inset(80)
-            make.height.equalTo(30)
+        infoView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
         }
         webView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(infoView.snp.bottom)
             make.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
         }
     }

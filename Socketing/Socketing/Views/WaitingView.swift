@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class WaitingView: BaseView {
+    
+    let infoView = EventInfoView()
 
     let waitingLabel = {
         let view = UILabel()
@@ -22,13 +24,18 @@ class WaitingView: BaseView {
     
     override func configure() {
         backgroundColor = .black
+        
+        addSubview(infoView)
         addSubview(waitingLabel)
     }
     
     override func setConstraints() {
+        infoView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
+        }
         waitingLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(safeAreaLayoutGuide).inset(80)
+            make.top.equalTo(infoView.snp.bottom).offset(30)
             make.height.equalTo(30)
         }
     }
