@@ -106,8 +106,8 @@ class QueueViewModel {
         let eventName = ClientToServerEvent.joinQueue.rawValue
         
         let data: [String: String] = [
-            JoinQueueRequest.eventId.rawValue: eventId,
-            JoinQueueRequest.eventDateId.rawValue: eventDateId
+            JoinQueueParams.eventId.rawValue: eventId,
+            JoinQueueParams.eventDateId.rawValue: eventDateId
         ]
         
         socket.emit(eventName, data)

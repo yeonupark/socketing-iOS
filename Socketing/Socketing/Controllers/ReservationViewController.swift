@@ -10,6 +10,7 @@ import UIKit
 class ReservationViewController: BaseViewController {
 
     let mainView = ReservationView()
+    let socketViewModel = SocketViewModel()
     
     override func loadView() {
         self.view = mainView
@@ -18,6 +19,14 @@ class ReservationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UserDefaults.standard.setValue(false, forKey: "enter")
+        
+        socketViewModel.connectSocket()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        socketViewModel.disconnectSocket()
     }
 
 }

@@ -17,7 +17,7 @@ enum ServerToClientEvent: String {
     case seatsInfo
 }
 
-enum JoinQueueRequest: String {
+enum JoinQueueParams: String {
     case eventId
     case eventDateId
 }
