@@ -70,7 +70,6 @@ class SocketViewModel {
             }
             
             print(response.message)
-            print("room data: ", response.areas)
             self.htmlContent.accept(self.wrapSVGsInHTML(areas: response.areas))
         }
         
@@ -112,7 +111,9 @@ class SocketViewModel {
     }
     
     private func wrapSVGsInHTML(areas: [AreaData]) -> String {
-        let svgElements = areas.map { $0.svg }.joined(separator: "\n")
+        let svgElements = areas.map { area in
+            "<g id='\(area.id)'>\(area.svg)</g>"
+        }.joined(separator: "\n")
 
         return """
         <html>
@@ -141,6 +142,18 @@ class SocketViewModel {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350 1350" preserveAspectRatio="xMidYMid meet">
                 \(svgElements)
             </svg>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const svg = document.querySelector('svg');
+                    
+                    svg.addEventListener('click', (event) => {
+                        const target = event.target.closest('g');
+                        if (target) {
+                            window.webkit.messageHandlers.svgHandler.postMessage(target.id);
+                        }
+                    });
+                });
+            </script>
         </body>
         </html>
         """

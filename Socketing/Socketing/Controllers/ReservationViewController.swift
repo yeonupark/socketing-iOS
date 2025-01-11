@@ -7,14 +7,22 @@
 
 import UIKit
 import RxSwift
+import WebKit
 
 class ReservationViewController: BaseViewController {
 
-    let mainView = ReservationView()
+    var mainView: ReservationView!
     let socketViewModel = SocketViewModel()
     let disposeBag = DisposeBag()
     
     override func loadView() {
+        let contentController = WKUserContentController()
+        contentController.add(self, name: "svgHandler")
+        
+        let config = WKWebViewConfiguration()
+        config.userContentController = contentController
+        
+        self.mainView = ReservationView(configuration: config)
         self.view = mainView
     }
     
@@ -45,4 +53,14 @@ class ReservationViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
 
+}
+
+extension ReservationViewController: WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+     
+        if message.name == "svgHandler", let id = message.body as? String {
+            print("Clicked area ID: \(id)")
+        }
+    }
 }

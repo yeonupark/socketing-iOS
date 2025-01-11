@@ -8,24 +8,39 @@
 import UIKit
 import WebKit
 
-class ReservationView: BaseView {
+class ReservationView: UIView {
     
     let infoView = EventInfoView()
     
-    let webView: WKWebView = {
-        let webView = WKWebView()
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        return webView
-    }()
+    var webView: WKWebView!
     
-    override func configure() {
-        super.configure()
+    init(configuration: WKWebViewConfiguration) {
+        super.init(frame: .zero)
+        
+        self.webView = WKWebView(frame: .zero, configuration: configuration)
+        self.webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        configure()
+        setConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func initializeWebView(configuration: WKWebViewConfiguration) {
+            webView = WKWebView(frame: .zero, configuration: configuration)
+            webView.translatesAutoresizingMaskIntoConstraints = false
+        }
+    
+    func configure() {
+        backgroundColor = .white
         
         addSubview(infoView)
         addSubview(webView)
     }
     
-    override func setConstraints() {
+    func setConstraints() {
         infoView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
         }

@@ -49,7 +49,7 @@ enum SelectSeatsParams: String {
     case numberOfSeats
 }
 
-enum ReserveSeatsParams {
+enum ReserveSeatsParams: String {
     case seatIds
     case eventId
     case eventDateId
@@ -57,7 +57,7 @@ enum ReserveSeatsParams {
     case userId
 }
 
-enum RequestOrderParams {
+enum RequestOrderParams: String {
     case userId
     case orderId
     case eventId
@@ -66,13 +66,13 @@ enum RequestOrderParams {
     case paymentMethod
 }
 
-enum ExitAreaParams {
+enum ExitAreaParams: String {
     case eventId
     case eventDateId
     case areaId
 }
 
-enum ExitRoomParams {
+enum ExitRoomParams: String {
     case eventId
     case eventDateId
 }
@@ -87,4 +87,21 @@ struct AreaData: Decodable {
 struct RoomJoinedResponse: Decodable {
     let message: String
     let areas: [AreaData]
+}
+
+struct SeatData: Decodable {
+    let id: String
+    let cx: Int
+    let cy: Int
+    let row: Int
+    let number: Int
+    let selectedBy: String?
+    let reservedUserId: String?
+    let expirationTime: String?
+//    let areaId: String
+}
+
+struct AreaJoinedResponse: Decodable {
+    let message: String
+    let seats: [SeatData]
 }
