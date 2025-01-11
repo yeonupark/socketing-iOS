@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class EventDetailViewController: UIViewController {
+class EventDetailViewController: BaseViewController {
 
     let mainView = EventDetailView()
     let viewModel = EventDetailViewModel.shared
@@ -43,7 +43,7 @@ class EventDetailViewController: UIViewController {
         mainView.bookingButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                
+                UserDefaults.standard.setValue(true, forKey: "enter")
                 let vc = WaitingViewController()
                 self?.navigationController?.pushViewController(vc, animated: true)
             })

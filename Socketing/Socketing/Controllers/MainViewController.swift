@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
     
     private let mainView = MainView()
     private let viewModel = MainViewModel()
@@ -28,8 +28,6 @@ class MainViewController: UIViewController {
     
     private func configureNavigationBar() {
         navigationItem.title = "예매 진행중인 공연"
-        navigationItem.backButtonTitle = ""
-        navigationController?.navigationBar.tintColor = .black
         navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .plain, target: .none, action: #selector(myPageButtonClicked)), animated: true)
     }
     

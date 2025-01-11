@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
 
     let mainView = LoginView()
     let viewModel = LoginViewModel()
