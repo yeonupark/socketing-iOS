@@ -60,6 +60,17 @@ class ReservationViewController: BaseViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        socketViewModel.seatsData
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { seats in
+                self.mainView.seatOverlayView.subviews.forEach { $0.removeFromSuperview() }
+                for seat in seats {
+                    let createdSeatView = self.mainView.seatView(seat)
+                    self.mainView.seatOverlayView.addSubview(createdSeatView)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
 }

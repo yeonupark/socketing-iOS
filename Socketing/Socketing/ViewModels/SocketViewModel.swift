@@ -20,6 +20,7 @@ class SocketViewModel {
     let currentAreaId = BehaviorRelay(value: "")
     
     let htmlContent = BehaviorRelay(value: "")
+    let seatsData = BehaviorRelay<[SeatData]>(value: [])
     
     init() {
         guard let url = URL(string: APIkeys.socketURL) else {
@@ -86,7 +87,7 @@ class SocketViewModel {
                 return
             }
             print(response.message)
-            print("first seat data: \(response.seats[0])")
+            self.seatsData.accept(response.seats)
         }
         
         

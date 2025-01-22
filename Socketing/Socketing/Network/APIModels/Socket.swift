@@ -91,8 +91,8 @@ struct RoomJoinedResponse: Decodable {
 
 struct SeatData: Decodable {
     let id: String
-    let cx: Int
-    let cy: Int
+    let cx: CGFloat
+    let cy: CGFloat
     let row: Int
     let number: Int
     let selectedBy: String?
