@@ -51,6 +51,15 @@ class ReservationViewController: BaseViewController {
                 self.mainView.webView.loadHTMLString(html, baseURL: nil)
             })
             .disposed(by: disposeBag)
+        
+        socketViewModel.currentAreaId
+            .asDriver(onErrorJustReturn: "")
+            .drive(onNext: { areaId in
+                if areaId != "" {
+                    self.socketViewModel.emitJoinArea()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
 }
@@ -59,8 +68,11 @@ extension ReservationViewController: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
      
-        if message.name == "svgHandler", let id = message.body as? String {
-            print("Clicked area ID: \(id)")
+        if message.name == "svgHandler", let areaId = message.body as? String {
+            if socketViewModel.currentAreaId.value != "" {
+                socketViewModel.emitExitArea()
+            }
+            socketViewModel.currentAreaId.accept(areaId)
         }
     }
 }

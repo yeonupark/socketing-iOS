@@ -15,6 +15,10 @@ class SocketViewModel {
     private var manager: SocketManager!
     private var socket: SocketIOClient!
     
+    private let eventId = EventDetailViewModel.shared.event.value.id
+    private let eventDateId = EventDetailViewModel.shared.event.value.eventDates[0].id
+    let currentAreaId = BehaviorRelay(value: "")
+    
     let htmlContent = BehaviorRelay(value: "")
     
     init() {
@@ -73,33 +77,23 @@ class SocketViewModel {
             self.htmlContent.accept(self.wrapSVGsInHTML(areas: response.areas))
         }
         
-//        socket.on(SocketServerToClientEvent.serverTime.rawValue) { data, _ in
-//            guard let firstData = data.first
-//            else {
-//                print("Failed to get serverTime data")
-//                return
-//            }
-//            
-//            print("server time: \(firstData)")
-//        }
-
-//        socket.on(ServerToClientEvent.seatsInfo.rawValue) { data, _ in
-//            guard let firstData = data.first as? [String: Any],
-//                  let response = JSONParser.decode(SeatsInfoResponse.self, from: firstData)
-//            else {
-//                print("Failed to parse seatsInfo data")
-//                return
-//            }
-//            print("Reserved seats: \(response)")
-//        }
+        
+        socket.on(SocketServerToClientEvent.areaJoined.rawValue) { data, _ in
+            guard let firstData = data.first as? [String: Any],
+                  let response = JSONParser.decode(AreaJoinedResponse.self, from: firstData)
+            else {
+                print("Failed to parse areaJoined data")
+                return
+            }
+            print(response.message)
+            print("first seat data: \(response.seats[0])")
+        }
+        
         
     }
     
     private func emitJoinRoom() {
         let eventName = SocketClientToServerEvent.joinRoom.rawValue
-        
-        let eventId = EventDetailViewModel.shared.event.value.id
-        let eventDateId = EventDetailViewModel.shared.event.value.eventDates[0].id
         
         let data: [String: String] = [
             JoinRoomParams.eventId.rawValue: eventId,
@@ -110,9 +104,46 @@ class SocketViewModel {
         print("Join room request sent")
     }
     
+    func emitJoinArea() {
+        let eventName = SocketClientToServerEvent.joinArea.rawValue
+        
+        let data: [String: String] = [
+            JoinAreaParams.eventId.rawValue: eventId,
+            JoinAreaParams.eventDateId.rawValue: eventDateId,
+            JoinAreaParams.areaId.rawValue: currentAreaId.value
+        ]
+        
+        socket.emit(eventName, data)
+        print("Join area request sent: ", currentAreaId.value)
+    }
+    
+    func emitExitArea() {
+        let eventName = SocketClientToServerEvent.exitArea.rawValue
+        
+        let data: [String: String] = [
+            ExitAreaParams.eventId.rawValue: eventId,
+            ExitAreaParams.eventDateId.rawValue: eventDateId,
+            ExitAreaParams.areaId.rawValue: currentAreaId.value
+        ]
+        
+        socket.emit(eventName, data)
+        print("Exit area request sent")
+    }
+    
     private func wrapSVGsInHTML(areas: [AreaData]) -> String {
         let svgElements = areas.map { area in
-            "<g id='\(area.id)'>\(area.svg)</g>"
+            
+            let modifiedSvg = area.svg.replacingOccurrences(
+                of: #"<g\s+id=["'].*?["']"#,
+                with: "<g",
+                options: .regularExpression
+            )
+
+            return """
+            <g id='\(area.id)' class='clickable-area'>
+                \(modifiedSvg)
+            </g>
+            """
         }.joined(separator: "\n")
 
         return """
@@ -129,12 +160,14 @@ class SocketViewModel {
                 width: 100vw;
                 height: 100vh;
                 background-color: #f0f0f0;
+                overflow: auto;
             }
             svg {
                 width: 100%;
                 height: auto;
                 max-width: 100%;
                 max-height: 100%;
+                transition: all 0.3s ease-in-out;
             }
         </style>
         </head>
@@ -145,9 +178,15 @@ class SocketViewModel {
             <script>
                 document.addEventListener('DOMContentLoaded', () => {
                     const svg = document.querySelector('svg');
-                    
+        
                     svg.addEventListener('click', (event) => {
-                        const target = event.target.closest('g');
+                        let target = event.target;
+
+                        // 클릭 가능한 영역의 가장 바깥쪽 g 태그를 찾음
+                        while (target && !target.classList.contains('clickable-area')) {
+                            target = target.parentElement;
+                        }
+
                         if (target) {
                             window.webkit.messageHandlers.svgHandler.postMessage(target.id);
                         }
