@@ -74,12 +74,13 @@ class EventInfoView: BaseView {
     override func setConstraints() {
         thumbnail.snp.makeConstraints { make in
             make.top.left.bottom.equalToSuperview().inset(12)
-            make.width.equalTo(120)
-            make.height.equalTo(150)
+            make.width.equalTo(180)
+            make.height.equalTo(240).priority(.required)
         }
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(thumbnail).inset(30)
+            make.top.equalTo(safeAreaLayoutGuide).inset(80)
             make.left.equalTo(thumbnail.snp.right).offset(30)
+            make.right.lessThanOrEqualToSuperview().inset(12)
         }
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
@@ -92,6 +93,7 @@ class EventInfoView: BaseView {
         castLabel.snp.makeConstraints { make in
             make.top.equalTo(placeLabel.snp.bottom).offset(8)
             make.left.equalTo(titleLabel)
+            make.bottom.lessThanOrEqualToSuperview().inset(12)
         }
     }
 
