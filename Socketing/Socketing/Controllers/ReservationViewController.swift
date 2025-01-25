@@ -64,13 +64,31 @@ class ReservationViewController: BaseViewController {
         socketViewModel.seatsData
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { seats in
-                self.mainView.seatOverlayView.subviews.forEach { $0.removeFromSuperview() }
+                self.mainView.webView.subviews
+                    .filter { $0 is SeatView }
+                    .forEach { $0.removeFromSuperview() }
                 for seat in seats {
                     let createdSeatView = self.mainView.seatView(seat)
-                    self.mainView.seatOverlayView.addSubview(createdSeatView)
+                    
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.seatTapped(sender: )))
+                    createdSeatView.addGestureRecognizer(tapGesture)
+                    self.mainView.webView.addSubview(createdSeatView)
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    @objc private func seatTapped(sender: UITapGestureRecognizer) {
+        guard let seatView = sender.view as? SeatView else {
+            print("Tapped view is not SeatView")
+            return
+        }
+        
+        guard let seatId = seatView.seatId else {
+            print("Seat ID not found in SeatView")
+            return
+        }
+        socketViewModel.emitSelectSeats(seatId: seatId)
     }
 
 }
@@ -80,6 +98,9 @@ extension ReservationViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
      
         if message.name == "svgHandler", let areaId = message.body as? String {
+            if socketViewModel.currentAreaId.value == areaId {
+                return
+            }
             if socketViewModel.currentAreaId.value != "" {
                 socketViewModel.emitExitArea()
             }

@@ -90,6 +90,15 @@ class SocketViewModel {
             self.seatsData.accept(response.seats)
         }
         
+        socket.on(SocketServerToClientEvent.seatsSelected.rawValue) { data, _ in
+            guard let firstData = data.first as? [[String: Any]],
+                  let response = JSONParser.decode([SeatsSelectedResponse].self, from: firstData)
+            else {
+                print("Failed to parse seatsSelected data")
+                return
+            }
+            print(response[0].selectedBy)
+        }
         
     }
     
@@ -129,6 +138,21 @@ class SocketViewModel {
         
         socket.emit(eventName, data)
         print("Exit area request sent")
+    }
+    
+    func emitSelectSeats(seatId: String) {
+        let eventName = SocketClientToServerEvent.selectSeats.rawValue
+        
+        let data: [String: Any] = [
+            SelectSeatsParams.eventId.rawValue: eventId,
+            SelectSeatsParams.eventDateId.rawValue: eventDateId,
+            SelectSeatsParams.areaId.rawValue: currentAreaId.value,
+            SelectSeatsParams.seatId.rawValue: seatId,
+            SelectSeatsParams.numberOfSeats.rawValue: 1
+        ]
+        socket.emit(eventName, data)
+        print("Select seats request sent")
+
     }
     
     private func wrapSVGsInHTML(areas: [AreaData]) -> String {
@@ -173,7 +197,7 @@ class SocketViewModel {
         </style>
         </head>
         <body>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350 1350" preserveAspectRatio="xMidYMid meet">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
                 \(svgElements)
             </svg>
             <script>

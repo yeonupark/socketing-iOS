@@ -105,3 +105,11 @@ struct AreaJoinedResponse: Decodable {
     let message: String
     let seats: [SeatData]
 }
+
+struct SeatsSelectedResponse: Decodable {
+    let seatId: String
+    let selectedBy: String?
+    let updatedAt: String
+    let expirationTime: String?
+//    let reservedUserId: String?
+}
