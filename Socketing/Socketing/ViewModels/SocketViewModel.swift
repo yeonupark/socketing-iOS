@@ -9,31 +9,69 @@ import Foundation
 import RxCocoa
 import RxSwift
 import SocketIO
+import UIKit
 
 class SocketViewModel {
     
     private var manager: SocketManager!
     private var socket: SocketIOClient!
+    var socketId: String!
     
     private let eventId = EventDetailViewModel.shared.event.value.id
     private let eventDateId = EventDetailViewModel.shared.event.value.eventDates[0].id
     let currentAreaId = BehaviorRelay(value: "")
+    private let userId = "88a6d7b6-b191-41ce-994d-29eced71b2af"
+    private let numberOfFriends = EventDetailViewModel.shared.numberOfFriends.value
     
+    var areaInfo: [String: String] = [:]
     let htmlContent = BehaviorRelay(value: "")
-    let seatsData = BehaviorRelay<[SeatData]>(value: [])
+    let seatsDataRelay = PublishRelay<[SeatData]>()
+    private var seatsData = [SeatData]()
+    
+    let selectedSeats = BehaviorRelay<[SeatData]>(value: [])
+    
+    let bookButtonEnabled: Driver<Bool>
+    let bookButtonColor: Driver<UIColor>
+    
+    private let disposeBag = DisposeBag()
     
     init() {
+        
+        bookButtonEnabled = selectedSeats
+            .asDriver(onErrorJustReturn: [])
+            .map { !$0.isEmpty }
+
+        bookButtonColor = bookButtonEnabled
+            .map { isEnabled in
+                return isEnabled ? UIColor.systemPink : UIColor.lightGray
+            }
+            .asDriver(onErrorJustReturn: UIColor.lightGray)
+        
         guard let url = URL(string: APIkeys.socketURL) else {
             return
         }
         manager = SocketManager(socketURL: url, config: [
-//                .log(true),
-                .compress,
-                .forceWebsockets(true),
-            ])
+            //                .log(true),
+            .compress,
+            .forceWebsockets(true),
+        ])
         socket = manager.defaultSocket
         
         self.setupSocketEvents()
+        
+        bind()
+    }
+    
+    func bind() {
+        
+        currentAreaId
+            .asDriver(onErrorJustReturn: "")
+            .drive(onNext: { areaId in
+                if areaId != "" {
+                    self.emitJoinArea()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     func connectSocket() {
@@ -55,6 +93,7 @@ class SocketViewModel {
         
         socket.on(clientEvent: .connect) { data, ack in
             print("Socket connected : \(data)")
+            self.socketId = self.socket.sid
             self.emitJoinRoom()
         }
         
@@ -75,6 +114,9 @@ class SocketViewModel {
             }
             
             print(response.message)
+            for area in response.areas {
+                self.areaInfo[area.id] = area.label
+            }
             self.htmlContent.accept(self.wrapSVGsInHTML(areas: response.areas))
         }
         
@@ -87,7 +129,8 @@ class SocketViewModel {
                 return
             }
             print(response.message)
-            self.seatsData.accept(response.seats)
+            self.seatsData = response.seats
+            self.seatsDataRelay.accept(self.seatsData)
         }
         
         socket.on(SocketServerToClientEvent.seatsSelected.rawValue) { data, _ in
@@ -97,7 +140,17 @@ class SocketViewModel {
                 print("Failed to parse seatsSelected data")
                 return
             }
-            print(response[0].selectedBy)
+            self.updateSeats(seats: response)
+        }
+        
+        socket.on(SocketServerToClientEvent.orderMade.rawValue) { data, _ in
+            guard let firstData = data.first as? [String: Any],
+                  let response = JSONParser.decode(orderMadeResponse.self, from: firstData)
+            else {
+                print("Failed to parse orderMade data")
+                return
+            }
+            self.updateReservedSeats(seats: response.data.seats)
         }
         
     }
@@ -114,7 +167,7 @@ class SocketViewModel {
         print("Join room request sent")
     }
     
-    func emitJoinArea() {
+    private func emitJoinArea() {
         let eventName = SocketClientToServerEvent.joinArea.rawValue
         
         let data: [String: String] = [
@@ -128,6 +181,7 @@ class SocketViewModel {
     }
     
     func emitExitArea() {
+        self.selectedSeats.accept([])
         let eventName = SocketClientToServerEvent.exitArea.rawValue
         
         let data: [String: String] = [
@@ -148,17 +202,74 @@ class SocketViewModel {
             SelectSeatsParams.eventDateId.rawValue: eventDateId,
             SelectSeatsParams.areaId.rawValue: currentAreaId.value,
             SelectSeatsParams.seatId.rawValue: seatId,
-            SelectSeatsParams.numberOfSeats.rawValue: 1
+            SelectSeatsParams.numberOfSeats.rawValue: numberOfFriends+1
         ]
         socket.emit(eventName, data)
         print("Select seats request sent")
 
     }
     
+    func emitReserveSeats() {
+        let seatIds = selectedSeats.value.map { $0.id }
+        let eventName = SocketClientToServerEvent.reserveSeats.rawValue
+        
+        let data: [String: Any] = [
+            ReserveSeatsParams.eventId.rawValue: eventId,
+            ReserveSeatsParams.eventDateId.rawValue: eventDateId,
+            ReserveSeatsParams.areaId.rawValue: currentAreaId.value,
+            ReserveSeatsParams.seatIds.rawValue: seatIds,
+            ReserveSeatsParams.userId.rawValue: userId
+        ]
+        socket.emit(eventName, data)
+        print("Reserve seats request sent")
+    }
+    
+    private func updateSeats(seats: [SeatsSelectedResponse]) {
+        let seatIds = Set(seats.map { $0.seatId })
+        let currentSeatsIds = Set(selectedSeats.value.map { $0.id })
+        let selectedBy = seats.first?.selectedBy
+        let reservedUserId = seats.first?.reservedUserId
+        
+        if seatIds == currentSeatsIds {
+            self.selectedSeats.accept([])
+        }
+        
+        var mySeats: [SeatData] = []
+        for (index, seat) in seatsData.enumerated() {
+            if seatIds.contains(seat.id) {
+                seatsData[index].selectedBy = selectedBy
+                seatsData[index].reservedUserId = reservedUserId
+                if selectedBy == self.socketId {
+                    mySeats.append(seat)
+                }
+            }
+        }
+        seatsDataRelay.accept(seatsData)
+        
+        if selectedBy == self.socketId {
+            self.selectedSeats.accept(mySeats)
+        }
+        
+    }
+    
+    private func updateReservedSeats(seats: [SeatData]) {
+        let seatIds = seats.map { $0.id }
+        for (index, seat) in seatsData.enumerated() {
+            if seatIds.contains(seat.id) {
+                seatsData[index].reservedUserId = seats.first?.reservedUserId
+            }
+        }
+        seatsDataRelay.accept(seatsData)
+    }
+
+    
     private func wrapSVGsInHTML(areas: [AreaData]) -> String {
+        
         let svgElements = areas.map { area in
-            
-            let modifiedSvg = area.svg.replacingOccurrences(
+            guard let svg = area.svg else {
+                return ""
+            }
+            let modifiedSvg = svg.replacingOccurrences(
                 of: #"<g\s+id=["'].*?["']"#,
                 with: "<g",
                 options: .regularExpression

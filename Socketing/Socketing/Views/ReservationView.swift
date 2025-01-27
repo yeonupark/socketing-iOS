@@ -8,8 +8,21 @@
 import UIKit
 import WebKit
 
+enum SeatStatus {
+    case isReserved
+    case isSelected
+    case isSelectedByMe
+    case isFree
+}
+
 class SeatView: UIView {
     var seatId: String?
+    
+    var seatStatus: SeatStatus = .isFree {
+        didSet {
+            updateBackgroundColor()
+        }
+    }
     
     init(frame: CGRect, seatId: String?, isReserved: Bool) {
         self.seatId = seatId
@@ -24,11 +37,35 @@ class SeatView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func updateBackgroundColor() {
+        switch seatStatus {
+        case .isReserved:
+            self.backgroundColor = .gray
+        case .isSelected:
+            self.backgroundColor = .systemYellow
+        case .isSelectedByMe:
+            self.backgroundColor = .systemPink
+        case .isFree:
+            self.backgroundColor = .white
+        }
+    }
 }
 
 class ReservationView: UIView {
     
     let infoView = EventInfoView()
+    
+    let bookButton = {
+        let view = UIButton()
+        view.setTitle("선택 좌석 예매하기", for: .normal)
+        view.backgroundColor = .systemPink
+        view.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        view.setTitleColor(.white, for: .normal)
+        view.layer.cornerRadius = 8
+        
+        return view
+    }()
     
     var webView: WKWebView!
     
@@ -50,6 +87,14 @@ class ReservationView: UIView {
         let frame = CGRect(x: screenX - seatSize / 2, y: screenY - seatSize / 2, width: seatSize, height: seatSize)
         return SeatView(frame: frame, seatId: seat.id, isReserved: seat.reservedUserId != nil)
     }
+    
+    let seatsInfoTableView = {
+        let view = UITableView()
+        view.register(UITableViewCell.self, forCellReuseIdentifier: "BasicCell")
+        view.backgroundColor = .white
+        
+        return view
+    }()
     
     init(configuration: WKWebViewConfiguration) {
         super.init(frame: .zero)
@@ -74,7 +119,9 @@ class ReservationView: UIView {
         backgroundColor = .white
         
         addSubview(infoView)
+        addSubview(bookButton)
         addSubview(webView)
+        addSubview(seatsInfoTableView)
     }
     
     func setConstraints() {
@@ -82,10 +129,20 @@ class ReservationView: UIView {
             make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(300)
         }
+        bookButton.snp.makeConstraints { make in
+            make.bottom.equalTo(infoView).inset(45)
+            make.trailing.equalToSuperview().inset(30)
+            make.height.equalTo(30)
+            make.width.equalTo(120)
+        }
         webView.snp.makeConstraints { make in
             make.top.equalTo(infoView.snp.bottom)
             make.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(300)
+        }
+        seatsInfoTableView.snp.makeConstraints { make in
+            make.bottom.horizontalEdges.equalToSuperview()
+            make.height.equalTo(140)
         }
     }
 

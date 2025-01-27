@@ -45,6 +45,14 @@ class ReservationViewController: BaseViewController {
     
     private func bind() {
         
+        socketViewModel.bookButtonEnabled
+            .drive(mainView.bookButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        socketViewModel.bookButtonColor
+            .drive(mainView.bookButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
+        
         socketViewModel.htmlContent
             .asDriver(onErrorJustReturn: "")
             .drive(onNext: { html in
@@ -52,28 +60,55 @@ class ReservationViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        socketViewModel.currentAreaId
-            .asDriver(onErrorJustReturn: "")
-            .drive(onNext: { areaId in
-                if areaId != "" {
-                    self.socketViewModel.emitJoinArea()
+        socketViewModel.seatsDataRelay
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { seats in
+                
+                self.mainView.webView.subviews
+                    .filter { $0 is SeatView }
+                    .forEach { $0.removeFromSuperview() }
+                
+                for seat in seats {
+                    
+                    let createdSeatView = self.mainView.seatView(seat)
+                    let seatStatus: SeatStatus = {
+                        if seat.reservedUserId != nil {
+                            return .isReserved
+                        }
+                        switch seat.selectedBy {
+                        case self.socketViewModel.socketId:
+                            return .isSelectedByMe
+                        case nil:
+                            return .isFree
+                        default:
+                            return .isSelected
+                        }
+                    }()
+                    createdSeatView.seatStatus = seatStatus
+                    self.mainView.webView.addSubview(createdSeatView)
+                    
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.seatTapped(sender: )))
+                    if seatStatus == .isFree {
+                        createdSeatView.addGestureRecognizer(tapGesture)
+                    }
                 }
             })
             .disposed(by: disposeBag)
         
-        socketViewModel.seatsData
-            .asDriver(onErrorJustReturn: [])
-            .drive(onNext: { seats in
-                self.mainView.webView.subviews
-                    .filter { $0 is SeatView }
-                    .forEach { $0.removeFromSuperview() }
-                for seat in seats {
-                    let createdSeatView = self.mainView.seatView(seat)
-                    
-                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.seatTapped(sender: )))
-                    createdSeatView.addGestureRecognizer(tapGesture)
-                    self.mainView.webView.addSubview(createdSeatView)
-                }
+        socketViewModel.selectedSeats
+            .bind(to: mainView.seatsInfoTableView.rx.items(cellIdentifier: "BasicCell", cellType: UITableViewCell.self)) { (_, element, cell) in
+                let currentArea = self.socketViewModel.areaInfo[self.socketViewModel.currentAreaId.value] ?? "A"
+                cell.textLabel?.text = "\(currentArea)구역 \(element.row)열 \(element.number)번"
+                cell.textLabel?.font = .boldSystemFont(ofSize: 14)
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.bookButton.rx.tap
+            .asDriver()
+            .drive(onNext: { _ in
+                self.socketViewModel.emitReserveSeats()
+                self.socketViewModel.selectedSeats.accept([])
+                self.showAlert()
             })
             .disposed(by: disposeBag)
     }
@@ -90,7 +125,18 @@ class ReservationViewController: BaseViewController {
         }
         socketViewModel.emitSelectSeats(seatId: seatId)
     }
-
+    
+    private func showAlert() {
+        
+        let alert = UIAlertController(title: "좌석 예매 알림",
+                                       message: "결제페이지로 이동합니다",
+                                       preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(confirmAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension ReservationViewController: WKScriptMessageHandler {
