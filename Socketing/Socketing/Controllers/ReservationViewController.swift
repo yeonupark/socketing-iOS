@@ -52,64 +52,40 @@ class ReservationViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        socketViewModel.currentAreaId
-            .asDriver(onErrorJustReturn: "")
-            .drive(onNext: { areaId in
-                if areaId != "" {
-                    self.socketViewModel.emitJoinArea()
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        socketViewModel.seatsData
+        socketViewModel.seatsDataRelay
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { seats in
+                
                 self.mainView.webView.subviews
                     .filter { $0 is SeatView }
                     .forEach { $0.removeFromSuperview() }
+                
                 for seat in seats {
+                    
                     let createdSeatView = self.mainView.seatView(seat)
+                    let seatStatus: SeatStatus = {
+                        if seat.reservedUserId != nil {
+                            return .isReserved
+                        }
+                        switch seat.selectedBy {
+                        case self.socketViewModel.socketId:
+                            return .isSelectedByMe
+                        case nil:
+                            return .isFree
+                        default:
+                            return .isSelected
+                        }
+                    }()
+                    createdSeatView.seatStatus = seatStatus
+                    self.mainView.webView.addSubview(createdSeatView)
                     
                     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.seatTapped(sender: )))
-                    createdSeatView.addGestureRecognizer(tapGesture)
-                    self.mainView.webView.addSubview(createdSeatView)
+                    if seatStatus == .isFree {
+                        createdSeatView.addGestureRecognizer(tapGesture)
+                    }
                 }
             })
             .disposed(by: disposeBag)
-        
-        socketViewModel.selectedSeats
-            .asDriver(onErrorJustReturn: [])
-            .drive(onNext: { seats in
-                guard !seats.isEmpty else { return }
-                
-                let seatIds = Set(seats.map { $0.seatId })
-                let selectedBy = seats.first?.selectedBy
-                
-                self.updateSeatStatus(for: seatIds, selectedBy: selectedBy)
-            })
-            .disposed(by: disposeBag)
-        
-    }
-    
-    private func updateSeatStatus(for seatIds: Set<String>, selectedBy: String?) {
-        let seatStatus: SeatStatus = {
-            switch selectedBy {
-            case self.socketViewModel.socketId:
-                return .isSelectedByMe
-            case nil:
-                return .isFree
-            default:
-                return .isSelected
-            }
-        }()
-        
-        self.mainView.webView.subviews
-            .compactMap { $0 as? SeatView }
-            .forEach { seatView in
-                if seatIds.contains(seatView.seatId ?? "") {
-                    seatView.seatStatus = seatStatus
-                }
-            }
     }
     
     @objc private func seatTapped(sender: UITapGestureRecognizer) {

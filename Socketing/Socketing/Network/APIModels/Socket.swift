@@ -95,8 +95,8 @@ struct SeatData: Decodable {
     let cy: CGFloat
     let row: Int
     let number: Int
-    let selectedBy: String?
-    let reservedUserId: String?
+    var selectedBy: String?
+    var reservedUserId: String?
     let expirationTime: String?
 //    let areaId: String
 }

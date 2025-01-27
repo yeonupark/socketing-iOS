@@ -9,6 +9,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 import SocketIO
+import UIKit
 
 class SocketViewModel {
     
@@ -21,22 +22,38 @@ class SocketViewModel {
     let currentAreaId = BehaviorRelay(value: "")
     
     let htmlContent = BehaviorRelay(value: "")
-    let seatsData = BehaviorRelay<[SeatData]>(value: [])
+    let seatsDataRelay = PublishRelay<[SeatData]>()
+    private var seatsData = [SeatData]()
     
-    let selectedSeats = BehaviorRelay<[SeatsSelectedResponse]>(value: [])
+    private let disposeBag = DisposeBag()
     
     init() {
+        
         guard let url = URL(string: APIkeys.socketURL) else {
             return
         }
         manager = SocketManager(socketURL: url, config: [
-//                .log(true),
-                .compress,
-                .forceWebsockets(true),
-            ])
+            //                .log(true),
+            .compress,
+            .forceWebsockets(true),
+        ])
         socket = manager.defaultSocket
         
         self.setupSocketEvents()
+        
+        bind()
+    }
+    
+    func bind() {
+        
+        currentAreaId
+            .asDriver(onErrorJustReturn: "")
+            .drive(onNext: { areaId in
+                if areaId != "" {
+                    self.emitJoinArea()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     func connectSocket() {
@@ -91,7 +108,8 @@ class SocketViewModel {
                 return
             }
             print(response.message)
-            self.seatsData.accept(response.seats)
+            self.seatsData = response.seats
+            self.seatsDataRelay.accept(self.seatsData)
         }
         
         socket.on(SocketServerToClientEvent.seatsSelected.rawValue) { data, _ in
@@ -101,7 +119,7 @@ class SocketViewModel {
                 print("Failed to parse seatsSelected data")
                 return
             }
-            self.selectedSeats.accept(response)
+            self.updateSeats(seats: response)
         }
         
     }
@@ -118,7 +136,7 @@ class SocketViewModel {
         print("Join room request sent")
     }
     
-    func emitJoinArea() {
+    private func emitJoinArea() {
         let eventName = SocketClientToServerEvent.joinArea.rawValue
         
         let data: [String: String] = [
@@ -157,6 +175,21 @@ class SocketViewModel {
         socket.emit(eventName, data)
         print("Select seats request sent")
 
+    }
+    
+    private func updateSeats(seats: [SeatsSelectedResponse]) {
+        let seatIds = Set(seats.map { $0.seatId })
+        let selectedBy = seats.first?.selectedBy
+        for (index, seat) in seatsData.enumerated() {
+            if seatIds.contains(seat.id) {
+                seatsData[index].selectedBy = selectedBy
+            }
+        }
+        seatsDataRelay.accept(seatsData)
+        
+        if selectedBy == self.socketId {
+            
+        }
     }
     
     private func wrapSVGsInHTML(areas: [AreaData]) -> String {
