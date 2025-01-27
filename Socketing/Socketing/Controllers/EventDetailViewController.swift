@@ -40,7 +40,24 @@ class EventDetailViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        viewModel.numberOfFriends
+            .asDriver(onErrorJustReturn: 0)
+            .drive(onNext: { number in
+                self.mainView.friendRegistrationButton.setTitle("함께할 친구 등록 (\(number)명)", for: .normal)
+            })
+            .disposed(by: disposeBag)
+        
         mainView.bookingButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.viewModel.numberOfFriends.accept(0)
+                UserDefaults.standard.setValue(true, forKey: "enter")
+                let vc = WaitingViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.togetherBookingButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
                 UserDefaults.standard.setValue(true, forKey: "enter")
@@ -49,6 +66,36 @@ class EventDetailViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        mainView.friendRegistrationButton.addTarget(self, action: #selector(showNameInputModal), for: .touchUpInside)
+        
     }
+    
+    @objc func showNameInputModal() {
+            let alert = UIAlertController(title: "함께할 친구 등록하기",
+                                           message: "친구의 이름을 입력해주세요",
+                                           preferredStyle: .alert)
+            
+            alert.addTextField { textField in
+                textField.placeholder = "이름을 입력하세요"
+            }
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+                if let name = alert.textFields?.first?.text, !name.isEmpty {
+                    let numberOfTickets = self.viewModel.numberOfFriends.value + 1
+                    self.viewModel.numberOfFriends.accept(numberOfTickets)
+                } else {
+                    print("이름이 입력되지 않았습니다")
+                }
+            }
+            
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+                print("입력 취소")
+            }
+            
+            alert.addAction(confirmAction)
+            alert.addAction(cancelAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
 
 }

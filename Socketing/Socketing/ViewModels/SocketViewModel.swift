@@ -21,6 +21,7 @@ class SocketViewModel {
     private let eventDateId = EventDetailViewModel.shared.event.value.eventDates[0].id
     let currentAreaId = BehaviorRelay(value: "")
     private let userId = "88a6d7b6-b191-41ce-994d-29eced71b2af"
+    private let numberOfFriends = EventDetailViewModel.shared.numberOfFriends.value
     
     var areaInfo: [String: String] = [:]
     let htmlContent = BehaviorRelay(value: "")
@@ -201,7 +202,7 @@ class SocketViewModel {
             SelectSeatsParams.eventDateId.rawValue: eventDateId,
             SelectSeatsParams.areaId.rawValue: currentAreaId.value,
             SelectSeatsParams.seatId.rawValue: seatId,
-            SelectSeatsParams.numberOfSeats.rawValue: 1
+            SelectSeatsParams.numberOfSeats.rawValue: numberOfFriends+1
         ]
         socket.emit(eventName, data)
         print("Select seats request sent")

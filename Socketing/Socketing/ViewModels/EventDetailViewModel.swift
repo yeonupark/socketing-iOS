@@ -11,6 +11,7 @@ import RxCocoa
 class EventDetailViewModel {
     
     static let shared = EventDetailViewModel()
+    let numberOfFriends = BehaviorRelay(value: 0)
     
     let event = BehaviorRelay<EventData>(value: EventData(id: "", title: "", eventDates: [], thumbnail: "", place: "", cast: "", ticketingStartTime: ""))
 }
