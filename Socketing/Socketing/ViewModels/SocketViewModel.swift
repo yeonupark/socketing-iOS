@@ -14,6 +14,7 @@ class SocketViewModel {
     
     private var manager: SocketManager!
     private var socket: SocketIOClient!
+    var socketId: String!
     
     private let eventId = EventDetailViewModel.shared.event.value.id
     private let eventDateId = EventDetailViewModel.shared.event.value.eventDates[0].id
@@ -21,6 +22,8 @@ class SocketViewModel {
     
     let htmlContent = BehaviorRelay(value: "")
     let seatsData = BehaviorRelay<[SeatData]>(value: [])
+    
+    let selectedSeats = BehaviorRelay<[SeatsSelectedResponse]>(value: [])
     
     init() {
         guard let url = URL(string: APIkeys.socketURL) else {
@@ -55,6 +58,7 @@ class SocketViewModel {
         
         socket.on(clientEvent: .connect) { data, ack in
             print("Socket connected : \(data)")
+            self.socketId = self.socket.sid
             self.emitJoinRoom()
         }
         
@@ -97,7 +101,7 @@ class SocketViewModel {
                 print("Failed to parse seatsSelected data")
                 return
             }
-            print(response[0].selectedBy)
+            self.selectedSeats.accept(response)
         }
         
     }

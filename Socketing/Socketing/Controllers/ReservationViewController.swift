@@ -76,6 +76,40 @@ class ReservationViewController: BaseViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        socketViewModel.selectedSeats
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { seats in
+                guard !seats.isEmpty else { return }
+                
+                let seatIds = Set(seats.map { $0.seatId })
+                let selectedBy = seats.first?.selectedBy
+                
+                self.updateSeatStatus(for: seatIds, selectedBy: selectedBy)
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    private func updateSeatStatus(for seatIds: Set<String>, selectedBy: String?) {
+        let seatStatus: SeatStatus = {
+            switch selectedBy {
+            case self.socketViewModel.socketId:
+                return .isSelectedByMe
+            case nil:
+                return .isFree
+            default:
+                return .isSelected
+            }
+        }()
+        
+        self.mainView.webView.subviews
+            .compactMap { $0 as? SeatView }
+            .forEach { seatView in
+                if seatIds.contains(seatView.seatId ?? "") {
+                    seatView.seatStatus = seatStatus
+                }
+            }
     }
     
     @objc private func seatTapped(sender: UITapGestureRecognizer) {

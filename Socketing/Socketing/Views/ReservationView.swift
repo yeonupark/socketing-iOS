@@ -8,8 +8,21 @@
 import UIKit
 import WebKit
 
+enum SeatStatus {
+    case isReserved
+    case isSelected
+    case isSelectedByMe
+    case isFree
+}
+
 class SeatView: UIView {
     var seatId: String?
+    
+    var seatStatus: SeatStatus = .isFree {
+        didSet {
+            updateBackgroundColor()
+        }
+    }
     
     init(frame: CGRect, seatId: String?, isReserved: Bool) {
         self.seatId = seatId
@@ -23,6 +36,19 @@ class SeatView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func updateBackgroundColor() {
+        switch seatStatus {
+        case .isReserved:
+            self.backgroundColor = .gray
+        case .isSelected:
+            self.backgroundColor = .systemYellow
+        case .isSelectedByMe:
+            self.backgroundColor = .systemPink
+        case .isFree:
+            self.backgroundColor = .white
+        }
     }
 }
 
