@@ -25,9 +25,24 @@ class SocketViewModel {
     let seatsDataRelay = PublishRelay<[SeatData]>()
     private var seatsData = [SeatData]()
     
+    let selectedSeats = BehaviorRelay<[SeatData]>(value: [])
+    
+    let bookButtonEnabled: Driver<Bool>
+    let bookButtonColor: Driver<UIColor>
+    
     private let disposeBag = DisposeBag()
     
     init() {
+        
+        bookButtonEnabled = selectedSeats
+            .asDriver(onErrorJustReturn: [])
+            .map { !$0.isEmpty }
+
+        bookButtonColor = bookButtonEnabled
+            .map { isEnabled in
+                return isEnabled ? UIColor.systemPink : UIColor.lightGray
+            }
+            .asDriver(onErrorJustReturn: UIColor.lightGray)
         
         guard let url = URL(string: APIkeys.socketURL) else {
             return
@@ -150,6 +165,7 @@ class SocketViewModel {
     }
     
     func emitExitArea() {
+        self.selectedSeats.accept([])
         let eventName = SocketClientToServerEvent.exitArea.rawValue
         
         let data: [String: String] = [
@@ -179,17 +195,28 @@ class SocketViewModel {
     
     private func updateSeats(seats: [SeatsSelectedResponse]) {
         let seatIds = Set(seats.map { $0.seatId })
+        let currentSeatsIds = Set(selectedSeats.value.map { $0.id })
         let selectedBy = seats.first?.selectedBy
+        
+        if seatIds == currentSeatsIds {
+            self.selectedSeats.accept([])
+        }
+        
+        var mySeats: [SeatData] = []
         for (index, seat) in seatsData.enumerated() {
             if seatIds.contains(seat.id) {
                 seatsData[index].selectedBy = selectedBy
+                if selectedBy == self.socketId {
+                    mySeats.append(seat)
+                }
             }
         }
         seatsDataRelay.accept(seatsData)
         
         if selectedBy == self.socketId {
-            
+            self.selectedSeats.accept(mySeats)
         }
+        
     }
     
     private func wrapSVGsInHTML(areas: [AreaData]) -> String {

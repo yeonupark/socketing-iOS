@@ -56,6 +56,17 @@ class ReservationView: UIView {
     
     let infoView = EventInfoView()
     
+    let bookButton = {
+        let view = UIButton()
+        view.setTitle("선택 좌석 예매하기", for: .normal)
+        view.backgroundColor = .systemPink
+        view.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        view.setTitleColor(.white, for: .normal)
+        view.layer.cornerRadius = 8
+        
+        return view
+    }()
+    
     var webView: WKWebView!
     
     lazy var seatView: (SeatData) -> SeatView = { seat in
@@ -100,6 +111,7 @@ class ReservationView: UIView {
         backgroundColor = .white
         
         addSubview(infoView)
+        addSubview(bookButton)
         addSubview(webView)
     }
     
@@ -107,6 +119,12 @@ class ReservationView: UIView {
         infoView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(300)
+        }
+        bookButton.snp.makeConstraints { make in
+            make.bottom.equalTo(infoView).inset(45)
+            make.trailing.equalToSuperview().inset(30)
+            make.height.equalTo(30)
+            make.width.equalTo(120)
         }
         webView.snp.makeConstraints { make in
             make.top.equalTo(infoView.snp.bottom)

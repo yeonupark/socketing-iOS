@@ -45,6 +45,14 @@ class ReservationViewController: BaseViewController {
     
     private func bind() {
         
+        socketViewModel.bookButtonEnabled
+            .drive(mainView.bookButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        socketViewModel.bookButtonColor
+            .drive(mainView.bookButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
+        
         socketViewModel.htmlContent
             .asDriver(onErrorJustReturn: "")
             .drive(onNext: { html in
