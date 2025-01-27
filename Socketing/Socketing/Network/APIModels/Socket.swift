@@ -81,7 +81,7 @@ struct AreaData: Decodable {
     let id: String
     let label: String
     let price: Double
-    let svg: String
+    let svg: String?
 }
 
 struct RoomJoinedResponse: Decodable {
@@ -111,5 +111,17 @@ struct SeatsSelectedResponse: Decodable {
     let selectedBy: String?
     let updatedAt: String
     let expirationTime: String?
-//    let reservedUserId: String?
+    let reservedUserId: String?
+}
+
+struct orderData: Decodable {
+    let id: String
+    let createdAt: String
+    let expirationTime: String
+    let seats: [SeatData]
+    let area: AreaData
+}
+
+struct orderMadeResponse: Decodable {
+    let data: orderData
 }

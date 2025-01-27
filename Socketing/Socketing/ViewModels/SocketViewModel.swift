@@ -20,6 +20,7 @@ class SocketViewModel {
     private let eventId = EventDetailViewModel.shared.event.value.id
     private let eventDateId = EventDetailViewModel.shared.event.value.eventDates[0].id
     let currentAreaId = BehaviorRelay(value: "")
+    private let userId = "88a6d7b6-b191-41ce-994d-29eced71b2af"
     
     var areaInfo: [String: String] = [:]
     let htmlContent = BehaviorRelay(value: "")
@@ -141,6 +142,16 @@ class SocketViewModel {
             self.updateSeats(seats: response)
         }
         
+        socket.on(SocketServerToClientEvent.orderMade.rawValue) { data, _ in
+            guard let firstData = data.first as? [String: Any],
+                  let response = JSONParser.decode(orderMadeResponse.self, from: firstData)
+            else {
+                print("Failed to parse orderMade data")
+                return
+            }
+            self.updateReservedSeats(seats: response.data.seats)
+        }
+        
     }
     
     private func emitJoinRoom() {
@@ -197,10 +208,26 @@ class SocketViewModel {
 
     }
     
+    func emitReserveSeats() {
+        let seatIds = selectedSeats.value.map { $0.id }
+        let eventName = SocketClientToServerEvent.reserveSeats.rawValue
+        
+        let data: [String: Any] = [
+            ReserveSeatsParams.eventId.rawValue: eventId,
+            ReserveSeatsParams.eventDateId.rawValue: eventDateId,
+            ReserveSeatsParams.areaId.rawValue: currentAreaId.value,
+            ReserveSeatsParams.seatIds.rawValue: seatIds,
+            ReserveSeatsParams.userId.rawValue: userId
+        ]
+        socket.emit(eventName, data)
+        print("Reserve seats request sent")
+    }
+    
     private func updateSeats(seats: [SeatsSelectedResponse]) {
         let seatIds = Set(seats.map { $0.seatId })
         let currentSeatsIds = Set(selectedSeats.value.map { $0.id })
         let selectedBy = seats.first?.selectedBy
+        let reservedUserId = seats.first?.reservedUserId
         
         if seatIds == currentSeatsIds {
             self.selectedSeats.accept([])
@@ -210,6 +237,7 @@ class SocketViewModel {
         for (index, seat) in seatsData.enumerated() {
             if seatIds.contains(seat.id) {
                 seatsData[index].selectedBy = selectedBy
+                seatsData[index].reservedUserId = reservedUserId
                 if selectedBy == self.socketId {
                     mySeats.append(seat)
                 }
@@ -223,10 +251,24 @@ class SocketViewModel {
         
     }
     
+    private func updateReservedSeats(seats: [SeatData]) {
+        let seatIds = seats.map { $0.id }
+        for (index, seat) in seatsData.enumerated() {
+            if seatIds.contains(seat.id) {
+                seatsData[index].reservedUserId = seats.first?.reservedUserId
+            }
+        }
+        seatsDataRelay.accept(seatsData)
+    }
+
+    
     private func wrapSVGsInHTML(areas: [AreaData]) -> String {
+        
         let svgElements = areas.map { area in
-            
-            let modifiedSvg = area.svg.replacingOccurrences(
+            guard let svg = area.svg else {
+                return ""
+            }
+            let modifiedSvg = svg.replacingOccurrences(
                 of: #"<g\s+id=["'].*?["']"#,
                 with: "<g",
                 options: .regularExpression

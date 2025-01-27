@@ -102,6 +102,15 @@ class ReservationViewController: BaseViewController {
                 cell.textLabel?.font = .boldSystemFont(ofSize: 14)
             }
             .disposed(by: disposeBag)
+        
+        mainView.bookButton.rx.tap
+            .asDriver()
+            .drive(onNext: { _ in
+                self.socketViewModel.emitReserveSeats()
+                self.socketViewModel.selectedSeats.accept([])
+                self.showAlert()
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc private func seatTapped(sender: UITapGestureRecognizer) {
@@ -116,7 +125,18 @@ class ReservationViewController: BaseViewController {
         }
         socketViewModel.emitSelectSeats(seatId: seatId)
     }
-
+    
+    private func showAlert() {
+        
+        let alert = UIAlertController(title: "좌석 예매 알림",
+                                       message: "결제페이지로 이동합니다",
+                                       preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(confirmAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension ReservationViewController: WKScriptMessageHandler {
