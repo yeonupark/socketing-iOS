@@ -21,6 +21,7 @@ class SocketViewModel {
     private let eventDateId = EventDetailViewModel.shared.event.value.eventDates[0].id
     let currentAreaId = BehaviorRelay(value: "")
     
+    var areaInfo: [String: String] = [:]
     let htmlContent = BehaviorRelay(value: "")
     let seatsDataRelay = PublishRelay<[SeatData]>()
     private var seatsData = [SeatData]()
@@ -111,6 +112,9 @@ class SocketViewModel {
             }
             
             print(response.message)
+            for area in response.areas {
+                self.areaInfo[area.id] = area.label
+            }
             self.htmlContent.accept(self.wrapSVGsInHTML(areas: response.areas))
         }
         

@@ -88,6 +88,14 @@ class ReservationView: UIView {
         return SeatView(frame: frame, seatId: seat.id, isReserved: seat.reservedUserId != nil)
     }
     
+    let seatsInfoTableView = {
+        let view = UITableView()
+        view.register(UITableViewCell.self, forCellReuseIdentifier: "BasicCell")
+        view.backgroundColor = .white
+        
+        return view
+    }()
+    
     init(configuration: WKWebViewConfiguration) {
         super.init(frame: .zero)
         
@@ -113,6 +121,7 @@ class ReservationView: UIView {
         addSubview(infoView)
         addSubview(bookButton)
         addSubview(webView)
+        addSubview(seatsInfoTableView)
     }
     
     func setConstraints() {
@@ -130,6 +139,10 @@ class ReservationView: UIView {
             make.top.equalTo(infoView.snp.bottom)
             make.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(300)
+        }
+        seatsInfoTableView.snp.makeConstraints { make in
+            make.bottom.horizontalEdges.equalToSuperview()
+            make.height.equalTo(140)
         }
     }
 

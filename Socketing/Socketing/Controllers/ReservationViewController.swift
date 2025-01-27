@@ -94,6 +94,14 @@ class ReservationViewController: BaseViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        socketViewModel.selectedSeats
+            .bind(to: mainView.seatsInfoTableView.rx.items(cellIdentifier: "BasicCell", cellType: UITableViewCell.self)) { (_, element, cell) in
+                let currentArea = self.socketViewModel.areaInfo[self.socketViewModel.currentAreaId.value] ?? "A"
+                cell.textLabel?.text = "\(currentArea)구역 \(element.row)열 \(element.number)번"
+                cell.textLabel?.font = .boldSystemFont(ofSize: 14)
+            }
+            .disposed(by: disposeBag)
     }
     
     @objc private func seatTapped(sender: UITapGestureRecognizer) {
