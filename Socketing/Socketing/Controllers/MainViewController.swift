@@ -28,11 +28,13 @@ class MainViewController: BaseViewController {
     
     private func configureNavigationBar() {
         navigationItem.title = "예매 진행중인 공연"
-        navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .plain, target: .none, action: #selector(myPageButtonClicked)), animated: true)
+        navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .plain, target: self, action: #selector(myPageButtonClicked)), animated: true)
     }
     
     @objc func myPageButtonClicked() {
-        
+        print("mypage button clicked")
+        let vc = MyPageViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func bind() {
