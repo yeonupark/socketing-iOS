@@ -31,8 +31,7 @@ class WaitingViewController: BaseViewController {
         
         queueViewModel.connectSocket()
         
-        let eventData = EventDetailViewModel.shared.event.value
-        mainView.infoView.configureWithViewModel(eventData: eventData)
+        mainView.infoView.configureWithViewModel(eventData: queueViewModel.eventData)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -17,8 +17,8 @@ class SocketViewModel {
     private var socket: SocketIOClient!
     var socketId: String!
     
-    private let eventId = EventDetailViewModel.shared.event.value.id
-    private let eventDateId = EventDetailViewModel.shared.event.value.eventDates[0].id
+    let eventData = EventDetailViewModel.shared.event.value
+    
     let currentAreaId = BehaviorRelay(value: "")
     private let userId = "88a6d7b6-b191-41ce-994d-29eced71b2af"
     private let numberOfFriends = EventDetailViewModel.shared.numberOfFriends.value
@@ -86,7 +86,7 @@ class SocketViewModel {
     func disconnectSocket() {
         socket.removeAllHandlers()
         socket.disconnect()
-        print("Socket disconnected")
+        print("Reservation Socket disconnected")
     }
     
     private func setupSocketEvents() {
@@ -159,8 +159,8 @@ class SocketViewModel {
         let eventName = SocketClientToServerEvent.joinRoom.rawValue
         
         let data: [String: String] = [
-            JoinRoomParams.eventId.rawValue: eventId,
-            JoinRoomParams.eventDateId.rawValue: eventDateId
+            JoinRoomParams.eventId.rawValue: eventData.id,
+            JoinRoomParams.eventDateId.rawValue: eventData.eventDates[0].id
         ]
         
         socket.emit(eventName, data)
@@ -171,8 +171,8 @@ class SocketViewModel {
         let eventName = SocketClientToServerEvent.joinArea.rawValue
         
         let data: [String: String] = [
-            JoinAreaParams.eventId.rawValue: eventId,
-            JoinAreaParams.eventDateId.rawValue: eventDateId,
+            JoinAreaParams.eventId.rawValue: eventData.id,
+            JoinAreaParams.eventDateId.rawValue: eventData.eventDates[0].id,
             JoinAreaParams.areaId.rawValue: currentAreaId.value
         ]
         
@@ -185,8 +185,8 @@ class SocketViewModel {
         let eventName = SocketClientToServerEvent.exitArea.rawValue
         
         let data: [String: String] = [
-            ExitAreaParams.eventId.rawValue: eventId,
-            ExitAreaParams.eventDateId.rawValue: eventDateId,
+            ExitAreaParams.eventId.rawValue: eventData.id,
+            ExitAreaParams.eventDateId.rawValue: eventData.eventDates[0].id,
             ExitAreaParams.areaId.rawValue: currentAreaId.value
         ]
         
@@ -198,8 +198,8 @@ class SocketViewModel {
         let eventName = SocketClientToServerEvent.selectSeats.rawValue
         
         let data: [String: Any] = [
-            SelectSeatsParams.eventId.rawValue: eventId,
-            SelectSeatsParams.eventDateId.rawValue: eventDateId,
+            SelectSeatsParams.eventId.rawValue: eventData.id,
+            SelectSeatsParams.eventDateId.rawValue: eventData.eventDates[0].id,
             SelectSeatsParams.areaId.rawValue: currentAreaId.value,
             SelectSeatsParams.seatId.rawValue: seatId,
             SelectSeatsParams.numberOfSeats.rawValue: numberOfFriends+1
@@ -214,8 +214,8 @@ class SocketViewModel {
         let eventName = SocketClientToServerEvent.reserveSeats.rawValue
         
         let data: [String: Any] = [
-            ReserveSeatsParams.eventId.rawValue: eventId,
-            ReserveSeatsParams.eventDateId.rawValue: eventDateId,
+            ReserveSeatsParams.eventId.rawValue: eventData.id,
+            ReserveSeatsParams.eventDateId.rawValue: eventData.eventDates[0].id,
             ReserveSeatsParams.areaId.rawValue: currentAreaId.value,
             ReserveSeatsParams.seatIds.rawValue: seatIds,
             ReserveSeatsParams.userId.rawValue: userId
