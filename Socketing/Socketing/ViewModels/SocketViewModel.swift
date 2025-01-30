@@ -29,6 +29,7 @@ class SocketViewModel {
     private var seatsData = [SeatData]()
     
     let selectedSeats = BehaviorRelay<[SeatData]>(value: [])
+    var orderData: OrderData?
     
     let bookButtonEnabled: Driver<Bool>
     let bookButtonColor: Driver<UIColor>
@@ -150,6 +151,8 @@ class SocketViewModel {
                 print("Failed to parse orderMade data")
                 return
             }
+            
+            self.orderData = response.data
             self.updateReservedSeats(seats: response.data.seats)
         }
         
