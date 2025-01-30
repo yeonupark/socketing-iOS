@@ -145,7 +145,7 @@ class SocketViewModel {
         
         socket.on(SocketServerToClientEvent.orderMade.rawValue) { data, _ in
             guard let firstData = data.first as? [String: Any],
-                  let response = JSONParser.decode(orderMadeResponse.self, from: firstData)
+                  let response = JSONParser.decode(OrderMadeResponse.self, from: firstData)
             else {
                 print("Failed to parse orderMade data")
                 return

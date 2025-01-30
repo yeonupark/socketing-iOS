@@ -80,7 +80,7 @@ enum ExitRoomParams: String {
 struct AreaData: Decodable {
     let id: String
     let label: String
-    let price: Double
+    let price: Int
     let svg: String?
 }
 
@@ -114,7 +114,7 @@ struct SeatsSelectedResponse: Decodable {
     let reservedUserId: String?
 }
 
-struct orderData: Decodable {
+struct OrderData: Decodable {
     let id: String
     let createdAt: String
     let expirationTime: String
@@ -122,6 +122,6 @@ struct orderData: Decodable {
     let area: AreaData
 }
 
-struct orderMadeResponse: Decodable {
-    let data: orderData
+struct OrderMadeResponse: Decodable {
+    let data: OrderData
 }
