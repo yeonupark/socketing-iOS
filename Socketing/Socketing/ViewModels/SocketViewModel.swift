@@ -134,6 +134,19 @@ class SocketViewModel {
             self.seatsDataRelay.accept(self.seatsData)
         }
         
+        socket.on(SocketServerToClientEvent.roomExited.rawValue) { data, _ in
+            guard let firstData = data.first as? [String: Any],
+                  let response = JSONParser.decode(RoomExitedResponse.self, from: firstData)
+            else {
+                print("Failed to parse roomExited data")
+                return
+            }
+            print(response.message)
+            self.seatsData = []
+            self.seatsDataRelay.accept(self.seatsData)
+            self.currentAreaId.accept("")
+        }
+        
         socket.on(SocketServerToClientEvent.seatsSelected.rawValue) { data, _ in
             guard let firstData = data.first as? [[String: Any]],
                   let response = JSONParser.decode([SeatsSelectedResponse].self, from: firstData)
@@ -181,6 +194,19 @@ class SocketViewModel {
         
         socket.emit(eventName, data)
         print("Join area request sent: ", currentAreaId.value)
+    }
+    
+    func emitExitRoom() {
+        emitExitArea()
+        let eventName = SocketClientToServerEvent.exitRoom.rawValue
+        
+        let data: [String: String] = [
+            ExitRoomParams.eventId.rawValue: eventData.id,
+            ExitRoomParams.eventDateId.rawValue: eventData.eventDates[0].id
+        ]
+        
+        socket.emit(eventName, data)
+        print("Exit room request sent")
     }
     
     func emitExitArea() {

@@ -39,6 +39,7 @@ class ReservationViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         socketViewModel.orderData = nil
+        socketViewModel.currentAreaId.accept("")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -139,6 +140,7 @@ class ReservationViewController: BaseViewController {
                                        preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            self.socketViewModel.emitExitRoom()
             let vc = PaymentViewController()
             vc.socketViewModel = self.socketViewModel
             self.navigationController?.pushViewController(vc, animated: true)

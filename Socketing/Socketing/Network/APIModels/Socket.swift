@@ -106,6 +106,10 @@ struct AreaJoinedResponse: Decodable {
     let seats: [SeatData]
 }
 
+struct RoomExitedResponse: Decodable {
+    let message: String
+}
+
 struct SeatsSelectedResponse: Decodable {
     let seatId: String
     let selectedBy: String?
