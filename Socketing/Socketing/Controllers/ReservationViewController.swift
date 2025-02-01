@@ -32,15 +32,22 @@ class ReservationViewController: BaseViewController {
         bind()
         
         socketViewModel.connectSocket()
+        mainView.infoView.configureWithViewModel(eventData: socketViewModel.eventData)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        let eventData = EventDetailViewModel.shared.event.value
-        mainView.infoView.configureWithViewModel(eventData: eventData)
+        socketViewModel.orderData = nil
+        socketViewModel.currentAreaId.accept("")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        socketViewModel.disconnectSocket()
+        if socketViewModel.orderData == nil {
+            socketViewModel.disconnectSocket()
+        }
     }
     
     private func bind() {
@@ -99,7 +106,7 @@ class ReservationViewController: BaseViewController {
             .bind(to: mainView.seatsInfoTableView.rx.items(cellIdentifier: "BasicCell", cellType: UITableViewCell.self)) { (_, element, cell) in
                 let currentArea = self.socketViewModel.areaInfo[self.socketViewModel.currentAreaId.value] ?? "A"
                 cell.textLabel?.text = "\(currentArea)구역 \(element.row)열 \(element.number)번"
-                cell.textLabel?.font = .boldSystemFont(ofSize: 14)
+                cell.textLabel?.font = .boldSystemFont(ofSize: 16)
             }
             .disposed(by: disposeBag)
         
@@ -129,10 +136,15 @@ class ReservationViewController: BaseViewController {
     private func showAlert() {
         
         let alert = UIAlertController(title: "좌석 예매 알림",
-                                       message: "결제페이지로 이동합니다",
+                                       message: "결제페이지로 이동합니다.\n1분 내에 결제를 완료해주세요.",
                                        preferredStyle: .alert)
         
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            self.socketViewModel.emitExitRoom()
+            let vc = PaymentViewController()
+            vc.socketViewModel = self.socketViewModel
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         alert.addAction(confirmAction)
         
         present(alert, animated: true, completion: nil)

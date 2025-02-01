@@ -15,6 +15,7 @@ class QueueViewModel {
     private var manager: SocketManager!
     private var socket: SocketIOClient!
     
+    let eventData = EventDetailViewModel.shared.event.value
     let isTurn = BehaviorRelay(value: false)
 
     init() {
@@ -37,13 +38,13 @@ class QueueViewModel {
             return
         }
         socket.connect(withPayload: ["token": authToken])
-        print("Socket connected")
+        print("Queue Socket connected")
     }
     
     func disconnectSocket() {
         socket.removeAllHandlers()
         socket.disconnect()
-        print("Socket disconnected")
+        print("Queue Socket disconnected")
     }
     
     private func setupSocketEvents() {

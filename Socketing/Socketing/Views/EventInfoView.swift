@@ -30,7 +30,7 @@ class EventInfoView: BaseView {
     
     let dateLabel = {
         let view = UILabel()
-        view.font = .boldSystemFont(ofSize: 14)
+        view.font = .systemFont(ofSize: 16)
         view.textColor = .darkGray
         view.textAlignment = .center
         
@@ -39,7 +39,7 @@ class EventInfoView: BaseView {
     
     let placeLabel = {
         let view = UILabel()
-        view.font = .boldSystemFont(ofSize: 14)
+        view.font = .systemFont(ofSize: 16)
         view.textColor = .darkGray
         view.textAlignment = .center
         
@@ -48,7 +48,7 @@ class EventInfoView: BaseView {
     
     let castLabel = {
         let view = UILabel()
-        view.font = .boldSystemFont(ofSize: 14)
+        view.font = .systemFont(ofSize: 16)
         view.textColor = .darkGray
         view.textAlignment = .center
         
@@ -64,9 +64,9 @@ class EventInfoView: BaseView {
     func configureWithViewModel(eventData: EventData) {
         
         titleLabel.text = eventData.title
-        dateLabel.text = "일시: \(CommonUtils.formatDateString(eventData.eventDates[0].date) ?? "")"
-        placeLabel.text = "장소: \(eventData.place)"
-        castLabel.text = "출연: \(eventData.cast)"
+        dateLabel.text = "일시 | \(CommonUtils.formatDateString(eventData.eventDates[0].date) ?? "")"
+        placeLabel.text = "장소 | \(eventData.place)"
+        castLabel.text = "출연 | \(eventData.cast)"
         
         CommonUtils.loadThumbnailImage(from: eventData.thumbnail, into: thumbnail)
     }
@@ -79,7 +79,7 @@ class EventInfoView: BaseView {
         }
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).inset(80)
-            make.left.equalTo(thumbnail.snp.right).offset(30)
+            make.left.equalTo(thumbnail.snp.right).offset(20)
             make.right.lessThanOrEqualToSuperview().inset(12)
         }
         dateLabel.snp.makeConstraints { make in

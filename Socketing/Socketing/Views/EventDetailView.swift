@@ -39,7 +39,7 @@ class EventDetailView: BaseView {
     let dateLabel = {
         let view = UILabel()
         view.text = "일시: "
-        view.font = .boldSystemFont(ofSize: 14)
+        view.font = .boldSystemFont(ofSize: 16)
         view.textColor = .darkGray
         view.textAlignment = .center
         
@@ -49,7 +49,7 @@ class EventDetailView: BaseView {
     let placeLabel = {
         let view = UILabel()
         view.text = "장소: "
-        view.font = .boldSystemFont(ofSize: 14)
+        view.font = .boldSystemFont(ofSize: 16)
         view.textColor = .darkGray
         view.textAlignment = .center
         
@@ -59,7 +59,7 @@ class EventDetailView: BaseView {
     let castLabel = {
         let view = UILabel()
         view.text = "출연: "
-        view.font = .boldSystemFont(ofSize: 14)
+        view.font = .boldSystemFont(ofSize: 16)
         view.textColor = .darkGray
         view.textAlignment = .center
         
