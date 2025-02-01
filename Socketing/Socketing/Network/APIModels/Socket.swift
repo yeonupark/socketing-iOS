@@ -66,6 +66,10 @@ enum RequestOrderParams: String {
     case paymentMethod
 }
 
+enum PaymentMethods: String {
+    case socketPay = "socket_pay"
+}
+
 enum ExitAreaParams: String {
     case eventId
     case eventDateId
@@ -128,4 +132,24 @@ struct OrderData: Decodable {
 
 struct OrderMadeResponse: Decodable {
     let data: OrderData
+}
+
+struct SeatAreaData: Decodable {
+    let seatAreaLabel: String
+    let seatRow: Int
+    let seatNumber: Int
+    let seatPrice: Int
+}
+
+struct ReservationData: Decodable {
+    let eventTitle: String
+    let eventCast: String
+    let eventDate: String
+    let eventThumbnail: String
+    let userEmail: String
+    let reservations: [SeatAreaData]
+}
+
+struct OrderApprovedResponse: Decodable {
+    let data: ReservationData
 }

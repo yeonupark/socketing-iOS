@@ -34,6 +34,9 @@ class SocketViewModel {
     let bookButtonEnabled: Driver<Bool>
     let bookButtonColor: Driver<UIColor>
     
+    let payButtonEnabled = BehaviorRelay(value: false)
+    let payButtonColor: Driver<UIColor>
+    
     private let disposeBag = DisposeBag()
     
     init() {
@@ -43,6 +46,12 @@ class SocketViewModel {
             .map { !$0.isEmpty }
 
         bookButtonColor = bookButtonEnabled
+            .map { isEnabled in
+                return isEnabled ? UIColor.systemPink : UIColor.lightGray
+            }
+            .asDriver(onErrorJustReturn: UIColor.lightGray)
+        
+        payButtonColor = payButtonEnabled
             .map { isEnabled in
                 return isEnabled ? UIColor.systemPink : UIColor.lightGray
             }
@@ -144,7 +153,6 @@ class SocketViewModel {
             print(response.message)
             self.seatsData = []
             self.seatsDataRelay.accept(self.seatsData)
-            self.currentAreaId.accept("")
         }
         
         socket.on(SocketServerToClientEvent.seatsSelected.rawValue) { data, _ in
@@ -169,6 +177,16 @@ class SocketViewModel {
             self.updateReservedSeats(seats: response.data.seats)
         }
         
+        socket.on(SocketServerToClientEvent.orderApproved.rawValue) { data, _ in
+            guard let firstData = data.first as? [String: Any],
+                  let response = JSONParser.decode(OrderApprovedResponse.self, from: firstData)
+            else {
+                print("Failed to parse orderApproved data")
+                return
+            }
+            
+            print(response.data)
+        }
     }
     
     private func emitJoinRoom() {
@@ -251,6 +269,25 @@ class SocketViewModel {
         ]
         socket.emit(eventName, data)
         print("Reserve seats request sent")
+    }
+    
+    func emitRequestOrder() {
+        let eventName = SocketClientToServerEvent.requestOrder.rawValue
+        
+        guard let orderId = orderData?.id else {
+            return
+        }
+        
+        let data: [String: Any] = [
+            RequestOrderParams.eventId.rawValue: eventData.id,
+            RequestOrderParams.eventDateId.rawValue: eventData.eventDates[0].id,
+            RequestOrderParams.areaId.rawValue: currentAreaId.value,
+            ReserveSeatsParams.userId.rawValue: userId,
+            RequestOrderParams.orderId.rawValue: orderId,
+            RequestOrderParams.paymentMethod.rawValue: PaymentMethods.socketPay.rawValue
+        ]
+        socket.emit(eventName, data)
+        print("Request order request sent")
     }
     
     private func updateSeats(seats: [SeatsSelectedResponse]) {
