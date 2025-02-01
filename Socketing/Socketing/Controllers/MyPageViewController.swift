@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController {
+class MyPageViewController: BaseViewController {
     
     let mainView = MyPageView()
     let viewModel = MyPageViewModel()

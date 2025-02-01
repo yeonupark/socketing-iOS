@@ -34,9 +34,9 @@ class EventDetailViewController: BaseViewController {
                 
                 CommonUtils.loadThumbnailImage(from: event.thumbnail, into: self.mainView.thumbnail)
                 self.mainView.titleLabel.text = event.title
-                self.mainView.dateLabel.text = "일시: \( CommonUtils.formatDateString(event.eventDates[0].date) ?? "2025.12.20")"
-                self.mainView.placeLabel.text = "장소: \(event.place)"
-                self.mainView.castLabel.text = "출연: \(event.cast)" 
+                self.mainView.dateLabel.text = "일시 | \( CommonUtils.formatDateString(event.eventDates[0].date) ?? "2025.12.20")"
+                self.mainView.placeLabel.text = "장소 | \(event.place)"
+                self.mainView.castLabel.text = "출연 | \(event.cast)" 
             })
             .disposed(by: disposeBag)
         
