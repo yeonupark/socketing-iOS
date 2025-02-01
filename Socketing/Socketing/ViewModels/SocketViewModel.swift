@@ -30,6 +30,7 @@ class SocketViewModel {
     
     let selectedSeats = BehaviorRelay<[SeatData]>(value: [])
     var orderData: OrderData?
+    let reservationData = BehaviorRelay<ReservationData?>(value: nil)
     
     let bookButtonEnabled: Driver<Bool>
     let bookButtonColor: Driver<UIColor>
@@ -185,7 +186,7 @@ class SocketViewModel {
                 return
             }
             
-            print(response.data)
+            self.reservationData.accept(response.data)
         }
     }
     
