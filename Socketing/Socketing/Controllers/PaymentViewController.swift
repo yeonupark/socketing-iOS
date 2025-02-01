@@ -15,7 +15,7 @@ class PaymentViewController: BaseViewController {
     let disposeBag = DisposeBag()
     
     override func loadView() {
-        view.self = mainView
+        self.view = mainView
     }
     
     override func viewDidLoad() {
@@ -45,6 +45,20 @@ class PaymentViewController: BaseViewController {
             .drive(onNext: { isEnabled in
                 self.mainView.checkboxButton.setImage(isEnabled ? UIImage(systemName: "checkmark.square.fill") : UIImage(systemName: "square"), for: .normal)
                 self.mainView.payButton.rx.isEnabled.onNext(isEnabled)
+            })
+            .disposed(by: disposeBag)
+        
+        socketViewModel.reservationData
+            .asDriver(onErrorJustReturn: nil)
+            .drive(onNext: { data in
+                if data == nil {
+                    return
+                }
+                
+                socketViewModel.disconnectSocket()
+                let vc = ConfirmationViewController()
+                vc.viewModel.reservationData = data
+                self.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
         
