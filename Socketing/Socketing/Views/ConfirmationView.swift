@@ -17,6 +17,15 @@ class ConfirmationView: BaseView {
         return label
     }()
     
+    let countdownLabel: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 16)
+        label.textColor = .red
+        label.textAlignment = .center
+        label.text = "5초 후 자동으로 첫 화면으로 이동합니다."
+        return label
+    }()
+    
     private let cardView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.systemPink.withAlphaComponent(0.2)
@@ -79,6 +88,7 @@ class ConfirmationView: BaseView {
         super.configure()
         
         addSubview(completionLabel)
+        addSubview(countdownLabel)
         addSubview(cardView)
         cardView.addSubview(posterImageView)
         cardView.addSubview(contentStackView)
@@ -108,8 +118,13 @@ class ConfirmationView: BaseView {
             make.centerX.equalToSuperview()
         }
         
-        cardView.snp.makeConstraints { make in
+        countdownLabel.snp.makeConstraints { make in
             make.top.equalTo(completionLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+        
+        cardView.snp.makeConstraints { make in
+            make.top.equalTo(countdownLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
         }
         

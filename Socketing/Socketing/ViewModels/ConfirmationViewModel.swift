@@ -10,4 +10,7 @@ import Foundation
 class ConfirmationViewModel {
     
     var reservationData: ReservationData?
+    
+    var countdownTimer: Timer?
+    var countdownValue = 5
 }
