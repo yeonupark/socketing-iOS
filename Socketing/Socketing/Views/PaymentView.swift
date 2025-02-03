@@ -11,6 +11,22 @@ class PaymentView: BaseView {
 
     let infoView = EventInfoView()
     
+    let timerLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+        
+    private let containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        return view
+    }()
+    
     private let seatsInfoLabel = {
         let view = UILabel()
         view.text = "🎫  좌석 정보"
@@ -77,15 +93,28 @@ class PaymentView: BaseView {
     override func configure() {
         super.configure()
         
-        for view in [infoView, seatsInfoLabel, seatsInfoView, totalPriceLabel, totalPriceView, checkboxButton, checkboxLabel, payButton] {
+        for view in [infoView, containerView, seatsInfoLabel, seatsInfoView, totalPriceLabel, totalPriceView, checkboxButton, checkboxLabel, payButton] {
             addSubview(view)
         }
+        
+        containerView.addSubview(timerLabel)
     }
     
     override func setConstraints() {
         
         infoView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
+        }
+        
+        containerView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).inset(20)
+            make.trailing.equalToSuperview().inset(32)
+            make.height.equalTo(32)
+            make.width.equalTo(120)
+        }
+        
+        timerLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
         
         let views  = [infoView, seatsInfoLabel, seatsInfoView, totalPriceLabel, totalPriceView]

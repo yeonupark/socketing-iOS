@@ -65,7 +65,7 @@ class PaymentViewController: BaseViewController {
         socketViewModel.timeLeft
             .asDriver(onErrorJustReturn: 0)
             .drive(onNext: { time in
-                print(time)
+                self.mainView.timerLabel.text = String(format: "남은 시간 00:%02d", time)
             })
             .disposed(by: disposeBag)
         
@@ -77,6 +77,7 @@ class PaymentViewController: BaseViewController {
                     self.socketViewModel?.disconnectSocket()
                     let vc1 = MainViewController()
                     let vc2 = EventDetailViewController()
+                    vc1.navigationItem.backButtonTitle = ""
                     self.navigationController?.setViewControllers([vc1, vc2], animated: true)
                 }
             })
