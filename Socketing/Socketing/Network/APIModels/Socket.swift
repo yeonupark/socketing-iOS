@@ -26,7 +26,7 @@ enum SocketServerToClientEvent: String {
     case orderMade
     case orderApproved
 //    case reservedSeatsStatistics
-//    case serverTime
+    case serverTime
 //    case error
 }
 

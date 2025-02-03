@@ -38,6 +38,8 @@ class SocketViewModel {
     let payButtonEnabled = BehaviorRelay(value: false)
     let payButtonColor: Driver<UIColor>
     
+    private let serverTime = BehaviorRelay<Date>(value: Date())
+    
     private let disposeBag = DisposeBag()
     
     init() {
@@ -116,6 +118,18 @@ class SocketViewModel {
 //            print("Socket disconnected : \(data)")
 //        }
         
+        socket.on(SocketServerToClientEvent.serverTime.rawValue) { data, _ in
+            let dataArray = data
+            
+            guard dataArray.count == 1,
+                  let serverTimeString = dataArray[0] as? String else {
+                print("Failed to parse serverTime data")
+                return
+            }
+            let serverTime = self.dateFromISO8601(serverTimeString)
+            self.serverTime.accept(serverTime ?? Date.now)
+        }
+        
         socket.on(SocketServerToClientEvent.roomJoined.rawValue) { data, _ in
             guard let firstData = data.first as? [String: Any],
                   let response = JSONParser.decode(RoomJoinedResponse.self, from: firstData)
@@ -130,7 +144,6 @@ class SocketViewModel {
             }
             self.htmlContent.accept(self.wrapSVGsInHTML(areas: response.areas))
         }
-        
         
         socket.on(SocketServerToClientEvent.areaJoined.rawValue) { data, _ in
             guard let firstData = data.first as? [String: Any],
@@ -316,7 +329,6 @@ class SocketViewModel {
         if selectedBy == self.socketId {
             self.selectedSeats.accept(mySeats)
         }
-        
     }
     
     private func updateReservedSeats(seats: [SeatData]) {
@@ -328,7 +340,6 @@ class SocketViewModel {
         }
         seatsDataRelay.accept(seatsData)
     }
-
     
     private func wrapSVGsInHTML(areas: [AreaData]) -> String {
         
