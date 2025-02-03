@@ -15,7 +15,7 @@ class LoginViewController: BaseViewController {
     let disposeBag = DisposeBag()
     
     override func loadView() {
-        view.self = mainView
+        self.view = mainView
     }
     
     override func viewDidLoad() {
