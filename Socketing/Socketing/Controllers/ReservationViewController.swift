@@ -38,14 +38,14 @@ class ReservationViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        socketViewModel.orderData = nil
+        socketViewModel.orderData.accept(nil)
         socketViewModel.currentAreaId.accept("")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        if socketViewModel.orderData == nil {
+        if socketViewModel.orderData.value == nil {
             socketViewModel.disconnectSocket()
         }
     }

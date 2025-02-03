@@ -29,7 +29,7 @@ class SocketViewModel {
     private var seatsData = [SeatData]()
     
     let selectedSeats = BehaviorRelay<[SeatData]>(value: [])
-    var orderData: OrderData?
+    let orderData = BehaviorRelay<OrderData?>(value: nil)
     let reservationData = BehaviorRelay<ReservationData?>(value: nil)
     
     let bookButtonEnabled: Driver<Bool>
@@ -39,6 +39,9 @@ class SocketViewModel {
     let payButtonColor: Driver<UIColor>
     
     private let serverTime = BehaviorRelay<Date>(value: Date())
+    let timeLeft = BehaviorRelay<Int>(value: 0)
+    let isTimeOut = BehaviorRelay(value: false)
+    private var timerDisposable: Disposable?
     
     private let disposeBag = DisposeBag()
     
@@ -82,6 +85,17 @@ class SocketViewModel {
             .drive(onNext: { areaId in
                 if areaId != "" {
                     self.emitJoinArea()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        orderData
+            .asDriver(onErrorJustReturn: nil)
+            .drive(onNext: { data in
+                if data != nil {
+                    self.resetTimer()
+                } else {
+                    self.stopTimer()
                 }
             })
             .disposed(by: disposeBag)
@@ -187,7 +201,7 @@ class SocketViewModel {
                 return
             }
             
-            self.orderData = response.data
+            self.orderData.accept(response.data)
             self.updateReservedSeats(seats: response.data.seats)
         }
         
@@ -288,7 +302,7 @@ class SocketViewModel {
     func emitRequestOrder() {
         let eventName = SocketClientToServerEvent.requestOrder.rawValue
         
-        guard let orderId = orderData?.id else {
+        guard let orderId = orderData.value?.id else {
             return
         }
         
@@ -339,6 +353,44 @@ class SocketViewModel {
             }
         }
         seatsDataRelay.accept(seatsData)
+    }
+    
+    private func stopTimer() {
+        timerDisposable?.dispose()
+        timerDisposable = nil
+    }
+    
+    private func resetTimer() {
+        stopTimer()
+        
+        let expirationTime = dateFromISO8601(orderData.value?.expirationTime ?? "") ?? Date()
+        let currentTime = serverTime.value
+        let initialTimeLeft = max(0, Int(expirationTime.timeIntervalSince(currentTime)))
+        
+        timeLeft.accept(initialTimeLeft)
+        
+        if initialTimeLeft == 0 {
+            return
+        }
+        
+        timerDisposable = Observable<Int>
+            .interval(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                
+                let updatedTimeLeft = max(0, self.timeLeft.value - 1)
+                self.timeLeft.accept(updatedTimeLeft)
+                
+                if updatedTimeLeft == 0 {
+                    isTimeOut.accept(true)
+                }
+            })
+    }
+    
+    private func dateFromISO8601(_ string: String) -> Date? {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter.date(from: string)
     }
     
     private func wrapSVGsInHTML(areas: [AreaData]) -> String {

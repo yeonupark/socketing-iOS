@@ -62,10 +62,30 @@ class PaymentViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        socketViewModel.timeLeft
+            .asDriver(onErrorJustReturn: 0)
+            .drive(onNext: { time in
+                print(time)
+            })
+            .disposed(by: disposeBag)
+        
+        socketViewModel.isTimeOut
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { value in
+                if value == true {
+                    socketViewModel.orderData.accept(nil)
+                    self.socketViewModel?.disconnectSocket()
+                    let vc1 = MainViewController()
+                    let vc2 = EventDetailViewController()
+                    self.navigationController?.setViewControllers([vc1, vc2], animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+
         mainView.infoView.configureWithViewModel(eventData: socketViewModel.eventData)
         
-        let areaInfo = socketViewModel.orderData?.area
-        let seatsInfo = socketViewModel.orderData?.seats ?? []
+        let areaInfo = socketViewModel.orderData.value?.area
+        let seatsInfo = socketViewModel.orderData.value?.seats ?? []
         let seatText = seatsInfo.map { "\(areaInfo?.label ?? "A")구역 \($0.row)열 \($0.number)번  |  \(areaInfo?.price ?? 100000)원" }.joined(separator: "\n")
 
         mainView.seatsInfoView.text = seatText
