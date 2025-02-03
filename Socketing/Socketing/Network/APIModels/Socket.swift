@@ -146,6 +146,7 @@ struct ReservationData: Decodable {
     let eventCast: String
     let eventDate: String
     let eventThumbnail: String
+    let eventPlace: String
     let userEmail: String
     let reservations: [SeatAreaData]
 }

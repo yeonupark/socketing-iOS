@@ -2,7 +2,7 @@
 //  MyPageViewController.swift
 //  Socketing
 //
-//  Created by Yeonu Park on 2025/01/29.
+//  Created by Yeonu Park on 2025/01/29. 
 //
 
 import UIKit
@@ -13,7 +13,7 @@ class MyPageViewController: BaseViewController {
     let viewModel = MyPageViewModel()
     
     override func loadView() {
-        view.self = mainView
+        self.view = mainView
     }
 
     override func viewDidLoad() {

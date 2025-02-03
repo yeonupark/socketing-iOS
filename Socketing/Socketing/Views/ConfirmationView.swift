@@ -71,7 +71,7 @@ class ConfirmationView: BaseView {
     private lazy var infoStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [userEmailLabel, dateLabel, locationLabel, seatLogo])
         stack.axis = .vertical
-        stack.spacing = 20
+        stack.spacing = 28
         return stack
     }()
     
@@ -126,7 +126,7 @@ class ConfirmationView: BaseView {
         }
 
         infoStackView.snp.makeConstraints { make in
-            make.top.equalTo(contentStackView.snp.bottom).offset(40)
+            make.top.equalTo(contentStackView.snp.bottom).offset(60)
             make.leading.trailing.equalTo(cardView).inset(16)
         }
         

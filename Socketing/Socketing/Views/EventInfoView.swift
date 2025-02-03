@@ -24,6 +24,7 @@ class EventInfoView: BaseView {
         let view = UILabel()
         view.font = .boldSystemFont(ofSize: 16)
         view.textAlignment = .center
+        view.numberOfLines = 0
         
         return view
     }()
