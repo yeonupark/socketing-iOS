@@ -160,7 +160,7 @@ class SeatTimerView: UIView {
     
     private let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black // ✅ 배경 색상 적용
+        view.backgroundColor = UIColor.black
         return view
     }()
     
@@ -186,9 +186,9 @@ class SeatTimerView: UIView {
     }
     
     private func setupView() {
-        addSubview(backgroundView) // ✅ 배경 뷰 추가
+        addSubview(backgroundView)
         backgroundView.layer.cornerRadius = bounds.width / 2
-        backgroundView.clipsToBounds = true // ✅ 원형 모양 유지
+        backgroundView.clipsToBounds = true
         
         let circularPath = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY),
                                         radius: bounds.width / 2,
@@ -199,7 +199,7 @@ class SeatTimerView: UIView {
         backgroundLayer.path = circularPath.cgPath
         backgroundLayer.strokeColor = UIColor.lightGray.cgColor
         backgroundLayer.lineWidth = 10
-        backgroundLayer.fillColor = UIColor.clear.cgColor // ✅ 원 내부를 채우지 않음 (UIView로 대체)
+        backgroundLayer.fillColor = UIColor.clear.cgColor
         layer.addSublayer(backgroundLayer)
         
         progressLayer.path = circularPath.cgPath

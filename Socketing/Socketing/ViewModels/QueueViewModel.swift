@@ -17,6 +17,9 @@ class QueueViewModel {
     
     let eventData = EventDetailViewModel.shared.event.value
     let isTurn = BehaviorRelay(value: false)
+    
+    let totalWaiting = BehaviorRelay(value: 0)
+    let myPosition = BehaviorRelay(value: 0)
 
     init() {
         guard let url = URL(string: APIkeys.queueURL) else {
@@ -83,8 +86,8 @@ class QueueViewModel {
                 return
             }
             
-            print("My position: \(response.yourPosition)")
-            print("Total waiting: \(response.totalWaiting)")
+            self.myPosition.accept(response.yourPosition)
+            self.totalWaiting.accept(response.totalWaiting)
         }
         
         socket.on(ServerToClientEvent.seatsInfo.rawValue) { data, _ in
