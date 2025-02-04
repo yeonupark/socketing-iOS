@@ -49,6 +49,21 @@ class WaitingViewController: BaseViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        Observable.combineLatest(queueViewModel.totalWaiting, queueViewModel.myPosition)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] total, position in
+                guard let self = self else { return }
+                if total == 0 {
+                    self.mainView.queueNumLabel.isHidden = true
+                    self.mainView.positionLabel.isHidden = true
+                }
+                let progress = 1.0 - (Double(position) / Double(total))
+                self.mainView.progressView.setProgress(Float(progress), animated: true)
+                self.mainView.positionLabel.text = "현재 순서: \(position)"
+                self.mainView.queueNumLabel.text = "\(total - position)명이 뒤에 대기중입니다."
+            })
+            .disposed(by: disposeBag)
     }
 
 }
