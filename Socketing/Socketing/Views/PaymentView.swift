@@ -21,7 +21,7 @@ class PaymentView: BaseView {
         
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .black
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
         return view
