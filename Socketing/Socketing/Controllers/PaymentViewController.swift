@@ -62,14 +62,14 @@ class PaymentViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        socketViewModel.timeLeft
+        socketViewModel.paymentTimeLeft
             .asDriver(onErrorJustReturn: 0)
             .drive(onNext: { time in
                 self.mainView.timerLabel.text = String(format: "남은 시간 00:%02d", time)
             })
             .disposed(by: disposeBag)
         
-        socketViewModel.isTimeOut
+        socketViewModel.isPaymentTimeOut
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { value in
                 if value == true {

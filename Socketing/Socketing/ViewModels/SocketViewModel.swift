@@ -39,8 +39,8 @@ class SocketViewModel {
     let payButtonColor: Driver<UIColor>
     
     private let serverTime = BehaviorRelay<Date>(value: Date())
-    let timeLeft = BehaviorRelay<Int>(value: 0)
-    let isTimeOut = BehaviorRelay(value: false)
+    let paymentTimeLeft = BehaviorRelay<Int>(value: 0)
+    let isPaymentTimeOut = BehaviorRelay(value: false)
     private var timerDisposable: Disposable?
     
     private let disposeBag = DisposeBag()
@@ -93,7 +93,7 @@ class SocketViewModel {
             .asDriver(onErrorJustReturn: nil)
             .drive(onNext: { data in
                 if data != nil {
-                    self.resetTimer()
+                    self.resetPaymentTimer()
                 } else {
                     self.stopTimer()
                 }
@@ -360,14 +360,14 @@ class SocketViewModel {
         timerDisposable = nil
     }
     
-    private func resetTimer() {
+    private func resetPaymentTimer() {
         stopTimer()
         
         let expirationTime = dateFromISO8601(orderData.value?.expirationTime ?? "") ?? Date()
         let currentTime = serverTime.value
         let initialTimeLeft = max(0, Int(expirationTime.timeIntervalSince(currentTime)))
         
-        timeLeft.accept(initialTimeLeft)
+        paymentTimeLeft.accept(initialTimeLeft)
         
         if initialTimeLeft == 0 {
             return
@@ -378,11 +378,11 @@ class SocketViewModel {
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 
-                let updatedTimeLeft = max(0, self.timeLeft.value - 1)
-                self.timeLeft.accept(updatedTimeLeft)
+                let updatedTimeLeft = max(0, self.paymentTimeLeft.value - 1)
+                self.paymentTimeLeft.accept(updatedTimeLeft)
                 
                 if updatedTimeLeft == 0 {
-                    isTimeOut.accept(true)
+                    isPaymentTimeOut.accept(true)
                 }
             })
     }
