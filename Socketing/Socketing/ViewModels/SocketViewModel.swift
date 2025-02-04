@@ -39,9 +39,13 @@ class SocketViewModel {
     let payButtonColor: Driver<UIColor>
     
     private let serverTime = BehaviorRelay<Date>(value: Date())
-    let paymentTimeLeft = BehaviorRelay<Int>(value: 0)
+    
+    let paymentTimeLeft = BehaviorRelay(value: 0)
     let isPaymentTimeOut = BehaviorRelay(value: false)
-    private var timerDisposable: Disposable?
+    private var paymentTimerDisposable: Disposable?
+    
+    let seatTimeLeft = BehaviorRelay(value: 0)
+    private var seatTimerDisposable: Disposable?
     
     private let disposeBag = DisposeBag()
     
@@ -95,7 +99,18 @@ class SocketViewModel {
                 if data != nil {
                     self.resetPaymentTimer()
                 } else {
-                    self.stopTimer()
+                    self.stopPaymentTimer()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        selectedSeats
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { seats in
+                if seats.count > 0 {
+                    self.resetSeatTimer()
+                } else {
+                    self.stopSeatTimer()
                 }
             })
             .disposed(by: disposeBag)
@@ -323,6 +338,7 @@ class SocketViewModel {
         let currentSeatsIds = Set(selectedSeats.value.map { $0.id })
         let selectedBy = seats.first?.selectedBy
         let reservedUserId = seats.first?.reservedUserId
+        let expirationTime = seats.first?.expirationTime
         
         if seatIds == currentSeatsIds {
             self.selectedSeats.accept([])
@@ -333,8 +349,9 @@ class SocketViewModel {
             if seatIds.contains(seat.id) {
                 seatsData[index].selectedBy = selectedBy
                 seatsData[index].reservedUserId = reservedUserId
+                seatsData[index].expirationTime = expirationTime
                 if selectedBy == self.socketId {
-                    mySeats.append(seat)
+                    mySeats.append(seatsData[index])
                 }
             }
         }
@@ -355,13 +372,18 @@ class SocketViewModel {
         seatsDataRelay.accept(seatsData)
     }
     
-    private func stopTimer() {
-        timerDisposable?.dispose()
-        timerDisposable = nil
+    private func stopPaymentTimer() {
+        paymentTimerDisposable?.dispose()
+        paymentTimerDisposable = nil
+    }
+    
+    private func stopSeatTimer() {
+        seatTimerDisposable?.dispose()
+        seatTimerDisposable = nil
     }
     
     private func resetPaymentTimer() {
-        stopTimer()
+        stopPaymentTimer()
         
         let expirationTime = dateFromISO8601(orderData.value?.expirationTime ?? "") ?? Date()
         let currentTime = serverTime.value
@@ -373,7 +395,7 @@ class SocketViewModel {
             return
         }
         
-        timerDisposable = Observable<Int>
+        paymentTimerDisposable = Observable<Int>
             .interval(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
@@ -384,6 +406,29 @@ class SocketViewModel {
                 if updatedTimeLeft == 0 {
                     isPaymentTimeOut.accept(true)
                 }
+            })
+    }
+    
+    private func resetSeatTimer() {
+        stopSeatTimer()
+        
+        let expirationTime = dateFromISO8601(selectedSeats.value.first?.expirationTime ?? "") ?? Date()
+        let currentTime = serverTime.value
+        let initialTimeLeft = max(0, Int(expirationTime.timeIntervalSince(currentTime)))
+        
+        seatTimeLeft.accept(initialTimeLeft)
+        
+        if initialTimeLeft == 0 {
+            return
+        }
+        
+        seatTimerDisposable = Observable<Int>
+            .interval(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                
+                let updatedTimeLeft = max(0, self.seatTimeLeft.value - 1)
+                self.seatTimeLeft.accept(updatedTimeLeft)
             })
     }
     

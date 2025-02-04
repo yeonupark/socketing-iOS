@@ -110,6 +110,21 @@ class ReservationViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        socketViewModel.selectedSeats
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { seats in
+                self.mainView.seatTimer.isHidden = seats.isEmpty ? true : false
+            })
+            .disposed(by: disposeBag)
+        
+        socketViewModel.seatTimeLeft
+            .asDriver(onErrorJustReturn: 0)
+            .drive(onNext: { time in
+                print(time)
+                self.mainView.seatTimer.percentage = time
+            })
+            .disposed(by: disposeBag)
+        
         mainView.bookButton.rx.tap
             .asDriver()
             .drive(onNext: { _ in

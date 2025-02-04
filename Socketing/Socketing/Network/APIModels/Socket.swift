@@ -101,7 +101,7 @@ struct SeatData: Decodable {
     let number: Int
     var selectedBy: String?
     var reservedUserId: String?
-    let expirationTime: String?
+    var expirationTime: String?
 //    let areaId: String
 }
 
