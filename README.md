@@ -7,7 +7,7 @@
 ### 🔧 Project Requirements
 - Swift Version: 5.9
 - iOS Deployment Target: 15.0 or later
-- Dependencies: RxSwift, SocketIO, SnapKit, Starscream, Toast (via SPM)
+- Dependencies: RxSwift, SocketIO, SnapKit, Starscream, Toast
 
 ---
 ### ⚙️ Installation
