@@ -9,7 +9,10 @@ cd Socketing
 ```
 2️⃣ Install dependencies
 ```
-pod install  # If using CocoaPods
+# Swift Package Manager (SPM) will automatically resolve dependencies when opening the project in Xcode.
+# If needed, you can manually resolve dependencies using:
+
+swift package resolve
 ```
 3️⃣ Open the project
 ```
