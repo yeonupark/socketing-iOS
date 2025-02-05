@@ -4,7 +4,7 @@
 
 1️⃣ Clone the repository
 ```
-git clone https://github.com/your-username/Socketing.git
+git clone https://github.com/yeonupark/socketing-iOS
 cd Socketing
 ```
 2️⃣ Install dependencies
