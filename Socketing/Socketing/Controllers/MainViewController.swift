@@ -7,11 +7,12 @@
 
 import UIKit
 import RxSwift
+import Toast
 
 class MainViewController: BaseViewController {
     
     private let mainView = MainView()
-    private let viewModel = MainViewModel()
+    let viewModel = MainViewModel()
     private let disposeBag = DisposeBag()
     
     override func loadView() {
@@ -21,11 +22,32 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkTokenExpiration()
         configureNavigationBar()
         bind()
         viewModel.getEvents()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        checkTokenExpiration()
+        if viewModel.logined {
+            guard let email = UserDefaults.standard.string(forKey: "email") else {
+                return
+            }
+            
+            if let username = email.split(separator: "@").first {
+                var style = ToastStyle()
+                style.backgroundColor = .systemPink
+                self.view.makeToast("환영합니다, \(username)님!", duration: 2.0, position: .top, style: style)
+            }
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.logined = false
     }
     
     private func configureNavigationBar() {
@@ -36,8 +58,8 @@ class MainViewController: BaseViewController {
     private func checkTokenExpiration() {
         let isExpired = viewModel.isTokenExpired()
         if isExpired {
-            print("토큰 만료됨")
             let vc = LoginViewController()
+            vc.viewModel.logouted = true
             self.navigationController?.setViewControllers([vc], animated: true)
         }
     }

@@ -12,6 +12,7 @@ import RxCocoa
 class MainViewModel {
     
     let events = BehaviorRelay<[EventData]>(value: [])
+    var logined = false
     
     func getEvents() {
         APIClient.shared.getRequest(urlString: APIEndpoint.events.url, responseType: EventsResponse.self) { [weak self] result in
