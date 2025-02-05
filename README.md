@@ -1,8 +1,8 @@
 # 🚀 Socketing 
 
 ### ⚙️ System Requirements
-- macOS Version: Ventura 13.5 (M2)
 - Xcode Version: 15.0
+- macOS Version: Ventura 13.5 (M2)
 
 ### 🔧 Project Requirements
 - Swift Version: 5.9
