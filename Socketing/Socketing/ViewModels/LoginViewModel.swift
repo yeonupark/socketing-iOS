@@ -11,6 +11,8 @@ import RxCocoa
 
 class LoginViewModel {
     
+    static let shared = LoginViewModel()
+    
     let email = BehaviorRelay(value: "")
     let pw = BehaviorRelay(value: "")
     
@@ -36,9 +38,8 @@ class LoginViewModel {
             .asDriver(onErrorJustReturn: UIColor.lightGray)
     }
     
-    func requestLogin(completionHandler: @escaping (LoginData?) -> Void) {
-        let email = email.value+"@jungle.com"
-        let loginBody = LoginRequest(email: email, password: pw.value)
+    func requestLogin(email: String, pw: String, completionHandler: @escaping (LoginData?) -> Void) {
+        let loginBody = LoginRequest(email: email, password: pw)
         
         APIClient.shared.postRequest(
             urlString: APIEndpoint.authentication.url + "login",

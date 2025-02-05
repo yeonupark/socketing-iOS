@@ -1,18 +1,17 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  Socketing
 //
-//  Created by Yeonu Park on 2025/01/03.
+//  Created by Yeonu Park on 2025/02/05.
 //
 
 import UIKit
 import RxSwift
-import Toast
 
-class LoginViewController: BaseViewController {
+class RegisterViewController: BaseViewController {
 
-    let mainView = LoginView()
-    let viewModel = LoginViewModel()
+    let mainView = RegisterView()
+    let viewModel = RegisterViewModel()
     let disposeBag = DisposeBag()
     
     override func loadView() {
@@ -30,20 +29,11 @@ class LoginViewController: BaseViewController {
         view.addGestureRecognizer(tapGesture)
         
         bind()
-        navigationItem.title = "로그인"
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if viewModel.logouted {
-            self.view.makeToast("로그아웃 되었습니다. 다시 로그인 해주세요", duration: 2.0, position: .top)
-        }
+        navigationItem.title = "회원가입"
     }
     
     func bind() {
         
-        // TextField -> ViewModel
         mainView.idField.rx.text.orEmpty
             .bind(to: viewModel.email)
             .disposed(by: disposeBag)
@@ -52,38 +42,28 @@ class LoginViewController: BaseViewController {
             .bind(to: viewModel.pw)
             .disposed(by: disposeBag)
         
-        // ViewModel -> Button State
-        viewModel.loginButtonEnabled
-            .drive(mainView.loginButton.rx.isEnabled)
+        viewModel.joinButtonEnabled
+            .drive(mainView.joinButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        viewModel.loginButtonColor
-            .drive(mainView.loginButton.rx.backgroundColor)
+        viewModel.joinButtonColor
+            .drive(mainView.joinButton.rx.backgroundColor)
             .disposed(by: disposeBag)
         
-        // Login Button Tap
-        mainView.loginButton.rx.tap
+        mainView.joinButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.hideKeyboard()
-                self.viewModel.requestLogin(email: viewModel.email.value+"@jungle.com", pw: viewModel.pw.value) { data in
+                self.viewModel.requestJoin { data in
                     if let data {
                         self.handleLoginSuccess(data: data)
                     } else {
-                        self.handleLoginFailure()
+                        self.handleJoinFailure()
                     }
                 }
             })
             .disposed(by: disposeBag)
-        
-        mainView.signUpButton.addTarget(self, action: #selector(registerButtonClicked), for: .touchUpInside)
-    }
-    
-    @objc
-    private func registerButtonClicked() {
-        let vc = RegisterViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func handleLoginSuccess(data: LoginData) {
@@ -92,8 +72,8 @@ class LoginViewController: BaseViewController {
         self.navigationController?.setViewControllers([vc], animated: true)
     }
 
-    private func handleLoginFailure() {
-        let alert = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인하세요.", preferredStyle: .alert)
+    private func handleJoinFailure() {
+        let alert = UIAlertController(title: "회원가입 실패", message: "이미 등록된 닉네임입니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default))
         self.present(alert, animated: true)
         
@@ -102,5 +82,6 @@ class LoginViewController: BaseViewController {
     @objc private func hideKeyboard() {
         view.endEditing(true)
     }
+    
 
 }

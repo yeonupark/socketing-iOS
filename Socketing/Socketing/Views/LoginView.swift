@@ -13,7 +13,7 @@ class LoginView: BaseView {
     let idField = {
         let view = UITextField()
         view.applyDefaultStyle()
-        view.placeholder = "enter your name"
+        view.placeholder = "닉네임을 입력하세요"
         
         return view
     }()
@@ -22,14 +22,14 @@ class LoginView: BaseView {
         let view = UITextField()
         view.applyDefaultStyle()
         view.isSecureTextEntry = true
-        view.placeholder = "enter your password"
+        view.placeholder = "비밀번호를 입력하세요"
         
         return view
     }()
     
     let loginButton = {
         let view = UIButton()
-        view.setTitle("LOGIN", for: .normal)
+        view.setTitle("로그인", for: .normal)
         view.backgroundColor = .black
         view.layer.cornerRadius = 5
         
@@ -41,7 +41,7 @@ class LoginView: BaseView {
     
     let signUpLabel = {
         let view = UILabel()
-        view.text = "not our member yet?"
+        view.text = "아직 회원이 아니신가요?"
         view.textColor = .darkGray
         view.font = .systemFont(ofSize: 14)
         
@@ -50,7 +50,7 @@ class LoginView: BaseView {
     
     let signUpButton = {
         let view = UIButton()
-        view.setTitle("sign up", for: .normal)
+        view.setTitle("회원가입", for: .normal)
         
         view.setTitleColor(.systemBlue, for: .normal)
         view.titleLabel?.font = .systemFont(ofSize: 14)
