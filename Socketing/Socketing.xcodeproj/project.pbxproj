@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		480B33902D29B300000FA50D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 480B338F2D29B300000FA50D /* SnapKit */; };
 		48461C0E2D19A1BA00675CED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C0D2D19A1BA00675CED /* AppDelegate.swift */; };
 		48461C102D19A1BA00675CED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C0F2D19A1BA00675CED /* SceneDelegate.swift */; };
 		48461C172D19A1BB00675CED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48461C162D19A1BB00675CED /* Assets.xcassets */; };
@@ -16,9 +15,6 @@
 		48461C312D19A1BB00675CED /* SocketingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C302D19A1BB00675CED /* SocketingUITestsLaunchTests.swift */; };
 		48461C432D19AEC200675CED /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C422D19AEC200675CED /* APIKeys.swift */; };
 		48461C452D263F6500675CED /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C442D263F6500675CED /* MainViewController.swift */; };
-		48461C482D26788700675CED /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 48461C472D26788700675CED /* RxCocoa */; };
-		48461C4A2D26788700675CED /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 48461C492D26788700675CED /* RxRelay */; };
-		48461C4C2D26788700675CED /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 48461C4B2D26788700675CED /* RxSwift */; };
 		48461C502D27B69600675CED /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C4F2D27B69600675CED /* MainViewModel.swift */; };
 		48461C552D27C30700675CED /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C542D27C30700675CED /* Common.swift */; };
 		48461C612D27EDBA00675CED /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48461C602D27EDBA00675CED /* BaseView.swift */; };
@@ -37,14 +33,29 @@
 		4852B65C2D2BEA5C00186115 /* EventDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B65B2D2BEA5C00186115 /* EventDetailViewModel.swift */; };
 		4852B6602D2C04FF00186115 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B65F2D2C04FF00186115 /* EventDetailViewController.swift */; };
 		4852B6632D2C220600186115 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B6622D2C220600186115 /* CommonUtils.swift */; };
+		486476802D53495A00B29CA1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4864767F2D53495A00B29CA1 /* SnapKit */; };
+		4864768A2D53497B00B29CA1 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 486476892D53497B00B29CA1 /* SocketIO */; };
+		4864768D2D534CC300B29CA1 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4864768C2D534CC300B29CA1 /* RxCocoa */; };
+		4864768F2D534CC300B29CA1 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4864768E2D534CC300B29CA1 /* RxRelay */; };
+		486476912D534CC300B29CA1 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 486476902D534CC300B29CA1 /* RxSwift */; };
+		48950A4A2D535672004A099B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A492D535672004A099B /* MyPageViewController.swift */; };
+		48950A4C2D535689004A099B /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A4B2D535689004A099B /* PaymentViewController.swift */; };
+		48950A4E2D535697004A099B /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A4D2D535697004A099B /* PaymentView.swift */; };
+		48950A502D5356A2004A099B /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A4F2D5356A2004A099B /* EventInfoView.swift */; };
+		48950A522D5356B3004A099B /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A512D5356B3004A099B /* MyPageView.swift */; };
+		48950A542D5356BB004A099B /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A532D5356BB004A099B /* ConfirmationView.swift */; };
+		48950A562D5356C9004A099B /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A552D5356C9004A099B /* ConfirmationViewController.swift */; };
+		48950A582D5356DE004A099B /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A572D5356DE004A099B /* ConfirmationViewModel.swift */; };
+		48950A5A2D535709004A099B /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A592D535709004A099B /* MyPageViewModel.swift */; };
+		48950A5D2D537B7A004A099B /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 48950A5C2D537B7A004A099B /* Toast */; };
 		48A065402D2FA65300DA5CAA /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0653F2D2FA65300DA5CAA /* ReservationView.swift */; };
 		48A065422D2FAECC00DA5CAA /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A065412D2FAECC00DA5CAA /* ReservationViewController.swift */; };
 		48A065442D2FC83E00DA5CAA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A065432D2FC83E00DA5CAA /* BaseViewController.swift */; };
 		48A065462D2FCAD900DA5CAA /* SocketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A065452D2FCAD900DA5CAA /* SocketViewModel.swift */; };
 		48A065482D301FBD00DA5CAA /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A065472D301FBD00DA5CAA /* Socket.swift */; };
+		48A6D3FB2D533F04007B45DC /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6D3FA2D533F04007B45DC /* Users.swift */; };
 		48AC46B22D2C5FA80054FC86 /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46B12D2C5FA80054FC86 /* WaitingViewController.swift */; };
 		48AC46B42D2C5FBB0054FC86 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46B32D2C5FBB0054FC86 /* WaitingView.swift */; };
-		48AC46B72D2E5FE00054FC86 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 48AC46B62D2E5FE00054FC86 /* SocketIO */; };
 		48AC46B92D2E5FF40054FC86 /* QueueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */; };
 		48AC46BB2D2E67650054FC86 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46BA2D2E67650054FC86 /* Queue.swift */; };
 		48AC46BD2D2F03720054FC86 /* SocketUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46BC2D2F03720054FC86 /* SocketUtils.swift */; };
@@ -98,11 +109,21 @@
 		4852B65B2D2BEA5C00186115 /* EventDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModel.swift; sourceTree = "<group>"; };
 		4852B65F2D2C04FF00186115 /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		4852B6622D2C220600186115 /* CommonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
+		48950A492D535672004A099B /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		48950A4B2D535689004A099B /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		48950A4D2D535697004A099B /* PaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		48950A4F2D5356A2004A099B /* EventInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
+		48950A512D5356B3004A099B /* MyPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		48950A532D5356BB004A099B /* ConfirmationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		48950A552D5356C9004A099B /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		48950A572D5356DE004A099B /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
+		48950A592D535709004A099B /* MyPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		48A0653F2D2FA65300DA5CAA /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		48A065412D2FAECC00DA5CAA /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		48A065432D2FC83E00DA5CAA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		48A065452D2FCAD900DA5CAA /* SocketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketViewModel.swift; sourceTree = "<group>"; };
 		48A065472D301FBD00DA5CAA /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		48A6D3FA2D533F04007B45DC /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		48AC46B12D2C5FA80054FC86 /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		48AC46B32D2C5FBB0054FC86 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueViewModel.swift; sourceTree = "<group>"; };
@@ -115,11 +136,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48461C4C2D26788700675CED /* RxSwift in Frameworks */,
-				480B33902D29B300000FA50D /* SnapKit in Frameworks */,
-				48461C4A2D26788700675CED /* RxRelay in Frameworks */,
-				48AC46B72D2E5FE00054FC86 /* SocketIO in Frameworks */,
-				48461C482D26788700675CED /* RxCocoa in Frameworks */,
+				48950A5D2D537B7A004A099B /* Toast in Frameworks */,
+				4864768D2D534CC300B29CA1 /* RxCocoa in Frameworks */,
+				4864768A2D53497B00B29CA1 /* SocketIO in Frameworks */,
+				486476912D534CC300B29CA1 /* RxSwift in Frameworks */,
+				4864768F2D534CC300B29CA1 /* RxRelay in Frameworks */,
+				486476802D53495A00B29CA1 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +228,8 @@
 				4852B65B2D2BEA5C00186115 /* EventDetailViewModel.swift */,
 				48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */,
 				48A065452D2FCAD900DA5CAA /* SocketViewModel.swift */,
+				48950A592D535709004A099B /* MyPageViewModel.swift */,
+				48950A572D5356DE004A099B /* ConfirmationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -214,10 +238,13 @@
 			isa = PBXGroup;
 			children = (
 				48461C442D263F6500675CED /* MainViewController.swift */,
+				48950A4B2D535689004A099B /* PaymentViewController.swift */,
 				48461C642D27F0AC00675CED /* LoginViewController.swift */,
 				4852B65F2D2C04FF00186115 /* EventDetailViewController.swift */,
 				48AC46B12D2C5FA80054FC86 /* WaitingViewController.swift */,
 				48A065412D2FAECC00DA5CAA /* ReservationViewController.swift */,
+				48950A492D535672004A099B /* MyPageViewController.swift */,
+				48950A552D5356C9004A099B /* ConfirmationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -226,10 +253,14 @@
 			isa = PBXGroup;
 			children = (
 				48461C622D27EF0000675CED /* LoginView.swift */,
+				48950A4F2D5356A2004A099B /* EventInfoView.swift */,
 				4852B64C2D2A4F9E00186115 /* MainView.swift */,
+				48950A4D2D535697004A099B /* PaymentView.swift */,
 				4852B6572D2BDF2000186115 /* EventDetailView.swift */,
 				48AC46B32D2C5FBB0054FC86 /* WaitingView.swift */,
 				48A0653F2D2FA65300DA5CAA /* ReservationView.swift */,
+				48950A512D5356B3004A099B /* MyPageView.swift */,
+				48950A532D5356BB004A099B /* ConfirmationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -249,6 +280,7 @@
 			children = (
 				48461C542D27C30700675CED /* Common.swift */,
 				48461C6E2D29749000675CED /* Authentication.swift */,
+				48A6D3FA2D533F04007B45DC /* Users.swift */,
 				4852B6512D2A56DD00186115 /* Events.swift */,
 				48AC46BA2D2E67650054FC86 /* Queue.swift */,
 				48A065472D301FBD00DA5CAA /* Socket.swift */,
@@ -307,11 +339,12 @@
 			);
 			name = Socketing;
 			packageProductDependencies = (
-				48461C472D26788700675CED /* RxCocoa */,
-				48461C492D26788700675CED /* RxRelay */,
-				48461C4B2D26788700675CED /* RxSwift */,
-				480B338F2D29B300000FA50D /* SnapKit */,
-				48AC46B62D2E5FE00054FC86 /* SocketIO */,
+				4864767F2D53495A00B29CA1 /* SnapKit */,
+				486476892D53497B00B29CA1 /* SocketIO */,
+				4864768C2D534CC300B29CA1 /* RxCocoa */,
+				4864768E2D534CC300B29CA1 /* RxRelay */,
+				486476902D534CC300B29CA1 /* RxSwift */,
+				48950A5C2D537B7A004A099B /* Toast */,
 			);
 			productName = Socketing;
 			productReference = 48461C0A2D19A1BA00675CED /* Socketing.app */;
@@ -386,9 +419,10 @@
 			);
 			mainGroup = 48461C012D19A1BA00675CED;
 			packageReferences = (
-				48461C462D26788700675CED /* XCRemoteSwiftPackageReference "RxSwift" */,
-				480B338E2D29B300000FA50D /* XCRemoteSwiftPackageReference "SnapKit" */,
-				48AC46B52D2E5FE00054FC86 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				4864767E2D53495A00B29CA1 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				486476882D53497B00B29CA1 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				4864768B2D534CC300B29CA1 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				48950A5B2D537B7A004A099B /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 48461C0B2D19A1BA00675CED /* Products */;
 			projectDirPath = "";
@@ -438,10 +472,15 @@
 				48A065482D301FBD00DA5CAA /* Socket.swift in Sources */,
 				48A065422D2FAECC00DA5CAA /* ReservationViewController.swift in Sources */,
 				4852B6602D2C04FF00186115 /* EventDetailViewController.swift in Sources */,
+				48950A522D5356B3004A099B /* MyPageView.swift in Sources */,
 				4852B64D2D2A4F9E00186115 /* MainView.swift in Sources */,
+				48950A5A2D535709004A099B /* MyPageViewModel.swift in Sources */,
 				48A065442D2FC83E00DA5CAA /* BaseViewController.swift in Sources */,
+				48950A562D5356C9004A099B /* ConfirmationViewController.swift in Sources */,
+				48950A502D5356A2004A099B /* EventInfoView.swift in Sources */,
 				48461C652D27F0AC00675CED /* LoginViewController.swift in Sources */,
 				48461C502D27B69600675CED /* MainViewModel.swift in Sources */,
+				48950A4E2D535697004A099B /* PaymentView.swift in Sources */,
 				48461C0E2D19A1BA00675CED /* AppDelegate.swift in Sources */,
 				48AC46BD2D2F03720054FC86 /* SocketUtils.swift in Sources */,
 				48461C432D19AEC200675CED /* APIKeys.swift in Sources */,
@@ -456,12 +495,17 @@
 				48461C632D27EF0000675CED /* LoginView.swift in Sources */,
 				4852B6522D2A56DD00186115 /* Events.swift in Sources */,
 				48461C672D27F44200675CED /* LoginViewModel.swift in Sources */,
+				48950A582D5356DE004A099B /* ConfirmationViewModel.swift in Sources */,
+				48950A542D5356BB004A099B /* ConfirmationView.swift in Sources */,
+				48950A4A2D535672004A099B /* MyPageViewController.swift in Sources */,
 				48AC46B22D2C5FA80054FC86 /* WaitingViewController.swift in Sources */,
 				48AC46BB2D2E67650054FC86 /* Queue.swift in Sources */,
 				4852B6582D2BDF2000186115 /* EventDetailView.swift in Sources */,
 				48AC46B92D2E5FF40054FC86 /* QueueViewModel.swift in Sources */,
+				48950A4C2D535689004A099B /* PaymentViewController.swift in Sources */,
 				48461C612D27EDBA00675CED /* BaseView.swift in Sources */,
 				48461C6F2D29749000675CED /* Authentication.swift in Sources */,
+				48A6D3FB2D533F04007B45DC /* Users.swift in Sources */,
 				48A065462D2FCAD900DA5CAA /* SocketViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -792,7 +836,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		480B338E2D29B300000FA50D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		4864767E2D53495A00B29CA1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -800,15 +844,7 @@
 				minimumVersion = 5.7.1;
 			};
 		};
-		48461C462D26788700675CED /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.8.0;
-			};
-		};
-		48AC46B52D2E5FE00054FC86 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+		486476882D53497B00B29CA1 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
 			requirement = {
@@ -816,33 +852,54 @@
 				kind = branch;
 			};
 		};
+		4864768B2D534CC300B29CA1 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.8.0;
+			};
+		};
+		48950A5B2D537B7A004A099B /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		480B338F2D29B300000FA50D /* SnapKit */ = {
+		4864767F2D53495A00B29CA1 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 480B338E2D29B300000FA50D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 4864767E2D53495A00B29CA1 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		48461C472D26788700675CED /* RxCocoa */ = {
+		486476892D53497B00B29CA1 /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 48461C462D26788700675CED /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 486476882D53497B00B29CA1 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
+		};
+		4864768C2D534CC300B29CA1 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4864768B2D534CC300B29CA1 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		48461C492D26788700675CED /* RxRelay */ = {
+		4864768E2D534CC300B29CA1 /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 48461C462D26788700675CED /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 4864768B2D534CC300B29CA1 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
 		};
-		48461C4B2D26788700675CED /* RxSwift */ = {
+		486476902D534CC300B29CA1 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 48461C462D26788700675CED /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 4864768B2D534CC300B29CA1 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		48AC46B62D2E5FE00054FC86 /* SocketIO */ = {
+		48950A5C2D537B7A004A099B /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 48AC46B52D2E5FE00054FC86 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
-			productName = SocketIO;
+			package = 48950A5B2D537B7A004A099B /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
