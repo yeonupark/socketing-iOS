@@ -12,25 +12,40 @@
 ---
 ### ⚙️ Installation
 
-1️⃣ Clone the repository
+1️⃣ **Clone the repository**
 ```
 git clone https://github.com/yeonupark/socketing-iOS
 cd Socketing
 ```
-2️⃣ Install dependencies
+2️⃣ **Install dependencies**
 ```
 # Swift Package Manager (SPM) will automatically resolve dependencies when opening the project in Xcode.
 # If needed, you can manually resolve dependencies using:
 
 swift package resolve
 ```
-3️⃣ Open the project
+3️⃣ **Open the project**
 ```
 xed .
 ``` 
+4️⃣ **Set up environment variables (if necessary)**   
 
 
-▶️ Running the App
+By default, the project has environment variables configured in Xcode's Edit Scheme, so no additional setup is required in most cases.
+However, if environment variables are missing after cloning, follow one of these methods to set them in Xcode:
+
+1. Open Xcode and select the project.
+
+2. Go to Product → Scheme → Edit Scheme.
+
+3. Navigate to Run → Arguments → Environment Variables.
+
+4. Add the following:
+- BASE_URL = https://socketing.hjyoon.me/api/
+- SOCKET_URL = https://socket.hjyoon.me/
+- QUEUE_URL = https://queue.hjyoon.me/
+
+▶️ **Running the App**
 
 1. Open the project in Xcode
 
