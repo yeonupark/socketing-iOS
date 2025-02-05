@@ -1,5 +1,15 @@
 # 🚀 Socketing 
 
+### ⚙️ System Requirements
+- Xcode Version: 15.0
+- macOS Version: Ventura 13.5 (M2)
+
+### 🔧 Project Requirements
+- Swift Version: 5.9
+- iOS Deployment Target: 15.0 or later
+- Dependencies: RxSwift, SocketIO, SnapKit, Starscream, Toast (via SPM)
+
+---
 ### ⚙️ Installation
 
 1️⃣ Clone the repository
