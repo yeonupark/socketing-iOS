@@ -17,7 +17,7 @@
 git clone https://github.com/yeonupark/socketing-iOS
 cd Socketing
 ```
-2️⃣ **Install dependencies**
+2️⃣ **Install dependencies (if necessary)**
 ```
 # Swift Package Manager (SPM) will automatically resolve dependencies when opening the project in Xcode.
 # If needed, you can manually resolve dependencies using:
