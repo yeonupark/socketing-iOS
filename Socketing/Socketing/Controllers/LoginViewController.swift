@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Toast
 
 class LoginViewController: BaseViewController {
 
@@ -30,6 +31,14 @@ class LoginViewController: BaseViewController {
         
         bind()
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if viewModel.logouted {
+            self.view.makeToast("로그아웃 되었습니다. 다시 로그인 해주세요", duration: 2.0, position: .top)
+        }
     }
     
     func bind() {
@@ -71,6 +80,7 @@ class LoginViewController: BaseViewController {
     
     private func handleLoginSuccess(data: LoginData) {
         let vc = MainViewController()
+        vc.viewModel.logined = true
         self.navigationController?.setViewControllers([vc], animated: true)
     }
 
