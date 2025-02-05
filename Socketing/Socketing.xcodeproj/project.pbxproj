@@ -48,6 +48,9 @@
 		48950A582D5356DE004A099B /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A572D5356DE004A099B /* ConfirmationViewModel.swift */; };
 		48950A5A2D535709004A099B /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A592D535709004A099B /* MyPageViewModel.swift */; };
 		48950A5D2D537B7A004A099B /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 48950A5C2D537B7A004A099B /* Toast */; };
+		48950A5F2D53904A004A099B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A5E2D53904A004A099B /* RegisterViewController.swift */; };
+		48950A612D539054004A099B /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A602D539054004A099B /* RegisterViewModel.swift */; };
+		48950A632D539063004A099B /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48950A622D539063004A099B /* RegisterView.swift */; };
 		48A065402D2FA65300DA5CAA /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0653F2D2FA65300DA5CAA /* ReservationView.swift */; };
 		48A065422D2FAECC00DA5CAA /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A065412D2FAECC00DA5CAA /* ReservationViewController.swift */; };
 		48A065442D2FC83E00DA5CAA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A065432D2FC83E00DA5CAA /* BaseViewController.swift */; };
@@ -118,6 +121,9 @@
 		48950A552D5356C9004A099B /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		48950A572D5356DE004A099B /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
 		48950A592D535709004A099B /* MyPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		48950A5E2D53904A004A099B /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		48950A602D539054004A099B /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		48950A622D539063004A099B /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		48A0653F2D2FA65300DA5CAA /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		48A065412D2FAECC00DA5CAA /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		48A065432D2FC83E00DA5CAA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +231,7 @@
 			children = (
 				48461C4F2D27B69600675CED /* MainViewModel.swift */,
 				48461C662D27F44200675CED /* LoginViewModel.swift */,
+				48950A602D539054004A099B /* RegisterViewModel.swift */,
 				4852B65B2D2BEA5C00186115 /* EventDetailViewModel.swift */,
 				48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */,
 				48A065452D2FCAD900DA5CAA /* SocketViewModel.swift */,
@@ -238,12 +245,13 @@
 			isa = PBXGroup;
 			children = (
 				48461C442D263F6500675CED /* MainViewController.swift */,
-				48950A4B2D535689004A099B /* PaymentViewController.swift */,
 				48461C642D27F0AC00675CED /* LoginViewController.swift */,
+				48950A5E2D53904A004A099B /* RegisterViewController.swift */,
 				4852B65F2D2C04FF00186115 /* EventDetailViewController.swift */,
 				48AC46B12D2C5FA80054FC86 /* WaitingViewController.swift */,
 				48A065412D2FAECC00DA5CAA /* ReservationViewController.swift */,
 				48950A492D535672004A099B /* MyPageViewController.swift */,
+				48950A4B2D535689004A099B /* PaymentViewController.swift */,
 				48950A552D5356C9004A099B /* ConfirmationViewController.swift */,
 			);
 			path = Controllers;
@@ -253,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				48461C622D27EF0000675CED /* LoginView.swift */,
+				48950A622D539063004A099B /* RegisterView.swift */,
 				48950A4F2D5356A2004A099B /* EventInfoView.swift */,
 				4852B64C2D2A4F9E00186115 /* MainView.swift */,
 				48950A4D2D535697004A099B /* PaymentView.swift */,
@@ -467,6 +476,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48950A632D539063004A099B /* RegisterView.swift in Sources */,
 				48AC46B42D2C5FBB0054FC86 /* WaitingView.swift in Sources */,
 				4852B64B2D29B87000186115 /* UITextField+Extensions.swift in Sources */,
 				48A065482D301FBD00DA5CAA /* Socket.swift in Sources */,
@@ -482,6 +492,7 @@
 				48461C502D27B69600675CED /* MainViewModel.swift in Sources */,
 				48950A4E2D535697004A099B /* PaymentView.swift in Sources */,
 				48461C0E2D19A1BA00675CED /* AppDelegate.swift in Sources */,
+				48950A5F2D53904A004A099B /* RegisterViewController.swift in Sources */,
 				48AC46BD2D2F03720054FC86 /* SocketUtils.swift in Sources */,
 				48461C432D19AEC200675CED /* APIKeys.swift in Sources */,
 				48A065402D2FA65300DA5CAA /* ReservationView.swift in Sources */,
@@ -503,6 +514,7 @@
 				4852B6582D2BDF2000186115 /* EventDetailView.swift in Sources */,
 				48AC46B92D2E5FF40054FC86 /* QueueViewModel.swift in Sources */,
 				48950A4C2D535689004A099B /* PaymentViewController.swift in Sources */,
+				48950A612D539054004A099B /* RegisterViewModel.swift in Sources */,
 				48461C612D27EDBA00675CED /* BaseView.swift in Sources */,
 				48461C6F2D29749000675CED /* Authentication.swift in Sources */,
 				48A6D3FB2D533F04007B45DC /* Users.swift in Sources */,

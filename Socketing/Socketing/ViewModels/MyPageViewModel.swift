@@ -9,6 +9,6 @@ import Foundation
 
 class MyPageViewModel {
     
-    let data = ["내가 예매한 공연 목록", "로그아웃"]
+    let data = ["로그아웃"]
     
 }

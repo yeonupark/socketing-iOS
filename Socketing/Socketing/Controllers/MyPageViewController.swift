@@ -46,7 +46,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 1 {
+        if indexPath.row == 0 {
             UserDefaults.standard.removeObject(forKey: "authToken")
             UserDefaults.standard.removeObject(forKey: "entranceToken")
             let vc = LoginViewController()
