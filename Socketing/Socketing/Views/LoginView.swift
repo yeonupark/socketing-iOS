@@ -9,6 +9,15 @@ import UIKit
 
 class LoginView: BaseView {
     
+    let titleLabel = {
+        let view = UILabel()
+        view.text = "Socketing"
+        view.font = .boldSystemFont(ofSize: 40)
+        view.textColor = .black
+        view.textAlignment = .center
+        
+        return view
+    }()
     
     let idField = {
         let view = UITextField()
@@ -61,6 +70,7 @@ class LoginView: BaseView {
     override func configure() {
         super.configure()
         
+        addSubview(titleLabel)
         addSubview(idField)
         addSubview(pwField)
         addSubview(loginButton)
@@ -70,6 +80,10 @@ class LoginView: BaseView {
     
     override func setConstraints() {
         
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(safeAreaLayoutGuide).inset(80)
+        }
         idField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(-50)

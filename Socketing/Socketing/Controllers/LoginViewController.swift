@@ -30,7 +30,7 @@ class LoginViewController: BaseViewController {
         view.addGestureRecognizer(tapGesture)
         
         bind()
-        navigationItem.title = "로그인"
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

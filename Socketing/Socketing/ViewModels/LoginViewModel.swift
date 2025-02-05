@@ -27,13 +27,13 @@ class LoginViewModel {
         
         loginButtonEnabled = Observable
             .combineLatest(email, pw) { email, password in
-                return !email.isEmpty && !password.isEmpty
+                return !email.isEmpty && password.count > 5
             }
             .asDriver(onErrorJustReturn: false)
         
         loginButtonColor = loginButtonEnabled
             .map { isEnabled in
-                return isEnabled ? UIColor.systemBlue : UIColor.lightGray
+                return isEnabled ? UIColor.systemPink : UIColor.lightGray
             }
             .asDriver(onErrorJustReturn: UIColor.lightGray)
     }
