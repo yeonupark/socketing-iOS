@@ -5,10 +5,12 @@
 //  Created by Yeonu Park on 2024/12/23.
 //
 
+import Foundation
+
 enum APIkeys {
-    static let baseURL = "https://socketing.hjyoon.me/api/"
-    static let socketURL = "https://socket.hjyoon.me/"
-    static let queueURL = "https://queue.hjyoon.me/"
+    static let baseURL = ProcessInfo.processInfo.environment["BASE_URL"] ?? ""
+    static let socketURL = ProcessInfo.processInfo.environment["SOCKET_URL"] ?? ""
+    static let queueURL = ProcessInfo.processInfo.environment["QUEUE_URL"] ?? ""
 }
 
 enum APIEndpoint {
