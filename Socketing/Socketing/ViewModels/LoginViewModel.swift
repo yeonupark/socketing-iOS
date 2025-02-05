@@ -35,7 +35,8 @@ class LoginViewModel {
     }
     
     func requestLogin(completionHandler: @escaping (LoginData?) -> Void) {
-        let loginBody = LoginRequest(email: email.value+"@jungle.com", password: pw.value)
+        let email = email.value+"@jungle.com"
+        let loginBody = LoginRequest(email: email, password: pw.value)
         
         APIClient.shared.postRequest(
             urlString: APIEndpoint.authentication.url + "login",
@@ -46,11 +47,29 @@ class LoginViewModel {
                 switch result {
                 case .success(let response):
                     UserDefaults.standard.set(response.data?.accessToken, forKey: "authToken")
+                    self.getUserInfo(email: email)
                     completionHandler(response.data)
                 case .failure(let error):
                     print("로그인 실패: \(error.localizedDescription)")
                     completionHandler(nil)
                 }
+            }
+        }
+    }
+    
+    func getUserInfo(email: String) {
+        
+        APIClient.shared.getRequest(urlString: APIEndpoint.users.url + "email/" + email, responseType: UserResponse.self) { result in
+            
+            switch result {
+            case .success(let response):
+                if let data = response.data {
+                    UserDefaults.standard.setValue(data.id, forKey: "userId")
+                    UserDefaults.standard.setValue(data.email, forKey: "email")
+                    print(data.email)
+                }
+            case .failure(let error):
+                print("get events api error: ", error.localizedDescription)
             }
         }
     }

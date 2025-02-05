@@ -20,7 +20,7 @@ class SocketViewModel {
     let eventData = EventDetailViewModel.shared.event.value
     
     let currentAreaId = BehaviorRelay(value: "")
-    private let userId = "88a6d7b6-b191-41ce-994d-29eced71b2af"
+    private let userId = UserDefaults.standard.string(forKey: "userId")
     private let numberOfFriends = EventDetailViewModel.shared.numberOfFriends.value
     
     var areaInfo: [String: String] = [:]
