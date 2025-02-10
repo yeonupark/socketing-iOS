@@ -20,6 +20,9 @@ class QueueViewModel {
     
     let totalWaiting = BehaviorRelay(value: 0)
     let myPosition = BehaviorRelay(value: 0)
+    
+    let isNeverLogined = BehaviorRelay(value: false)
+    let isLogouted = BehaviorRelay(value: false)
 
     init() {
         guard let url = URL(string: APIkeys.queueURL) else {
@@ -37,11 +40,11 @@ class QueueViewModel {
     
     func connectSocket() {
         guard let authToken = UserDefaults.standard.string(forKey: "authToken") else {
+            self.isNeverLogined.accept(true)
             print("can't find authToken")
             return
         }
         socket.connect(withPayload: ["token": authToken])
-        print("Queue Socket connected")
     }
     
     func disconnectSocket() {
@@ -53,12 +56,13 @@ class QueueViewModel {
     private func setupSocketEvents() {
         
         socket.on(clientEvent: .connect) { data, ack in
-            print("Socket connected : \(data)")
+            print("Queue Socket connected : \(data)")
             self.emitJoinQueue()
         }
         
         socket.on(clientEvent: .error) { data, ack in
-            print("Socket Error: ", data)
+            self.isLogouted.accept(true)
+            print("Queue Socket Error: ", data)
         }
         
 //        socket.on(clientEvent: .disconnect) { data, _ in

@@ -64,6 +64,26 @@ class WaitingViewController: BaseViewController {
                 self.mainView.queueNumLabel.text = "\(total - position)명이 뒤에 대기중입니다."
             })
             .disposed(by: disposeBag)
+        
+        queueViewModel.isLogouted.asDriver(onErrorJustReturn: false)
+            .drive(onNext: { isLogouted in
+                if isLogouted {
+                    let vc = LoginViewController()
+                    vc.viewModel.logouted = true
+                    self.navigationController?.setViewControllers([vc], animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        queueViewModel.isNeverLogined.asDriver(onErrorJustReturn: false)
+            .drive(onNext: { isNeverLogined in
+                if isNeverLogined {
+                    let vc = LoginViewController()
+                    vc.viewModel.firstLogined = true
+                    self.navigationController?.setViewControllers([vc], animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
 }
