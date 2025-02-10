@@ -22,7 +22,6 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkTokenExpiration()
         configureNavigationBar()
         bind()
         viewModel.getEvents()
@@ -53,15 +52,6 @@ class MainViewController: BaseViewController {
     private func configureNavigationBar() {
         navigationItem.title = "예매 진행중인 공연"
         navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .plain, target: self, action: #selector(myPageButtonClicked)), animated: true)
-    }
-    
-    private func checkTokenExpiration() {
-        let isExpired = viewModel.isTokenExpired()
-        if isExpired {
-            let vc = LoginViewController()
-            vc.viewModel.logouted = true
-            self.navigationController?.setViewControllers([vc], animated: true)
-        }
     }
     
     @objc func myPageButtonClicked() {

@@ -19,14 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        var rootViewController: UIViewController?
-        if UserDefaults.standard.string(forKey: "authToken") != nil {
-            rootViewController = UINavigationController(rootViewController: MainViewController())
-        } else {
-            rootViewController = UINavigationController(rootViewController: LoginViewController())
-        }
-        
-        window?.rootViewController = rootViewController
+        let rootViewController = MainViewController()
+        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.makeKeyAndVisible()
     }
 

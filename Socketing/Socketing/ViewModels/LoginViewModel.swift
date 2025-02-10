@@ -16,6 +16,7 @@ class LoginViewModel {
     let email = BehaviorRelay(value: "")
     let pw = BehaviorRelay(value: "")
     
+    var firstLogined = false
     var logouted = false
 
     let loginButtonEnabled: Driver<Bool>

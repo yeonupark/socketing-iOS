@@ -36,8 +36,10 @@ class LoginViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if viewModel.logouted {
-            self.view.makeToast("로그아웃 되었습니다. 다시 로그인 해주세요", duration: 2.0, position: .top)
+        if viewModel.firstLogined {
+            self.view.makeToast("로그인이 필요한 페이지 입니다.", duration: 2.0, position: .top)
+        } else if viewModel.logouted {
+            self.view.makeToast("로그아웃 되었습니다. 다시 로그인 해주세요!", duration: 2.0, position: .top)
         }
     }
     
