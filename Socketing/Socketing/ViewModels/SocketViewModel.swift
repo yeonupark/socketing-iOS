@@ -122,7 +122,6 @@ class SocketViewModel {
             return
         }
         socket.connect(withPayload: ["token": entranceToken])
-        print("Reservation Socket connected")
     }
     
     func disconnectSocket() {
@@ -134,13 +133,13 @@ class SocketViewModel {
     private func setupSocketEvents() {
         
         socket.on(clientEvent: .connect) { data, ack in
-            print("Socket connected : \(data)")
+            print("Reservation Socket connected : \(data)")
             self.socketId = self.socket.sid
             self.emitJoinRoom()
         }
         
         socket.on(clientEvent: .error) { data, ack in
-            print("Socket Error: ", data)
+            print("Reservation Socket Error: ", data)
         }
         
 //        socket.on(clientEvent: .disconnect) { data, _ in

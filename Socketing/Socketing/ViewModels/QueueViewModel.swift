@@ -41,7 +41,6 @@ class QueueViewModel {
             return
         }
         socket.connect(withPayload: ["token": authToken])
-        print("Queue Socket connected")
     }
     
     func disconnectSocket() {
@@ -53,12 +52,12 @@ class QueueViewModel {
     private func setupSocketEvents() {
         
         socket.on(clientEvent: .connect) { data, ack in
-            print("Socket connected : \(data)")
+            print("Queue Socket connected : \(data)")
             self.emitJoinQueue()
         }
         
         socket.on(clientEvent: .error) { data, ack in
-            print("Socket Error: ", data)
+            print("Queue Socket Error: ", data)
         }
         
 //        socket.on(clientEvent: .disconnect) { data, _ in
