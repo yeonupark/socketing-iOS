@@ -1,6 +1,8 @@
 # 🚀 Socketing 
 
 ### 📝 Description
+- built upon [everyone-falls-asleep](https://github.com/everyone-falls-asleep)
+- The original project provides a web-based real-time ticketing program, and this app extends its functionality to a mobile platform using Swift and UIKit.  
 
 ---
 ### ⚙️ System Requirements
@@ -87,7 +89,7 @@ SPM is used as a dependency manager. List of dependencies:
 - **[Socket.IO-Client-Swift](https://github.com/socketio/socket.io-client-swift)** → Enables real-time data communication using WebSocket-based Socket.IO for message exchange with the server.
 - **[Starscream](https://github.com/daltoniam/Starscream)** → Manages WebSocket connections, facilitating real-time communication with the server.    
 - **[SnapKit](https://github.com/SnapKit/SnapKit)** → Simplifies Auto Layout implementation, allowing for intuitive and concise UI layout management in code.  
-- **[Toast-Swift](https://github.com/scalessec/Toast-Swift.git)** → Displays brief notifications to users, commonly used for error messages or status updates in a toast-style popup.  
+- **[Toast-Swift](https://github.com/scalessec/Toast-Swift.git)** → Displays brief notifications or error messages in a toast-style popup.  
 
 ---
 ### 🌟 Key Features
