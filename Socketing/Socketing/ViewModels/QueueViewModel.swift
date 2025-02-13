@@ -44,10 +44,18 @@ class QueueViewModel {
             print("can't find authToken")
             return
         }
+        guard let socket else {
+            print("can't find socket")
+            return
+        }
         socket.connect(withPayload: ["token": authToken])
     }
     
     func disconnectSocket() {
+        guard let socket else {
+            print("can't find socket")
+            return
+        }
         socket.removeAllHandlers()
         socket.disconnect()
         print("Queue Socket disconnected")

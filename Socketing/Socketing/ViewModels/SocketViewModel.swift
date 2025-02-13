@@ -117,6 +117,10 @@ class SocketViewModel {
     }
     
     func connectSocket() {
+        guard let socket else {
+            print("can't find socket")
+            return
+        }
         guard let entranceToken = UserDefaults.standard.string(forKey: "entranceToken") else {
             print("can't find entranceToken")
             return
@@ -125,6 +129,10 @@ class SocketViewModel {
     }
     
     func disconnectSocket() {
+        guard let socket else {
+            print("can't find socket")
+            return
+        }
         socket.removeAllHandlers()
         socket.disconnect()
         print("Reservation Socket disconnected")
