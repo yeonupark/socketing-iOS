@@ -8,9 +8,9 @@
 import Foundation
 
 enum APIkeys {
-    static let baseURL = ProcessInfo.processInfo.environment["BASE_URL"] ?? ""
-    static let socketURL = ProcessInfo.processInfo.environment["SOCKET_URL"] ?? ""
-    static let queueURL = ProcessInfo.processInfo.environment["QUEUE_URL"] ?? ""
+    static let baseURL = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as! String
+    static let socketURL = Bundle.main.object(forInfoDictionaryKey: "SOCKET_URL") as! String
+    static let queueURL = Bundle.main.object(forInfoDictionaryKey: "QUEUE_URL") as! String
 }
 
 enum APIEndpoint {

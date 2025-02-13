@@ -73,23 +73,6 @@
             ReferencedContainer = "container:Socketing.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "BASE_URL"
-            value = "https://socketing.hjyoon.me/api/"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "QUEUE_URL"
-            value = "https://queue.hjyoon.me/"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "SOCKET_URL "
-            value = "https://socket.hjyoon.me/"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
