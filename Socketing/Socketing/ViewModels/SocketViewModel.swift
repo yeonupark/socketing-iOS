@@ -347,7 +347,7 @@ class SocketViewModel {
         let reservedUserId = seats.first?.reservedUserId
         let expirationTime = seats.first?.expirationTime
         
-        if seatIds == currentSeatsIds {
+        if currentSeatsIds.contains(seatIds.first ?? "") {
             self.selectedSeats.accept([])
         }
         
