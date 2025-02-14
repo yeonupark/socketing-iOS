@@ -41,7 +41,8 @@ swift package resolve
 
 4️⃣ **Set up environment variables**   
 
-The project uses .xcconfig files to manage environment variables.
+The project uses .xcconfig files to manage environment variables.     
+
 🔹 Steps to Configure Environment Variables:
 1. Navigate to the Configurations folder:
 ```
@@ -50,6 +51,7 @@ cd Configurations
 2. Create .xcconfig files for different configurations:
 - ```Debug.xcconfig```
 - ```Release.xcconfig```
+  
 💡```.xcconfig``` files are ignored by Git
 
 3. Inside each .xcconfig file, add the following variables
