@@ -31,15 +31,7 @@ git clone https://github.com/yeonupark/socketing-iOS
 cd Socketing
 xed .
 ``` 
-3️⃣ **Install dependencies (if necessary)**
-```
-# Swift Package Manager (SPM) will automatically resolve dependencies when opening the project in Xcode.
-# If needed, you can manually resolve dependencies using:
-
-swift package resolve
-```
-
-4️⃣ **Set up environment variables**   
+3️⃣ **Set up environment variables**   
 
 The project uses .xcconfig files to manage environment variables.     
 
@@ -98,7 +90,8 @@ QUEUE_URL = [your-queue-url]
 
 ### 🔗 Dependencies
 
-SPM is used as a dependency manager. List of dependencies:  
+Swift Package Manager (SPM) will automatically resolve dependencies when opening the project in Xcode.     
+List of dependencies:  
 
 - **[RxSwift](https://github.com/ReactiveX/RxSwift)** → Used for reactive programming, handling UI events and network responses asynchronously with `Relay`, `Driver`, `Subject`.  
 - **[Socket.IO-Client-Swift](https://github.com/socketio/socket.io-client-swift)** → Enables real-time data communication using WebSocket-based Socket.IO for message exchange with the server.
