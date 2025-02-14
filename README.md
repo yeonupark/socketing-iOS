@@ -6,7 +6,7 @@
 ---
 ### 🎥 Demo
 
-<img src="https://github.com/user-attachments/assets/b955fbae-63c3-47ee-a2c4-eddef5a90138" width="75%">
+<img src="https://github.com/user-attachments/assets/7a4f35c1-73ba-42df-8665-2e13461b0f5a" width="30%">
 
 
 ---

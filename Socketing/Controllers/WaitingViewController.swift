@@ -71,6 +71,7 @@ class WaitingViewController: BaseViewController {
                     let vc1 = MainViewController()
                     let vc2 = EventDetailViewController()
                     let vc3 = LoginViewController()
+                    vc1.navigationItem.backButtonTitle = ""
                     vc3.viewModel.logouted = true
                     self.navigationController?.setViewControllers([vc1, vc2, vc3], animated: true)
                 }
@@ -83,6 +84,7 @@ class WaitingViewController: BaseViewController {
                     let vc1 = MainViewController()
                     let vc2 = EventDetailViewController()
                     let vc3 = LoginViewController()
+                    vc1.navigationItem.backButtonTitle = ""
                     vc3.viewModel.firstLogined = true
                     self.navigationController?.setViewControllers([vc1, vc2, vc3], animated: true)
                 }
