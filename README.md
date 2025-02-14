@@ -6,7 +6,9 @@
 ---
 ### 🎥 Demo
 
-![socketing_record](https://github.com/user-attachments/assets/b955fbae-63c3-47ee-a2c4-eddef5a90138)
+<img src="https://github.com/user-attachments/assets/b955fbae-63c3-47ee-a2c4-eddef5a90138" width="75%">
+
+
 ---
 ### ⚙️ System Requirements
 - Xcode Version: 15.0
