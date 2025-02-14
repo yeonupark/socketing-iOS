@@ -49,7 +49,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             UserDefaults.standard.removeObject(forKey: "authToken")
             UserDefaults.standard.removeObject(forKey: "entranceToken")
-            let vc = LoginViewController()
+            let vc = MainViewController()
             self.navigationController?.setViewControllers([vc], animated: true)
         }
         mainView.tableView.deselectRow(at: indexPath, animated: true)

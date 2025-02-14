@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Toast
 
 class EventDetailViewController: BaseViewController {
 
@@ -22,7 +23,7 @@ class EventDetailViewController: BaseViewController {
         super.viewDidLoad()
 
         navigationItem.title = viewModel.event.value.title
-        
+        viewModel.numberOfFriends.accept(0)
         bind()
     }
     
@@ -47,15 +48,7 @@ class EventDetailViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        mainView.bookingButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.viewModel.numberOfFriends.accept(0)
-                UserDefaults.standard.setValue(true, forKey: "enter")
-                let vc = WaitingViewController()
-                self?.navigationController?.pushViewController(vc, animated: true)
-            })
-            .disposed(by: disposeBag)
+        mainView.bookingButton.addTarget(self, action: #selector(bookButtonClicked), for: .touchUpInside)
         
         mainView.togetherBookingButton.rx.tap
             .asDriver()
@@ -74,7 +67,24 @@ class EventDetailViewController: BaseViewController {
         
     }
     
+    @objc func bookButtonClicked() {
+        guard let token = UserDefaults.standard.string(forKey: "authToken") else {
+            let vc = LoginViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            return
+        }
+        self.viewModel.numberOfFriends.accept(0)
+        UserDefaults.standard.setValue(true, forKey: "enter")
+        let vc = WaitingViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func showNameInputModal() {
+        guard let token = UserDefaults.standard.string(forKey: "authToken") else {
+            let vc = LoginViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            return
+        }
         let alert = UIAlertController(title: "함께할 친구 등록하기",
                                       message: "친구의 이름을 입력해주세요",
                                       preferredStyle: .alert)

@@ -68,9 +68,11 @@ class WaitingViewController: BaseViewController {
         queueViewModel.isLogouted.asDriver(onErrorJustReturn: false)
             .drive(onNext: { isLogouted in
                 if isLogouted {
-                    let vc = LoginViewController()
-                    vc.viewModel.logouted = true
-                    self.navigationController?.setViewControllers([vc], animated: true)
+                    let vc1 = MainViewController()
+                    let vc2 = EventDetailViewController()
+                    let vc3 = LoginViewController()
+                    vc3.viewModel.logouted = true
+                    self.navigationController?.setViewControllers([vc1, vc2, vc3], animated: true)
                 }
             })
             .disposed(by: disposeBag)
@@ -78,9 +80,11 @@ class WaitingViewController: BaseViewController {
         queueViewModel.isNeverLogined.asDriver(onErrorJustReturn: false)
             .drive(onNext: { isNeverLogined in
                 if isNeverLogined {
-                    let vc = LoginViewController()
-                    vc.viewModel.firstLogined = true
-                    self.navigationController?.setViewControllers([vc], animated: true)
+                    let vc1 = MainViewController()
+                    let vc2 = EventDetailViewController()
+                    let vc3 = LoginViewController()
+                    vc3.viewModel.firstLogined = true
+                    self.navigationController?.setViewControllers([vc1, vc2, vc3], animated: true)
                 }
             })
             .disposed(by: disposeBag)
