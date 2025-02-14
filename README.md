@@ -25,10 +25,10 @@
 1️⃣ **Clone the repository**
 ```
 git clone https://github.com/yeonupark/socketing-iOS
-cd Socketing
 ```
 2️⃣ **Open the project**
 ```
+cd Socketing
 xed .
 ``` 
 3️⃣ **Install dependencies (if necessary)**
@@ -39,20 +39,28 @@ xed .
 swift package resolve
 ```
 
-4️⃣ **Set up environment variables (if necessary)**   
+4️⃣ **Set up environment variables**   
 
+The project uses .xcconfig files to manage environment variables.
+🔹 Steps to Configure Environment Variables:
+1. Navigate to the Configurations folder:
+```
+cd Configurations
+```
+2. Create .xcconfig files for different configurations:
+- ```Debug.xcconfig```
+- ```Release.xcconfig```
+💡```.xcconfig``` files are ignored by Git
 
-By default, the project has environment variables configured in Xcode's Edit Scheme, so no additional setup is required in most cases.
-However, if environment variables are missing after cloning, follow one of these methods to set them in Xcode:
-
-1. Go to Product → Scheme → Edit Scheme.
-
-2. Navigate to Run → Arguments → Environment Variables.
-
-3. Add the following:
-- BASE_URL = https://socketing.hjyoon.me/api/
-- SOCKET_URL = https://socket.hjyoon.me/
-- QUEUE_URL = https://queue.hjyoon.me/
+3. Inside each .xcconfig file, add the following variables
+```
+BASE_URL = [your-api-url]
+SOCKET_URL = [your-socket-url]
+QUEUE_URL = [your-queue-url]
+```
+4. Verify the configuration is applied correctly in Xcode:
+- Go to Project → Info → Configurations
+- Ensure the Debug and Release configurations reference the corresponding ```.xcconfig``` files.
 
 ▶️ **Running the App**
 
@@ -106,4 +114,10 @@ SPM is used as a dependency manager. List of dependencies:
 ✔ MVVM architecture for better scalability
 
 ✔ User authentication & token validation  
+
+---
+
+### 📬 Contact
+
+If you have any questions, feel free to reach out at [idepix5@gmail.com](mailto:idepix5@gmail.com).
 
