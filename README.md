@@ -1,9 +1,12 @@
-# 🚀 Socketing 
+# 🚀 Socketing
 
 ### 📝 Description
-- built upon [everyone-falls-asleep](https://github.com/everyone-falls-asleep)
+- This project is built upon [everyone-falls-asleep](https://github.com/everyone-falls-asleep)
 - The original project provides a web-based real-time ticketing program, and this app extends its functionality to a mobile platform using Swift and UIKit.  
+---
+### 🎥 Demo
 
+![socketing_record](https://github.com/user-attachments/assets/b955fbae-63c3-47ee-a2c4-eddef5a90138)
 ---
 ### ⚙️ System Requirements
 - Xcode Version: 15.0
