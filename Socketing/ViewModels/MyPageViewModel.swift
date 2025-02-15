@@ -19,6 +19,8 @@ class MyPageViewModel {
         APIClient.shared.deleteRequest(urlString: APIEndpoint.users.url+userId) { result in
             switch result {
             case .success(_):
+                UserDefaults.standard.removeObject(forKey: "authToken")
+                UserDefaults.standard.removeObject(forKey: "entranceToken")
                 completionHandler(true)
             case .failure(let error):
                 completionHandler(false)

@@ -64,8 +64,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 self.viewModel.deleteUser { done in
                     DispatchQueue.main.async {
                         if done {
-                            UserDefaults.standard.removeObject(forKey: "authToken")
-                            UserDefaults.standard.removeObject(forKey: "entranceToken")
                             let vc = MainViewController()
                             self.navigationController?.setViewControllers([vc], animated: true)
                         } else {

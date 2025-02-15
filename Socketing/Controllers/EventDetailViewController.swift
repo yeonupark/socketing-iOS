@@ -95,8 +95,18 @@ class EventDetailViewController: BaseViewController {
         
         let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
             if let name = alert.textFields?.first?.text, !name.isEmpty {
-                let numberOfTickets = self.viewModel.numberOfFriends.value + 1
-                self.viewModel.numberOfFriends.accept(numberOfTickets)
+                if name+"@jungle.com" == UserDefaults.standard.string(forKey: "email") {
+                    self.view.makeToast("다른 사용자의 닉네임을 입력해주세요.", duration: 2.0, position: .top)
+                    return
+                }
+                self.viewModel.searchFriend(nickname: name) { ok in
+                    DispatchQueue.main.async {
+                        if !ok {
+                            self.view.makeToast("가입되지 않은 사용자입니다.", duration: 2.0, position: .top)
+                        }
+                    }
+                }
+                
             } else {
                 print("이름이 입력되지 않았습니다")
             }
