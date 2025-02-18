@@ -31,7 +31,6 @@ class MyTicketsViewController: BaseViewController {
 
             cell.configureData(thumbnailUrl: element.eventThumbnail, title: element.eventTitle, booking: element.orderCreatedAt, schedule: element.eventDate, place: element.eventPlace, cast: element.eventCast)
         
-            cell.disposeBag = DisposeBag()
             cell.infoButton.rx.tap.subscribe { _ in
                 let vc = MyTicketDetailViewController()
                 vc.mainView.configureWithViewModel(with: element)

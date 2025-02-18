@@ -55,11 +55,11 @@ class MainViewController: BaseViewController {
     }
     
     @objc func myPageButtonClicked() {
-        if UserDefaults.standard.string(forKey: "authToken") != nil {
-            let vc = MyPageViewController()
+        if viewModel.isTokenExpired() {
+            let vc = LoginViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            let vc = LoginViewController()
+            let vc = MyPageViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
