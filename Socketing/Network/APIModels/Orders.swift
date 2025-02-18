@@ -10,6 +10,7 @@ import Foundation
 struct MyOrderData: Decodable {
     let orderId: String
     let orderCreatedAt: String
+    let orderCanceledAt: String?
     let eventDateId: String
     let eventDate: String
     let eventTitle: String

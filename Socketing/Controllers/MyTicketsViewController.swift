@@ -27,10 +27,17 @@ class MyTicketsViewController: BaseViewController {
     
     private func bind() {
         
-        viewModel.orderDatas.bind(to: mainView.tableView.rx.items(cellIdentifier: "MyTicketsTableViewCell", cellType: MyTicketsTableViewCell.self)) { (_, element, cell) in
-
-            cell.configureData(thumbnailUrl: element.eventThumbnail, title: element.eventTitle, booking: element.orderCreatedAt, schedule: element.eventDate, place: element.eventPlace, cast: element.eventCast)
+        mainView.segmentedControl.rx.selectedSegmentIndex
+            .subscribe(onNext: { [weak self] index in
+                guard let self = self else { return }
+                self.viewModel.filterOrders(by: index)
+            })
+            .disposed(by: disposeBag)
         
+        viewModel.filteredOrderDatas.bind(to: mainView.tableView.rx.items(cellIdentifier: "MyTicketsTableViewCell", cellType: MyTicketsTableViewCell.self)) { (_, element, cell) in
+            
+            cell.configureData(thumbnailUrl: element.eventThumbnail, title: element.eventTitle, booking: element.orderCreatedAt, schedule: element.eventDate, place: element.eventPlace, cast: element.eventCast)
+            
             cell.infoButton.rx.tap.subscribe { _ in
                 let vc = MyTicketDetailViewController()
                 vc.mainView.configureWithViewModel(with: element)
