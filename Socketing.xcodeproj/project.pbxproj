@@ -64,6 +64,13 @@
 		48AC46B92D2E5FF40054FC86 /* QueueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */; };
 		48AC46BB2D2E67650054FC86 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46BA2D2E67650054FC86 /* Queue.swift */; };
 		48AC46BD2D2F03720054FC86 /* SocketUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC46BC2D2F03720054FC86 /* SocketUtils.swift */; };
+		48B74EA92D6422CB00F4CBF4 /* MyTicketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B74EA82D6422CB00F4CBF4 /* MyTicketsView.swift */; };
+		48B74EAB2D6439C300F4CBF4 /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B74EAA2D6439C300F4CBF4 /* Orders.swift */; };
+		48B74EAD2D643C9B00F4CBF4 /* MyTicketsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B74EAC2D643C9B00F4CBF4 /* MyTicketsTableViewCell.swift */; };
+		48B74EAF2D6444B500F4CBF4 /* MyTicketsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B74EAE2D6444B500F4CBF4 /* MyTicketsViewModel.swift */; };
+		48B74EB12D6444F900F4CBF4 /* MyTicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B74EB02D6444F900F4CBF4 /* MyTicketsViewController.swift */; };
+		48B74EB32D6452B900F4CBF4 /* MyTicketDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B74EB22D6452B900F4CBF4 /* MyTicketDetailView.swift */; };
+		48B74EB52D64533E00F4CBF4 /* MyTicketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B74EB42D64533E00F4CBF4 /* MyTicketDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +148,13 @@
 		48AC46B82D2E5FF40054FC86 /* QueueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueViewModel.swift; sourceTree = "<group>"; };
 		48AC46BA2D2E67650054FC86 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		48AC46BC2D2F03720054FC86 /* SocketUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketUtils.swift; sourceTree = "<group>"; };
+		48B74EA82D6422CB00F4CBF4 /* MyTicketsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketsView.swift; sourceTree = "<group>"; };
+		48B74EAA2D6439C300F4CBF4 /* Orders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
+		48B74EAC2D643C9B00F4CBF4 /* MyTicketsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketsTableViewCell.swift; sourceTree = "<group>"; };
+		48B74EAE2D6444B500F4CBF4 /* MyTicketsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketsViewModel.swift; sourceTree = "<group>"; };
+		48B74EB02D6444F900F4CBF4 /* MyTicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketsViewController.swift; sourceTree = "<group>"; };
+		48B74EB22D6452B900F4CBF4 /* MyTicketDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketDetailView.swift; sourceTree = "<group>"; };
+		48B74EB42D64533E00F4CBF4 /* MyTicketDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +269,7 @@
 				48A065452D2FCAD900DA5CAA /* SocketViewModel.swift */,
 				48950A592D535709004A099B /* MyPageViewModel.swift */,
 				48950A572D5356DE004A099B /* ConfirmationViewModel.swift */,
+				48B74EAE2D6444B500F4CBF4 /* MyTicketsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -271,6 +286,8 @@
 				48950A492D535672004A099B /* MyPageViewController.swift */,
 				48950A4B2D535689004A099B /* PaymentViewController.swift */,
 				48950A552D5356C9004A099B /* ConfirmationViewController.swift */,
+				48B74EB02D6444F900F4CBF4 /* MyTicketsViewController.swift */,
+				48B74EB42D64533E00F4CBF4 /* MyTicketDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -288,6 +305,8 @@
 				48A0653F2D2FA65300DA5CAA /* ReservationView.swift */,
 				48950A512D5356B3004A099B /* MyPageView.swift */,
 				48950A532D5356BB004A099B /* ConfirmationView.swift */,
+				48B74EA82D6422CB00F4CBF4 /* MyTicketsView.swift */,
+				48B74EB22D6452B900F4CBF4 /* MyTicketDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +330,7 @@
 				4852B6512D2A56DD00186115 /* Events.swift */,
 				48AC46BA2D2E67650054FC86 /* Queue.swift */,
 				48A065472D301FBD00DA5CAA /* Socket.swift */,
+				48B74EAA2D6439C300F4CBF4 /* Orders.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -336,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				4852B64F2D2A50BE00186115 /* EventsTableViewCell.swift */,
+				48B74EAC2D643C9B00F4CBF4 /* MyTicketsTableViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -505,23 +526,29 @@
 				48950A522D5356B3004A099B /* MyPageView.swift in Sources */,
 				4852B64D2D2A4F9E00186115 /* MainView.swift in Sources */,
 				48950A5A2D535709004A099B /* MyPageViewModel.swift in Sources */,
+				48B74EAD2D643C9B00F4CBF4 /* MyTicketsTableViewCell.swift in Sources */,
 				48A065442D2FC83E00DA5CAA /* BaseViewController.swift in Sources */,
 				48950A562D5356C9004A099B /* ConfirmationViewController.swift in Sources */,
 				48950A502D5356A2004A099B /* EventInfoView.swift in Sources */,
 				48461C652D27F0AC00675CED /* LoginViewController.swift in Sources */,
+				48B74EAF2D6444B500F4CBF4 /* MyTicketsViewModel.swift in Sources */,
 				48461C502D27B69600675CED /* MainViewModel.swift in Sources */,
 				48950A4E2D535697004A099B /* PaymentView.swift in Sources */,
 				48461C0E2D19A1BA00675CED /* AppDelegate.swift in Sources */,
 				48950A5F2D53904A004A099B /* RegisterViewController.swift in Sources */,
 				48AC46BD2D2F03720054FC86 /* SocketUtils.swift in Sources */,
+				48B74EB12D6444F900F4CBF4 /* MyTicketsViewController.swift in Sources */,
 				48461C432D19AEC200675CED /* APIKeys.swift in Sources */,
 				48A065402D2FA65300DA5CAA /* ReservationView.swift in Sources */,
 				48461C102D19A1BA00675CED /* SceneDelegate.swift in Sources */,
 				4852B6632D2C220600186115 /* CommonUtils.swift in Sources */,
 				4852B6502D2A50BE00186115 /* EventsTableViewCell.swift in Sources */,
 				4852B65C2D2BEA5C00186115 /* EventDetailViewModel.swift in Sources */,
+				48B74EAB2D6439C300F4CBF4 /* Orders.swift in Sources */,
 				48461C6D2D29733800675CED /* APIClient.swift in Sources */,
 				48461C552D27C30700675CED /* Common.swift in Sources */,
+				48B74EB32D6452B900F4CBF4 /* MyTicketDetailView.swift in Sources */,
+				48B74EA92D6422CB00F4CBF4 /* MyTicketsView.swift in Sources */,
 				48461C452D263F6500675CED /* MainViewController.swift in Sources */,
 				48461C632D27EF0000675CED /* LoginView.swift in Sources */,
 				4852B6522D2A56DD00186115 /* Events.swift in Sources */,
@@ -531,6 +558,7 @@
 				48950A4A2D535672004A099B /* MyPageViewController.swift in Sources */,
 				48AC46B22D2C5FA80054FC86 /* WaitingViewController.swift in Sources */,
 				48AC46BB2D2E67650054FC86 /* Queue.swift in Sources */,
+				48B74EB52D64533E00F4CBF4 /* MyTicketDetailViewController.swift in Sources */,
 				4852B6582D2BDF2000186115 /* EventDetailView.swift in Sources */,
 				48AC46B92D2E5FF40054FC86 /* QueueViewModel.swift in Sources */,
 				48950A4C2D535689004A099B /* PaymentViewController.swift in Sources */,
@@ -725,7 +753,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marpark.Socketing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -755,7 +783,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marpark.Socketing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

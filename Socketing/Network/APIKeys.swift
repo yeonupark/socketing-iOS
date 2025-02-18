@@ -17,6 +17,7 @@ enum APIEndpoint {
     case authentication
     case events
     case users
+    case orders
     
     var url: String {
         switch self {
@@ -26,6 +27,8 @@ enum APIEndpoint {
             return "\(APIkeys.baseURL)events/"
         case .users:
             return "\(APIkeys.baseURL)users/"
+        case .orders:
+            return "\(APIkeys.baseURL)orders/"
         }
     }
 }

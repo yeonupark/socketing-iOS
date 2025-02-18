@@ -55,8 +55,7 @@ class MainViewController: BaseViewController {
     }
     
     @objc func myPageButtonClicked() {
-        print("mypage button clicked")
-        if let authToken = UserDefaults.standard.string(forKey: "authToken") {
+        if UserDefaults.standard.string(forKey: "authToken") != nil {
             let vc = MyPageViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
