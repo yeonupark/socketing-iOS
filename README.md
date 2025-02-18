@@ -1,5 +1,13 @@
 # 🚀 Socketing
 
+### 📲 Download on the App Store
+<a href="https://apps.apple.com/kr/app/socketing/id6741525412">
+    <img src="https://github.com/user-attachments/assets/4c37a2ce-69b1-4f4b-9ef3-6ece2f0979d8" width="120">
+</a>
+
+https://apps.apple.com/kr/app/socketing/id6741525412  
+
+---
 ### 📝 Description
 - This project is built upon [everyone-falls-asleep](https://github.com/everyone-falls-asleep)
 - The original project provides a web-based real-time ticketing program, and this app extends its functionality to a mobile platform using Swift and UIKit.  
@@ -101,13 +109,15 @@ List of dependencies:
 ---
 ### 🌟 Key Features
 
-✔ Socket-based communication
+✔ **Socket-based communication** – Real-time ticketing system powered by Socket.IO.
 
-✔ Reactive programming with RxSwift
+✔ **Reactive programming with RxSwift** – Efficient event-driven programming.  
 
-✔ MVVM architecture for better scalability
+✔ **WebView-based SVG rendering** – Renders a seating chart SVG in a WebView and overlays coordinate-based seat data.
 
-✔ User authentication & token validation  
+✔ **Secure environment configuration** –  Manages environment variables using `.xcconfig` to protect sensitive information.
+
+✔ **MVVM architecture** – Separates UI and business logic, improving modularity and maintainability.
 
 ---
 
