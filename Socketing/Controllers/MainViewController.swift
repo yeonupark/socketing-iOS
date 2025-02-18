@@ -66,6 +66,13 @@ class MainViewController: BaseViewController {
     
     private func bind() {
         viewModel.events
+            .map { events in
+                events.sorted {
+                    guard let date1 = CommonUtils.formatDateString($0.eventDates[0].date),
+                          let date2 = CommonUtils.formatDateString($1.eventDates[0].date) else { return false }
+                    return date1 > date2
+                }
+            }
             .bind(to: mainView.tableView.rx.items(cellIdentifier: "EventsTableViewCell", cellType: EventsTableViewCell.self)) { (_, element, cell) in
                 
                 cell.titleLabel.text = element.title
