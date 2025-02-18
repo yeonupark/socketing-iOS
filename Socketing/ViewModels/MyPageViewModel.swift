@@ -7,9 +7,26 @@
 
 import Foundation
 
+enum UserMenu: String {
+    case MyTickets = "나의 예매 내역"
+    case Logout = "로그아웃"
+    case DeleteAccount = "회원 탈퇴"
+    
+    var intValue: Int {
+        switch self {
+        case .MyTickets:
+            return 0
+        case .Logout:
+            return 1
+        case .DeleteAccount:
+            return 2
+        }
+    }
+}
+
 class MyPageViewModel {
     
-    let data = ["로그아웃", "회원 탈퇴"]
+    let data = [UserMenu.MyTickets.rawValue, UserMenu.Logout.rawValue, UserMenu.DeleteAccount.rawValue]
     
     func deleteUser(completionHandler: @escaping (Bool) -> Void) {
         guard let userId = UserDefaults.standard.string(forKey: "userId") else {

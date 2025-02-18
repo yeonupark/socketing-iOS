@@ -68,7 +68,7 @@ class EventDetailViewController: BaseViewController {
     }
     
     @objc func bookButtonClicked() {
-        guard let token = UserDefaults.standard.string(forKey: "authToken") else {
+        guard UserDefaults.standard.string(forKey: "authToken") != nil else {
             let vc = LoginViewController()
             self.navigationController?.pushViewController(vc, animated: true)
             return
@@ -80,7 +80,7 @@ class EventDetailViewController: BaseViewController {
     }
     
     @objc func showNameInputModal() {
-        guard let token = UserDefaults.standard.string(forKey: "authToken") else {
+        guard UserDefaults.standard.string(forKey: "authToken") != nil else {
             let vc = LoginViewController()
             self.navigationController?.pushViewController(vc, animated: true)
             return

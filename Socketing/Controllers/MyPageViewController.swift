@@ -24,10 +24,15 @@ class MyPageViewController: BaseViewController {
         
         configureNavigationBar()
         
+        guard let nickname = UserDefaults.standard.string(forKey: "email")?.split(separator: "@").first else {
+            return
+        }
     }
     
     private func configureNavigationBar() {
-        navigationItem.title = "마이페이지"
+        if let nickname = UserDefaults.standard.string(forKey: "email")?.split(separator: "@").first {
+            navigationItem.title = "👤 \(nickname)님"
+        }
     }
     
 }
@@ -43,7 +48,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = viewModel.data[indexPath.row]
         cell.textLabel?.font = .boldSystemFont(ofSize: 15)
         
-        if indexPath.row == 1 {
+        if indexPath.row == UserMenu.DeleteAccount.intValue {
             cell.textLabel?.textColor = .red
         }
         
@@ -51,13 +56,18 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        
+        switch indexPath.row {
+        case UserMenu.MyTickets.intValue:
+            let vc = MyTicketsViewController()
+            vc.navigationItem.title = UserMenu.MyTickets.rawValue
+            self.navigationController?.pushViewController(vc, animated: true)
+        case UserMenu.Logout.intValue:
             UserDefaults.standard.removeObject(forKey: "authToken")
             UserDefaults.standard.removeObject(forKey: "entranceToken")
             let vc = MainViewController()
             self.navigationController?.setViewControllers([vc], animated: true)
-        }
-        else if indexPath.row == 1 {
+        case UserMenu.DeleteAccount.intValue :
             let alert = UIAlertController(title: "정말 탈퇴하시겠습니까?", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "아니오", style: .cancel))
             alert.addAction(UIAlertAction(title: "네", style: .destructive, handler: { _ in
@@ -75,6 +85,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }))
             self.present(alert, animated: true)
+            
+        default: print("default case for MypageTableView")
         }
         mainView.tableView.deselectRow(at: indexPath, animated: true)
     }

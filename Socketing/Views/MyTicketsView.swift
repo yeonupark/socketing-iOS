@@ -1,19 +1,19 @@
 //
-//  MyPageView.swift
+//  MyTicketsView.swift
 //  Socketing
 //
-//  Created by Yeonu Park on 2025/01/29.
+//  Created by Yeonu Park on 2025/02/18.
 //
 
 import UIKit
 
-class MyPageView: BaseView {
+class MyTicketsView: BaseView {
 
     let tableView = {
         let view = UITableView()
-        view.register(UITableViewCell.self, forCellReuseIdentifier: "BasicCell")
+        view.register(MyTicketsTableViewCell.self, forCellReuseIdentifier: "MyTicketsTableViewCell")
         view.backgroundColor = .white
-        
+//        view.rowHeight = 100
         return view
     }()
     
@@ -25,8 +25,7 @@ class MyPageView: BaseView {
     
     override func setConstraints() {
         tableView.snp.makeConstraints { make in
-            make.edges.bottom.equalTo(safeAreaLayoutGuide)
+            make.edges.equalTo(safeAreaLayoutGuide)
         }
     }
-
 }
