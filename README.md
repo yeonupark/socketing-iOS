@@ -36,6 +36,7 @@ git clone https://github.com/yeonupark/socketing-iOS
 ```
 2️⃣ **Open the project**
 ```
+cd socketing-iOS
 xed .
 ``` 
 3️⃣ **Set up environment variables**   
