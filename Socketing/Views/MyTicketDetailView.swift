@@ -12,6 +12,9 @@ class MyTicketDetailView: BaseView {
     private let cardView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
+        view.layer.borderWidth = 3
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        
         return view
     }()
     

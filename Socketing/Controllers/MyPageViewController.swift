@@ -24,14 +24,14 @@ class MyPageViewController: BaseViewController {
         
         configureNavigationBar()
         
-        guard let nickname = UserDefaults.standard.string(forKey: "email")?.split(separator: "@").first else {
+        guard (UserDefaults.standard.string(forKey: "email")?.split(separator: "@").first) != nil else {
             return
         }
     }
     
     private func configureNavigationBar() {
         if let nickname = UserDefaults.standard.string(forKey: "email")?.split(separator: "@").first {
-            navigationItem.title = "👤 \(nickname)님"
+            navigationItem.title = "\(nickname)님"
         }
     }
     
@@ -45,9 +45,17 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = mainView.tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath)
-        cell.textLabel?.text = viewModel.data[indexPath.row]
-        cell.textLabel?.font = .boldSystemFont(ofSize: 15)
         
+        var text = viewModel.data[indexPath.row]
+        
+        if indexPath.row == UserMenu.MyProfile.intValue {
+            text = "👤  "+text
+        } else if indexPath.row == UserMenu.MyTickets.intValue {
+            text = "🎫  "+text
+        }
+        
+        cell.textLabel?.text = text
+        cell.textLabel?.font = .boldSystemFont(ofSize: 15)
         if indexPath.row == UserMenu.DeleteAccount.intValue {
             cell.textLabel?.textColor = .red
         }
