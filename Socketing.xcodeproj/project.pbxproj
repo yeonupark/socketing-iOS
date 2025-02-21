@@ -35,6 +35,9 @@
 		4852B65C2D2BEA5C00186115 /* EventDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B65B2D2BEA5C00186115 /* EventDetailViewModel.swift */; };
 		4852B6602D2C04FF00186115 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B65F2D2C04FF00186115 /* EventDetailViewController.swift */; };
 		4852B6632D2C220600186115 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852B6622D2C220600186115 /* CommonUtils.swift */; };
+		485D687C2D6826BD001E9F22 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485D687B2D6826BD001E9F22 /* MyProfileViewController.swift */; };
+		485D687E2D6826D1001E9F22 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485D687D2D6826D1001E9F22 /* MyProfileView.swift */; };
+		485D68802D6826E9001E9F22 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485D687F2D6826E9001E9F22 /* MyProfileViewModel.swift */; };
 		486476802D53495A00B29CA1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4864767F2D53495A00B29CA1 /* SnapKit */; };
 		4864768A2D53497B00B29CA1 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 486476892D53497B00B29CA1 /* SocketIO */; };
 		4864768D2D534CC300B29CA1 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4864768C2D534CC300B29CA1 /* RxCocoa */; };
@@ -125,6 +128,9 @@
 		4852B65B2D2BEA5C00186115 /* EventDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModel.swift; sourceTree = "<group>"; };
 		4852B65F2D2C04FF00186115 /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		4852B6622D2C220600186115 /* CommonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
+		485D687B2D6826BD001E9F22 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		485D687D2D6826D1001E9F22 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		485D687F2D6826E9001E9F22 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
 		48950A492D535672004A099B /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		48950A4B2D535689004A099B /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		48950A4D2D535697004A099B /* PaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
@@ -270,6 +276,7 @@
 				48950A592D535709004A099B /* MyPageViewModel.swift */,
 				48950A572D5356DE004A099B /* ConfirmationViewModel.swift */,
 				48B74EAE2D6444B500F4CBF4 /* MyTicketsViewModel.swift */,
+				485D687F2D6826E9001E9F22 /* MyProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -288,6 +295,7 @@
 				48950A552D5356C9004A099B /* ConfirmationViewController.swift */,
 				48B74EB02D6444F900F4CBF4 /* MyTicketsViewController.swift */,
 				48B74EB42D64533E00F4CBF4 /* MyTicketDetailViewController.swift */,
+				485D687B2D6826BD001E9F22 /* MyProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -307,6 +315,7 @@
 				48950A532D5356BB004A099B /* ConfirmationView.swift */,
 				48B74EA82D6422CB00F4CBF4 /* MyTicketsView.swift */,
 				48B74EB22D6452B900F4CBF4 /* MyTicketDetailView.swift */,
+				485D687D2D6826D1001E9F22 /* MyProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -531,8 +540,10 @@
 				48950A562D5356C9004A099B /* ConfirmationViewController.swift in Sources */,
 				48950A502D5356A2004A099B /* EventInfoView.swift in Sources */,
 				48461C652D27F0AC00675CED /* LoginViewController.swift in Sources */,
+				485D68802D6826E9001E9F22 /* MyProfileViewModel.swift in Sources */,
 				48B74EAF2D6444B500F4CBF4 /* MyTicketsViewModel.swift in Sources */,
 				48461C502D27B69600675CED /* MainViewModel.swift in Sources */,
+				485D687E2D6826D1001E9F22 /* MyProfileView.swift in Sources */,
 				48950A4E2D535697004A099B /* PaymentView.swift in Sources */,
 				48461C0E2D19A1BA00675CED /* AppDelegate.swift in Sources */,
 				48950A5F2D53904A004A099B /* RegisterViewController.swift in Sources */,
@@ -565,6 +576,7 @@
 				48950A612D539054004A099B /* RegisterViewModel.swift in Sources */,
 				48461C612D27EDBA00675CED /* BaseView.swift in Sources */,
 				48461C6F2D29749000675CED /* Authentication.swift in Sources */,
+				485D687C2D6826BD001E9F22 /* MyProfileViewController.swift in Sources */,
 				48A6D3FB2D533F04007B45DC /* Users.swift in Sources */,
 				48A065462D2FCAD900DA5CAA /* SocketViewModel.swift in Sources */,
 			);
@@ -753,7 +765,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marpark.Socketing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -783,7 +795,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marpark.Socketing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -70,7 +70,7 @@ class LoginViewModel {
                 if let data = response.data {
                     UserDefaults.standard.setValue(data.id, forKey: "userId")
                     UserDefaults.standard.setValue(data.email, forKey: "email")
-                    print(data.email)
+                    UserDefaults.standard.setValue(data.nickname, forKey: "nickname")
                 }
             case .failure(let error):
                 print("get events api error: ", error.localizedDescription)
