@@ -60,6 +60,19 @@ class MyTicketDetailView: BaseView {
         return stack
     }()
     
+    let cancelButton = {
+        let view = UIButton()
+        view.setTitle("예매 취소", for: .normal)
+        
+        view.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        view.backgroundColor = .systemPink
+        view.setTitleColor(.white, for: .normal)
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        
+        return view
+    }()
+    
     override func configure() {
         super.configure()
         
@@ -68,6 +81,7 @@ class MyTicketDetailView: BaseView {
         cardView.addSubview(contentStackView)
         cardView.addSubview(infoStackView)
         cardView.addSubview(seatLabel)
+        addSubview(cancelButton)
     }
     
     func configureWithViewModel(with data: MyOrderData) {
@@ -112,6 +126,12 @@ class MyTicketDetailView: BaseView {
             make.top.equalTo(infoStackView.snp.bottom).offset(4)
             make.leading.equalTo(cardView).inset(48)
             make.bottom.equalTo(cardView).offset(-16)
+        }
+        cancelButton.snp.makeConstraints { make in
+            make.top.equalTo(cardView.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(40)
+            make.width.equalTo(80)
         }
     }
 

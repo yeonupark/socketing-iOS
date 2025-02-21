@@ -38,6 +38,7 @@
 		485D687C2D6826BD001E9F22 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485D687B2D6826BD001E9F22 /* MyProfileViewController.swift */; };
 		485D687E2D6826D1001E9F22 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485D687D2D6826D1001E9F22 /* MyProfileView.swift */; };
 		485D68802D6826E9001E9F22 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485D687F2D6826E9001E9F22 /* MyProfileViewModel.swift */; };
+		485D68822D688E35001E9F22 /* MyTicketDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485D68812D688E35001E9F22 /* MyTicketDetailViewModel.swift */; };
 		486476802D53495A00B29CA1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4864767F2D53495A00B29CA1 /* SnapKit */; };
 		4864768A2D53497B00B29CA1 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 486476892D53497B00B29CA1 /* SocketIO */; };
 		4864768D2D534CC300B29CA1 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4864768C2D534CC300B29CA1 /* RxCocoa */; };
@@ -131,6 +132,7 @@
 		485D687B2D6826BD001E9F22 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		485D687D2D6826D1001E9F22 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		485D687F2D6826E9001E9F22 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
+		485D68812D688E35001E9F22 /* MyTicketDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketDetailViewModel.swift; sourceTree = "<group>"; };
 		48950A492D535672004A099B /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		48950A4B2D535689004A099B /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		48950A4D2D535697004A099B /* PaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				48950A572D5356DE004A099B /* ConfirmationViewModel.swift */,
 				48B74EAE2D6444B500F4CBF4 /* MyTicketsViewModel.swift */,
 				485D687F2D6826E9001E9F22 /* MyProfileViewModel.swift */,
+				485D68812D688E35001E9F22 /* MyTicketDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				48950A632D539063004A099B /* RegisterView.swift in Sources */,
 				48AC46B42D2C5FBB0054FC86 /* WaitingView.swift in Sources */,
 				4852B64B2D29B87000186115 /* UITextField+Extensions.swift in Sources */,
+				485D68822D688E35001E9F22 /* MyTicketDetailViewModel.swift in Sources */,
 				48A065482D301FBD00DA5CAA /* Socket.swift in Sources */,
 				48A065422D2FAECC00DA5CAA /* ReservationViewController.swift in Sources */,
 				4852B6602D2C04FF00186115 /* EventDetailViewController.swift in Sources */,
