@@ -70,7 +70,7 @@ class MainViewController: BaseViewController {
                 events.sorted {
                     guard let date1 = CommonUtils.formatDateString($0.eventDates[0].date),
                           let date2 = CommonUtils.formatDateString($1.eventDates[0].date) else { return false }
-                    return date1 > date2
+                    return date1 < date2
                 }
             }
             .bind(to: mainView.tableView.rx.items(cellIdentifier: "EventsTableViewCell", cellType: EventsTableViewCell.self)) { (_, element, cell) in
