@@ -7,26 +7,29 @@
 
 import Foundation
 
-enum UserMenu: String {
+enum UserMenu: String, CaseIterable {
+    case MyProfile = "나의 프로필"
     case MyTickets = "나의 예매 내역"
     case Logout = "로그아웃"
     case DeleteAccount = "회원 탈퇴"
     
     var intValue: Int {
         switch self {
-        case .MyTickets:
+        case .MyProfile:
             return 0
-        case .Logout:
+        case .MyTickets:
             return 1
-        case .DeleteAccount:
+        case .Logout:
             return 2
+        case .DeleteAccount:
+            return 3
         }
     }
 }
 
 class MyPageViewModel {
     
-    let data = [UserMenu.MyTickets.rawValue, UserMenu.Logout.rawValue, UserMenu.DeleteAccount.rawValue]
+    let data = UserMenu.allCases.map { $0.rawValue }
     
     func deleteUser(completionHandler: @escaping (Bool) -> Void) {
         guard let userId = UserDefaults.standard.string(forKey: "userId") else {

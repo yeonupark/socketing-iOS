@@ -11,13 +11,13 @@ class MyTicketsView: BaseView {
     
     let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: [TicketsMenu.UpComing.rawValue, TicketsMenu.Past.rawValue, TicketsMenu.Cancelled.rawValue])
-            control.selectedSegmentIndex = 0
-            control.backgroundColor = .white
-            control.selectedSegmentTintColor = .clear
-            control.setTitleTextAttributes([.foregroundColor: UIColor.systemPink, .font: UIFont.boldSystemFont(ofSize: 16)], for: .selected)
-            control.setTitleTextAttributes([.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 14)], for: .normal)
-            return control
-        }()
+        control.selectedSegmentIndex = 0
+        control.backgroundColor = .white
+        control.selectedSegmentTintColor = .clear
+        control.setTitleTextAttributes([.foregroundColor: UIColor.systemPink, .font: UIFont.boldSystemFont(ofSize: 16)], for: .selected)
+        control.setTitleTextAttributes([.foregroundColor: UIColor.darkGray, .font: UIFont.systemFont(ofSize: 14)], for: .normal)
+        return control
+    }()
 
     let tableView = {
         let view = UITableView()
