@@ -22,6 +22,11 @@ class MyTicketsViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         viewModel.getMyOrders()
     }
     
@@ -41,6 +46,7 @@ class MyTicketsViewController: BaseViewController {
             cell.infoButton.rx.tap.subscribe { _ in
                 let vc = MyTicketDetailViewController()
                 vc.mainView.configureWithViewModel(with: element)
+                vc.viewModel.orderId = element.orderId
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: cell.disposeBag)

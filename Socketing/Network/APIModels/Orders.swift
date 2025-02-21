@@ -27,4 +27,9 @@ struct SeatOrderData: Decodable {
     let seatAreaPrice: Int
 }
 
+struct CancelOrderData: Decodable {
+    
+}
+
 typealias OrdersResponse = ApiResponse<[MyOrderData]>
+typealias CancelOrderResponse = ApiResponse<CancelOrderData>
