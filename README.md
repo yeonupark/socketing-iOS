@@ -10,7 +10,7 @@ https://apps.apple.com/kr/app/socketing/id6741525412
 ---
 ### 📝 Description
 - This project is built upon [everyone-falls-asleep](https://github.com/everyone-falls-asleep)
-- The original project provides a web-based real-time ticketing program, and this app extends its functionality to a mobile platform using Swift and UIKit.  
+- The original project provides a web-based real-time ticketing program, and this app extends its functionality to iOS platform using Swift and UIKit.  
 ---
 ### 🎥 Demo
 
